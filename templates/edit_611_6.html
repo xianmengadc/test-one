@@ -1,0 +1,617 @@
+{% extends "base.html" %}
+{% block css %}
+
+    {% load  static %}
+    <link href={% static "plugins/bower_components/bootstrap-datepicker/bootstrap-datepicker.min.css" %} rel="stylesheet"
+          type="text/css"/>
+    <link href={% static "plugins/bower_components/custom-select/custom-select.css" %} rel="stylesheet"
+          type="text/css"/>
+    <link href={% static "plugins/bower_components/switchery/dist/switchery.min.css" %} rel="stylesheet"/>
+    <link href={% static "plugins/bower_components/bootstrap-select/bootstrap-select.min.css" %} rel="stylesheet"/>
+    <link href={% static "plugins/bower_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.css" %} rel="stylesheet"/>
+    <link href={% static "plugins/bower_components/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.css" %} rel="stylesheet"/>
+    <link href={% static "plugins/bower_components/multiselect/css/multi-select.css" %} rel="stylesheet"
+          type="text/css"/>
+
+    <style>
+        label {
+            text-align: left !important;
+        }
+
+        .card-a label {
+        }
+
+        {#标题分割线#}
+        h3 {
+            border-bottom: 1px solid rgba(120, 130, 140, 0.28);
+            padding-bottom: 12px;
+        }
+
+        .done {
+            background: #00c292
+        }
+
+        .need {
+            background: #03a9f3 !important;
+        }
+    </style>
+
+{% endblock %}
+{% block breadcum %}
+    <a href="{% url 'basedata' companies.street_district %}">{{ companies.street_district }}普查数据</a>
+{% endblock %}
+{% block content %}
+    <div class="row">
+        <form class="form-horizontal" data-toggle="validator" id="base_form_611_6">{% csrf_token %}
+            <ul class="wizard-steps" role="tablist">
+
+
+                <li class="tab1 need now  {% if companies.done_611 == True %} done {% endif %}" role="tab">
+                    <h4>
+                        <a href="{% url 'edit_com' companies.street_district cid %}"><span>主表</span>611
+                        </a>
+                    </h4>
+                </li>
+
+                <li class="tab1  {% if companies.need_611_1 == True %} need {% endif %}{% if companies.done_611_1 == True and companies.need_611_1 == True %} done {% endif %}"
+                    role="tab">
+                    <h4>
+                        {% if companies.need_611_1 == False %} <span>1</span>611-1
+                        {% endif %}
+                        {% if companies.need_611_1 == True %}
+                            <a href="{% url 'edit_611_1' cid %}"><span>1</span>611-1
+                            </a>{% endif %}
+                    </h4>
+                </li>
+
+
+                <li class="tab2 {% if companies.need_611_2 == True %} need {% endif %}{% if companies.done_611_2 == True and companies.need_611_2 == True %} done {% endif %}"
+                    role="tab">
+                    <h4>
+                        {% if companies.need_611_2 == False %} <span>2</span>611-2
+                            {{ companies.done_611_2 }}{% endif %}
+                        {% if companies.need_611_2 == True %}
+                            <a href="{% url 'edit_611_2' cid %}"><span>2</span>611-2
+                            </a>{% endif %}
+
+                    </h4>
+                </li>
+                <li class="tab3 {% if companies.need_611_3 == True %} need {% endif %}{% if companies.done_611_3 == True and companies.need_611_3 == True %} done {% endif %}"
+                    role="tab">
+                    <h4>
+                        {% if companies.need_611_3 == False %} <span>3</span>611-3
+                        {% endif %}
+                        {% if companies.need_611_3 == True %}
+                            <a href="{% url 'edit_611_3' cid %}"><span>3</span>611-3
+                            </a>{% endif %}
+
+                    </h4>
+                </li>
+                <li class="tab4 {% if companies.need_611_4 == True %} need {% endif %}{% if companies.done_611_4 == True and companies.need_611_4 == True %} done {% endif %}"
+                    role="tab">
+                    <h4>
+                        {% if companies.need_611_4 == False %} <span>4</span>611-4
+                        {% endif %}
+                        {% if companies.need_611_4 == True %}
+                            <a href="{% url 'edit_611_4' cid %}"><span>4</span>611-4
+                            </a>{% endif %}
+                    </h4>
+                </li>
+                <li class="tab5 {% if companies.need_611_5 == True %} need {% endif %}{% if companies.done_611_5 == True and companies.need_611_5 == True %} done {% endif %}"
+                    role="tab">
+                    <h4>
+                        {% if companies.need_611_5 == False %} <span>5</span>611-5{% endif %}
+                        {% if companies.need_611_5 == True %}
+                            <a href="{% url 'edit_611_5' cid %}"><span>5</span>611-5</a>{% endif %}
+                    </h4>
+                </li>
+                <li class="tab6 now {% if companies.need_611_6 == True %} need {% endif %}{% if companies.done_611_6 == True and companies.need_611_6 == True %} done {% endif %}"
+                    role="tab">
+                    <h4>
+                        {% if companies.need_611_6 == False %} <span>6</span>611-6{% endif %}
+                        {% if companies.need_611_6 == True %}
+                            <a href="{% url 'edit_611_6' cid %}"><span>6</span>611-6</a>{% endif %}
+                    </h4>
+                </li>
+            </ul>
+
+            <div class="col-sm-12 white-box">
+
+                <div class="">
+                    <h3 class="box-title m-b-0">民间非盈利组织主要经济指标（2018）611-6</h3>
+                    <div class="col-md-6">
+                        <div class="disable-card">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="social_num" class="col-sm-6 control-label">统一社会信用代码</label>
+                                    <div class="col-sm-6">
+                                        <input type="text" class="form-control" id="social_num"
+                                               name="social_num" value="{{ companies.social_num|default_if_none:"" }}"
+                                               readonly>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="main_org_num" class="col-sm-6 control-label">组织机构代码</label>
+                                    <div class="col-sm-6">
+                                        <input type="text" class="form-control" id="main_org_num"
+                                               name="main_org_num" value="{{ companies.org_num|default_if_none:"" }}"
+                                               readonly>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="main_name" class="col-sm-6 control-label">单位详细名称</label>
+                                    <div class="col-sm-6">
+                                        <input type="text" class="form-control" id="main_name"
+                                               name="main_name" value="{{ companies.name|default_if_none:"" }}"
+                                               readonly>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <p>单位（元）</p>
+                            <label for="inventory_early" class="col-sm-6 control-label">年初存货*</label>
+                            <div class="col-sm-6">
+                                <input type="number" class="form-control" id="inventory_early"
+                                       placeholder="请输入" name="inventory_early" required data-error="必填项(两位小数)" required step="0.01"
+                                       value="{{ privateobj.inventory_early|default_if_none:"" }}">
+                                <span class="help-block with-errors"></span>
+                                <input type="hidden" name="main_social_num" value="{{ cid }}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="current_assets" class="col-sm-6 control-label">流动资产合计*</label>
+                            <div class="col-sm-6">
+                                <input type="number" class="form-control" id="current_assets" required step="0.01"
+                                       data-error="必填项(两位小数)"
+                                       placeholder="请输入" name="current_assets"
+                                       value="{{ privateobj.current_assets|default_if_none:"" }}">
+                                <span class="help-block with-errors"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inventory_current_assets" class="col-sm-6 control-label"
+                                   style="padding-left: 50px">其中：存货*</label>
+                            <div class="col-sm-6">
+                                <input type="number" class="form-control" id="inventory_current_assets"
+                                       placeholder="请输入" name="inventory_current_assets"
+                                       required data-error="必填项(两位小数)" step="0.01"
+                                       value="{{ privateobj.inventory_current_assets|default_if_none:"" }}">
+                                <span class="help-block with-errors"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="permanent_investment" class="col-sm-6 control-label">长期投资*</label>
+                            <div class="col-sm-6">
+                                <input type="number" class="form-control" id="permanent_investment"
+                                       placeholder="请输入" name="permanent_investment"
+                                       required data-error="必填项(两位小数)" step="0.01"
+                                       value="{{ privateobj.permanent_investment|default_if_none:"" }}">
+                                <span class="help-block with-errors"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="original_price" class="col-sm-6 control-label">固定资产原价*</label>
+                            <div class="col-sm-6">
+                                <input type="number" class="form-control" id="original_price"
+                                       required data-error="必填项(两位小数)" step="0.01"
+                                       placeholder="请输入" name="original_price"
+                                       value="{{ privateobj.original_price|default_if_none:"" }}">
+                                <span class="help-block with-errors"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="area_building" class="col-sm-6 control-label" style="padding-left: 50px">其中：土地房屋和构筑物*</label>
+                            <div class="col-sm-6">
+                                <input type="number" class="form-control" id="area_building"
+                                       required data-error="必填项(两位小数)" step="0.01"
+                                       placeholder="请输入" name="area_building"
+                                       value="{{ privateobj.area_building|default_if_none:"" }}">
+                                <span class="help-block with-errors"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="machinery_equipment" class="col-sm-6 control-label" style="padding-left: 50px">其中：机器设备*</label>
+                            <div class="col-sm-6">
+                                <input type="number" class="form-control" id="machinery_equipment"
+                                       placeholder="请输入" name="machinery_equipment"
+                                       required data-error="必填项(两位小数)" step="0.01"
+                                       value="{{ privateobj.machinery_equipment|default_if_none:"" }}">
+                                <span class="help-block with-errors"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="transportation_equipment" class="col-sm-6 control-label"
+                                   style="padding-left: 50px">其中：运输设备*</label>
+                            <div class="col-sm-6">
+                                <input type="number" class="form-control" id="transportation_equipment"
+                                       placeholder="请输入" name="transportation_equipment"
+                                       required data-error="必填项(两位小数)" step="0.01"
+                                       value="{{ privateobj.transportation_equipment|default_if_none:"" }}">
+                                <span class="help-block with-errors"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="building" class="col-sm-6 control-label">在建工程*</label>
+                            <div class="col-sm-6">
+                                <input type="number" class="form-control" id="building"
+                                       required data-error="必填项(两位小数)" step="0.01"
+                                       placeholder="请输入" name="building"
+                                       value="{{ privateobj.building |default_if_none:"" }}">
+                                <span class="help-block with-errors"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="cultural_price" class="col-sm-6 control-label">文物文化资产*</label>
+                            <div class="col-sm-6">
+                                <input type="number" class="form-control" id="cultural_price"
+                                       required data-error="必填项(两位小数)" step="0.01"
+                                       placeholder="请输入" name="cultural_price"
+                                       value="{{ privateobj.cultural_price|default_if_none:"" }}">
+                                <span class="help-block with-errors"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="intangible_price" class="col-sm-6 control-label">无形资产*</label>
+                            <div class="col-sm-6">
+                                <input type="number" class="form-control" id="intangible_price"
+                                       placeholder="请输入" name="intangible_price"
+                                       required data-error="必填项(两位小数)" step="0.01"
+                                       value="{{ privateobj.intangible_price |default_if_none:"" }}">
+                                <span class="help-block with-errors"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="total_assets" class="col-sm-6 control-label">资产总计*</label>
+                            <div class="col-sm-6">
+                                <input type="number" class="form-control" id="total_assets"
+                                       required data-error="必填项(两位小数)" step="0.01"
+                                       placeholder="请输入" name="total_assets"
+                                       value="{{ privateobj.total_assets |default_if_none:"" }}">
+                                <span class="help-block with-errors"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="total_liabilities" class="col-sm-6 control-label">负债合计*</label>
+                            <div class="col-sm-6">
+                                <input type="number" class="form-control" id="total_liabilities"
+                                       placeholder="请输入" name="total_liabilities"
+                                       required data-error="必填项(两位小数)" step="0.01"
+                                       value="{{ privateobj.total_liabilities|default_if_none:"" }}">
+                                <span class="help-block with-errors"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="total_net_asset" class="col-sm-6 control-label">净资产合计*</label>
+                            <div class="col-sm-6">
+                                <input type="number" class="form-control" id="total_net_asset"
+                                       placeholder="请输入" name="total_net_asset"
+                                       required data-error="必填项(两位小数)" step="0.01"
+                                       value="{{ privateobj.total_net_asset|default_if_none:"" }}">
+                                <span class="help-block with-errors"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="total_income" class="col-sm-6 control-label">本年收入合计*</label>
+                            <div class="col-sm-6">
+                                <input type="number" class="form-control" id="total_income"
+                                       required data-error="必填项(两位小数)" step="0.01"
+                                       placeholder="请输入" name="total_income"
+                                       value="{{ privateobj.total_income|default_if_none:"" }}">
+                                <span class="help-block with-errors"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="income_donate" class="col-sm-6 control-label"
+                                   style="padding-left: 50px">捐赠收入*</label>
+                            <div class="col-sm-6">
+                                <input type="number" class="form-control" id="income_donate"
+                                       required data-error="必填项(两位小数)" step="0.01"
+                                       placeholder="请输入" name="income_donate"
+                                       value="{{ privateobj.income_donate|default_if_none:"" }}">
+                                <span class="help-block with-errors"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="income_membership_fees" class="col-sm-6 control-label"
+                                   style="padding-left: 50px">会费收入*</label>
+                            <div class="col-sm-6">
+                                <input type="number" class="form-control" id="income_membership_fees"
+                                       placeholder="请输入" name="income_membership_fees"
+                                       required data-error="必填项(两位小数)" step="0.01"
+                                       value="{{ privateobj.income_membership_fees|default_if_none:"" }}">
+                                <span class="help-block with-errors"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="total_this_year" class="col-sm-6 control-label">本年费用合计*</label>
+                            <div class="col-sm-6">
+                                <input type="number" class="form-control" id="total_this_year"
+                                       placeholder="请输入" name="total_this_year"
+                                       required data-error="必填项(两位小数)" step="0.01"
+                                       value="{{ privateobj.total_this_year |default_if_none:"" }}">
+                                <span class="help-block with-errors"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="total_operational_action" class="col-sm-6 control-label"
+                                   style="padding-left: 50px">业务活动成本*</label>
+                            <div class="col-sm-6">
+                                <input type="number" class="form-control" id="total_operational_action"
+                                       placeholder="请输入" name="total_operational_action"
+                                       required data-error="必填项(两位小数)" step="0.01"
+                                       value="{{ privateobj.total_operational_action |default_if_none:"" }}">
+                                <span class="help-block with-errors"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="expend_action_salary" class="col-sm-6 control-label"
+                                   style="padding-left: 100px">人员费用*</label>
+                            <div class="col-sm-6">
+                                <input type="number" class="form-control" id="expend_action_salary"
+                                       placeholder="请输入" name="expend_action_salary"
+                                       required data-error="必填项(两位小数)" step="0.01"
+                                       value="{{ privateobj.expend_action_salary |default_if_none:"" }}">
+                                <span class="help-block with-errors"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="expend_action_current_expense" class="col-sm-6 control-label"
+                                   style="padding-left: 100px">日常费用*</label>
+                            <div class="col-sm-6">
+                                <input type="number" class="form-control" id="expend_action_current_expense"
+                                       placeholder="请输入" name="expend_action_current_expense"
+                                       required data-error="必填项(两位小数)" step="0.01"
+                                       value="{{ privateobj.expend_action_current_expense|default_if_none:"" }}">
+                                <span class="help-block with-errors"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="expend_action_depreciation_assets" class="col-sm-6 control-label"
+                                   style="padding-left: 100px">固定资产折旧*</label>
+                            <div class="col-sm-6">
+                                <input type="number" class="form-control" id="expend_action_depreciation_assets"
+                                       placeholder="请输入" name="expend_action_depreciation_assets"
+                                       required data-error="必填项(两位小数)" step="0.01"
+                                       value="{{ privateobj.expend_action_depreciation_assets|default_if_none:"" }}">
+                                <span class="help-block with-errors"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="expend_action_taxes" class="col-sm-6 control-label" style="padding-left: 100px">税费*</label>
+                            <div class="col-sm-6">
+                                <input type="number" class="form-control" id="expend_action_taxes"
+                                       placeholder="请输入" name="expend_action_taxes"
+                                       required data-error="必填项(两位小数)" step="0.01"
+                                       value="{{ privateobj.expend_action_taxes|default_if_none:"" }}">
+                                <span class="help-block with-errors"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="expend_management" class="col-sm-6 control-label" style="padding-left: 50px">管理费用*</label>
+                            <div class="col-sm-6">
+                                <input type="number" class="form-control" id="expend_management"
+                                       placeholder="请输入" name="expend_management"
+                                       required data-error="必填项(两位小数)" step="0.01"
+                                       value="{{ privateobj.expend_management |default_if_none:"" }}">
+                                <span class="help-block with-errors"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="expend_management_salary" class="col-sm-6 control-label"
+                                   style="padding-left: 100px">人员费用*</label>
+                            <div class="col-sm-6">
+                                <input type="number" class="form-control" id="expend_management_salary"
+                                       placeholder="请输入" name="expend_management_salary"
+                                       required data-error="必填项(两位小数)" step="0.01"
+                                       value="{{ privateobj.expend_management_salary|default_if_none:"" }}">
+                                <span class="help-block with-errors"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="expend_management_current_expense" class="col-sm-6 control-label"
+                                   style="padding-left: 100px">日常费用*</label>
+                            <div class="col-sm-6">
+                                <input type="number" class="form-control" id="expend_management_current_expense"
+                                       placeholder="请输入" name="expend_management_current_expense"
+                                       required data-error="必填项(两位小数)" step="0.01"
+                                       value="{{ privateobj.expend_management_current_expense|default_if_none:"" }}">
+                                <span class="help-block with-errors"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="expend_management_depreciation_assets"
+                                   class="col-sm-6 control-label" style="padding-left: 100px">固定资产折旧*</label>
+                            <div class="col-sm-6">
+                                <input type="number" class="form-control" id="expend_management_depreciation_assets"
+                                       placeholder="请输入" name="expend_management_depreciation_assets"
+                                       required data-error="必填项(两位小数)" step="0.01"
+                                       value="{{ privateobj.expend_management_depreciation_assets|default_if_none:"" }}">
+                                <span class="help-block with-errors"></span>
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="expend_management_taxes" class="col-sm-6 control-label"
+                                   style="padding-left: 100px">税费*</label>
+                            <div class="col-sm-6">
+                                <input type="number" class="form-control" id="expend_management_taxes"
+                                       placeholder="请输入" name="expend_management_taxes"
+                                       required data-error="必填项(两位小数)" step="0.01"
+                                       value="{{ privateobj.expend_management_taxes |default_if_none:"" }}">
+                                <span class="help-block with-errors"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="net_asset_change" class="col-sm-6 control-label">净资产变动额*</label>
+                            <div class="col-sm-6">
+                                <input type="number" class="form-control" id="net_asset_change"
+                                       placeholder="请输入" name="net_asset_change"
+                                       required data-error="必填项(两位小数)" step="0.01"
+                                       value="{{ privateobj.net_asset_change|default_if_none:"" }}">
+                                <span class="help-block with-errors"></span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+             {% if  permission == True %}
+                <div class="col-sm-12 white-box ">
+                    <button type="submit" id="onClickButton"
+                            class="btn  btn-default btn-outline btn-danger pull-right">提交
+                    </button>
+                    <div style="clear:both "></div>
+                </div>
+            {% endif %}
+        </form>
+    </div>
+
+
+
+{% endblock %}
+
+{% block js %}
+    {% load static %}
+    <script src= {% static  "plugins/bower_components/switchery/dist/switchery.min.js" %}></script>
+    <script src={% static  "plugins/bower_components/custom-select/custom-select.min.js" %} type="text/javascript"></script>
+    <script src={% static  "plugins/bower_components/bootstrap-select/bootstrap-select.min.js" %} type="text/javascript"></script>
+    <script src={% static  "plugins/bower_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js" %}></script>
+    <script src={% static  "plugins/bower_components/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js" %}
+                    type="text/javascript"></script>
+    <script type="text/javascript"
+            src={% static  "plugins/bower_components/multiselect/js/jquery.multi-select.js" %}></script>
+    {#    <script src={% static "js/xianmeng/edit-com.js" %}></script>#}
+    {#    <script src={% static "js/xianmeng/edit-611-6.js" %}></script>#}
+
+    <script>
+        jQuery(document).ready(function () {
+            // Switchery
+            var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
+            $('.js-switch').each(function () {
+                new Switchery($(this)[0], $(this).data());
+
+            });
+            // For select 2
+
+            $(".select2").select2();
+            $('.selectpicker').selectpicker();
+
+            //Bootstrap-TouchSpin
+            $(".vertical-spin").TouchSpin({
+                verticalbuttons: true,
+                verticalupclass: 'ti-plus',
+                verticaldownclass: 'ti-minus'
+            });
+            var vspinTrue = $(".vertical-spin").TouchSpin({
+                verticalbuttons: true
+            });
+            if (vspinTrue) {
+                $('.vertical-spin').prev('.bootstrap-touchspin-prefix').remove();
+            }
+
+
+            $("#onClickButton").click(function () {
+                var data = $("#base_form_611_6").serializeArray();
+                var postData = {};
+                console.log(data)
+                for (var x in data) {
+                    postData[data[x].name] = data[x].value;
+                    if (data[x].value == '') {
+                        if (data[x].name == 'social_num' || data[x].name == 'main_org_num') {
+
+                        } else {
+                            toastr.error("不能有空选项");
+                            $("#" + data[x].name).parent().parent().addClass("has-error")
+                            return false
+                        }
+                    }
+                }
+                console.log(postData);
+                // 验证表
+
+                
+                //资产负债
+                if (parseInt(postData.current_assets) < parseInt(postData.inventory_current_assets)) {
+                    $("#current_assets").parent().parent().addClass("has-error")
+                    $("#inventory_current_assets").parent().parent().addClass("has-error")
+                    toastr.error("流动资产合计必须大于等于存货");
+                    return false
+                }
+                if (parseInt(postData.original_price) < (parseInt(postData.area_building) + parseInt(postData.machinery_equipment) + parseInt(postData.transportation_equipment))) {
+                    toastr.error("固定资产原价必须大于等于土地、房屋和构筑物，机器设备，运输设备之和");
+                    $("#original_price").parent().parent().addClass("has-error")
+                    $("#area_building").parent().parent().addClass("has-error")
+                    $("#machinery_equipment").parent().parent().addClass("has-error")
+                    $("#transportation_equipment").parent().parent().addClass("has-error")
+                    return false
+                }
+                if (parseInt(postData.total_net_asset) != (parseInt(postData.total_assets) - parseInt(postData.total_liabilities))) {
+                    toastr.error("净资产合计必须等于资产总计-负债合计");
+                    $("#total_net_asset").parent().parent().addClass("has-error")
+                    $("#total_assets").parent().parent().addClass("has-error")
+                    $("#total_liabilities").parent().parent().addClass("has-error")
+                    return false
+                }
+
+                //财务状况
+                if (parseInt(postData.total_income) < (parseInt(postData.income_donate) + parseInt(postData.income_membership_fees))) {
+                    $("#total_income").parent().parent().addClass("has-error")
+                    $("#income_donate").parent().parent().addClass("has-error")
+                    $("#income_membership_fees").parent().parent().addClass("has-error")
+                    toastr.error("本年收入合计必须大于等于捐赠收入和会费收入之和");
+                    return false
+                }
+                if (parseInt(postData.total_this_year) < (parseInt(postData.total_operational_action) + parseInt(postData.expend_management))) {
+                    $("#total_this_year").parent().parent().addClass("has-error")
+                    $("#total_operational_action").parent().parent().addClass("has-error")
+                    $("#expend_management").parent().parent().addClass("has-error")
+                    toastr.error("本年费用合计必须大于等于业务活动成本和管理费用之和");
+                    return false
+                }
+                if (parseInt(postData.total_operational_action) < (parseInt(postData.expend_action_salary) + parseInt(postData.expend_action_current_expense) + parseInt(postData.expend_action_depreciation_assets) + parseInt(postData.expend_action_taxes))) {
+                    toastr.error("业务活动成本大于等于人员费用，日常费用，固定资产折旧，税费之和");
+                    $("#total_operational_action").parent().parent().addClass("has-error")
+                    $("#expend_action_salary").parent().parent().addClass("has-error")
+                    $("#expend_action_depreciation_assets").parent().parent().addClass("has-error")
+                    $("#expend_action_taxes").parent().parent().addClass("has-error")
+                    $("#expend_action_current_expense").parent().parent().addClass("has-error")
+                    return false
+                }
+                if (parseInt(postData.expend_management) < (parseInt(postData.expend_management_salary) + parseInt(postData.expend_management_current_expense) + parseInt(postData.expend_management_depreciation_assets) + parseInt(postData.expend_management_taxes))) {
+                    toastr.error("管理费用大于等于人员费用，日常费用，固定资产折旧，税费之和");
+                    $("#expend_management").parent().parent().addClass("has-error")
+                    $("#expend_management_salary").parent().parent().addClass("has-error")
+                    $("#expend_management_current_expense").parent().parent().addClass("has-error")
+                    $("#expend_management_depreciation_assets").parent().parent().addClass("has-error")
+                    $("#expend_management_taxes").parent().parent().addClass("has-error")
+                    return false
+                }
+
+
+                var next_url = '/index/';
+                $.post('/edit_611_6/{{ cid }}/?next=' + next_url, postData, function (res) {
+                    {#console.log(res);#}
+                    if (res.code == 0) {
+                        toastr.success("保存成功");
+                        window.setTimeout(function () {
+                            window.location.reload()
+                        }, 1000);
+                    } else {
+                        for (var msg1 in res.msg) {
+                            toastr.error(msg1 + "," + res.msg[msg1]);
+                        }
+                    }
+                }).fail(function (jqXHR, textStatus, errorThrown) {
+                    toastr.error('提交失败请稍后重试');
+                });
+                ;
+            })
+
+        });
+
+    </script>
+
+{% endblock %}

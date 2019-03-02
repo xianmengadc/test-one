@@ -1,0 +1,44 @@
+.disable-card {
+    background-color: rgba(17, 14, 13, 0.75) !important;
+}
+
+.small-card {
+    border: 1px solid #49ff93    !important;
+}
+
+.disable-card input {
+    background-color: rgba(17, 14, 13, 0.75) !important;
+}
+
+.disable-card select {
+    background-color: rgba(17, 14, 13, 0.75) !important;
+}
+
+.now {
+    border: 1px solid #fb9678;
+}
+.need {
+    background: #03a9f3 !important;
+}
+.done {
+    background: #00c292 !important;
+}
+
+.new-parent-row input{
+    width: 40% !important;
+}
+
+/*.second-add-btn{*/
+    /*position: absolute;*/
+    /*bottom: 30px;*/
+    /*left: 100px;*/
+/*}*/
+/*611-1*/
+
+
+
+/*#onClickButton{*/
+    /*position: fixed;*/
+    /*top: 200px;*/
+/*}*/
+

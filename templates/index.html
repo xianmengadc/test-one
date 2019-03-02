@@ -1,0 +1,1607 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <!-- /.row  信息总览-->
+    {% if user.district == '碑林区' %}
+        <div class="row">
+            <div class="col-md-12 col-lg-12 col-sm-12">
+                <div class="white-box">
+                    <div class="row row-in">
+                        <div class="col-lg-3 col-sm-6 row-in-br">
+                            <div class="col-in row">
+                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                    <h2 class="text-muted vb" style="font-weight: 800">碑林区
+                                        <small>(总数)</small>
+                                    </h2>
+
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                    <h3 class="counter text-right m-t-15 text-danger">{{ total_count }}</h3>
+                                </div>
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <div class="progress">
+                                        <div class="progress-bar progress-bar-danger" role="progressbar"
+                                             aria-valuenow="40"
+                                             aria-valuemin="0" aria-valuemax="100" style="width: 100%"><span
+                                                class="sr-only"></span></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <div class="col-md-6 col-sm-6 col-xs-6">
+                                        <h4 class="text-muted vb">第一阶段
+                                        </h4>
+
+                                    </div>
+                                    <div class="col-md-6 col-sm-6 col-xs-6">
+                                        <h4 class="counter text-right m-t-15 text-danger">{{ total_phase1_count }}</h4>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <div class="col-md-6 col-sm-6 col-xs-6">
+                                        <h4 class="text-muted vb">第二阶段
+                                        </h4>
+
+                                    </div>
+                                    <div class="col-md-6 col-sm-6 col-xs-6">
+                                        <h4 class="counter text-right m-t-15 text-danger">{{ total_phase2_count }}</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-sm-6 row-in-br  b-r-none">
+                            <div class="col-in row">
+                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                    <h2 class="text-muted vb">已审核 </h2>
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                    <h3 class="counter text-right m-t-15 text-megna">{{ total_complete_done_count }}</h3>
+                                </div>
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <div class="progress">
+                                        <div class="progress-bar progress-bar-megna" role="progressbar"
+                                             aria-valuenow="40"
+                                             aria-valuemin="0" aria-valuemax="100"
+                                             style="width:{% widthratio 0 total_count 100 %}%"><span
+                                                class="sr-only"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <div class="col-md-6 col-sm-6 col-xs-6">
+                                        <h4 class="text-muted vb">第一阶段
+                                        </h4>
+
+                                    </div>
+                                    <div class="col-md-6 col-sm-6 col-xs-6">
+                                        <h4 class="counter text-right m-t-15 text-danger">{{ total_complete_done_phase1_count }}</h4>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <div class="col-md-6 col-sm-6 col-xs-6">
+                                        <h4 class="text-muted vb">第二阶段
+                                        </h4>
+
+                                    </div>
+                                    <div class="col-md-6 col-sm-6 col-xs-6">
+                                        <h4 class="counter text-right m-t-15 text-danger">{{ total_complete_done_phase2_count }}</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6 row-in-br">
+                            <div class="col-in row">
+                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                    <h2 class="text-muted vb">未审核</h2>
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                    <h3 class="counter text-right m-t-15 text-primary">{{ total_no_complete_done_count }}</h3>
+                                </div>
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <div class="progress">
+                                        <div class="progress-bar progress-bar-primary" role="progressbar"
+                                             aria-valuenow="40"
+                                             aria-valuemin="0" aria-valuemax="100"
+                                             style="width:{% widthratio total_no_complete_done_count total_count 100 %}%"><span
+                                                class="sr-only"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                        <div class="col-md-6 col-sm-6 col-xs-6">
+                                            <h4 class="text-muted vb">第一阶段
+                                            </h4>
+
+                                        </div>
+                                        <div class="col-md-6 col-sm-6 col-xs-6">
+                                            <h4 class="counter text-right m-t-15 text-danger">{{ total_no_complete_done_phase1_count }}</h4>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                        <div class="col-md-6 col-sm-6 col-xs-6">
+                                            <h4 class="text-muted vb">第二阶段
+                                            </h4>
+
+                                        </div>
+                                        <div class="col-md-6 col-sm-6 col-xs-6">
+                                            <h4 class="counter text-right m-t-15 text-danger">{{ total_no_complete_done_phase2_count }}</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6  b-0">
+                            <div class="col-in row">
+                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                    <h2 class="text-muted vb">今日审核</h2>
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                    <h3 class="counter text-right m-t-15 text-success">{{ total_today_complete_done_count }}</h3>
+                                </div>
+                                <div class="col-md-12 col-sm-12 col-xs-12" style="height: 22px">
+
+                                </div>
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <div class="col-md-6 col-sm-6 col-xs-6">
+                                        <h4 class="text-muted vb">第一阶段
+                                        </h4>
+
+                                    </div>
+                                    <div class="col-md-6 col-sm-6 col-xs-6">
+                                        <h4 class="counter text-right m-t-15 text-danger">{{ total_today_complete_done_phase1_count }}</h4>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <div class="col-md-6 col-sm-6 col-xs-6">
+                                        <h4 class="text-muted vb">第二阶段
+                                        </h4>
+
+                                    </div>
+                                    <div class="col-md-6 col-sm-6 col-xs-6">
+                                        <h4 class="counter text-right m-t-15 text-danger">{{ total_today_complete_done_phase2_count }}</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+
+        </div>
+    {% endif %}
+    {% if user.district == '碑林区' or user.get_group_name.name == '南院门' %}
+        <div class="white-box">
+            <div class="row row-in">
+                <div class="col-lg-3 col-sm-6 row-in-br">
+                    <div class="col-in row">
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <h2 class="text-muted vb" style="font-weight: 800">南院门
+                                <small>(总数)</small>
+                            </h2>
+
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <h3 class="counter text-right m-t-15 text-danger">{{ nym_count }}</h3>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="40"
+                                     aria-valuemin="0" aria-valuemax="100" style="width: 100%"><span
+                                        class="sr-only"></span></div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <h4 class="text-muted vb">第一阶段
+                                </h4>
+
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <h4 class="counter text-right m-t-15 text-danger">{{ nym_phase1_count }}</h4>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <h4 class="text-muted vb">第二阶段
+                                </h4>
+
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <h4 class="counter text-right m-t-15 text-danger">{{ nym_phase2_count }}</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6 row-in-br  b-r-none">
+                    <div class="col-in row">
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <h2 class="text-muted vb">已审核 </h2>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <h3 class="counter text-right m-t-15 text-megna">{{ nym_complete_done_count }}</h3>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-megna" role="progressbar"
+                                     aria-valuenow="40"
+                                     aria-valuemin="0" aria-valuemax="100"
+                                     style="width:{% widthratio 0 total_count 100 %}%"><span
+                                        class="sr-only"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <h4 class="text-muted vb">第一阶段
+                                </h4>
+
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <h4 class="counter text-right m-t-15 text-danger">{{ nym_complete_done_phase1_count }}</h4>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <h4 class="text-muted vb">第二阶段
+                                </h4>
+
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <h4 class="counter text-right m-t-15 text-danger">{{ nym_complete_done_phase2_count }}</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6 row-in-br">
+                    <div class="col-in row">
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <h2 class="text-muted vb">未审核</h2>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <h3 class="counter text-right m-t-15 text-primary">{{ nym_no_complete_done_count }}</h3>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-primary" role="progressbar"
+                                     aria-valuenow="40"
+                                     aria-valuemin="0" aria-valuemax="100"
+                                     style="width:{% widthratio nym_no_complete_done_count nym_count 100 %}%"><span
+                                        class="sr-only"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                    <h4 class="text-muted vb">第一阶段
+                                    </h4>
+
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                    <h4 class="counter text-right m-t-15 text-danger">{{ nym_no_complete_done_phase1_count }}</h4>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                    <h4 class="text-muted vb">第二阶段
+                                    </h4>
+
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                    <h4 class="counter text-right m-t-15 text-danger">{{ nym_no_complete_done_phase2_count }}</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6  b-0">
+                    <div class="col-in row">
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <h2 class="text-muted vb">今日审核</h2>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <h3 class="counter text-right m-t-15 text-success">{{ nym_today_complete_done_count }}</h3>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12" style="height: 22px">
+
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <h4 class="text-muted vb">第一阶段
+                                </h4>
+
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <h4 class="counter text-right m-t-15 text-danger">{{ nym_today_complete_done_phase1_count }}</h4>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <h4 class="text-muted vb">第二阶段
+                                </h4>
+
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <h4 class="counter text-right m-t-15 text-danger">{{ nym_today_complete_done_phase2_count }}</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    {% if user.district == '碑林区' or user.get_group_name.name == '柏树林' %}
+        <div class="white-box">
+            <div class="row row-in">
+                <div class="col-lg-3 col-sm-6 row-in-br">
+                    <div class="col-in row">
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <h2 class="text-muted vb" style="font-weight: 800">柏树林
+                                <small>(总数)</small>
+                            </h2>
+
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <h3 class="counter text-right m-t-15 text-danger">{{ bsl_count }}</h3>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="40"
+                                     aria-valuemin="0" aria-valuemax="100" style="width: 100%"><span
+                                        class="sr-only"></span></div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <h4 class="text-muted vb">第一阶段
+                                </h4>
+
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <h4 class="counter text-right m-t-15 text-danger">{{ bsl_phase1_count }}</h4>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <h4 class="text-muted vb">第二阶段
+                                </h4>
+
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <h4 class="counter text-right m-t-15 text-danger">{{ bsl_phase2_count }}</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6 row-in-br  b-r-none">
+                    <div class="col-in row">
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <h2 class="text-muted vb">已审核 </h2>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <h3 class="counter text-right m-t-15 text-megna">{{ bsl_complete_done_count }}</h3>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-megna" role="progressbar"
+                                     aria-valuenow="40"
+                                     aria-valuemin="0" aria-valuemax="100"
+                                     style="width:{% widthratio 0 total_count 100 %}%"><span
+                                        class="sr-only"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <h4 class="text-muted vb">第一阶段
+                                </h4>
+
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <h4 class="counter text-right m-t-15 text-danger">{{ bsl_complete_done_phase1_count }}</h4>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <h4 class="text-muted vb">第二阶段
+                                </h4>
+
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <h4 class="counter text-right m-t-15 text-danger">{{ bsl_complete_done_phase2_count }}</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6 row-in-br">
+                    <div class="col-in row">
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <h2 class="text-muted vb">未审核</h2>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <h3 class="counter text-right m-t-15 text-primary">{{ bsl_no_complete_done_count }}</h3>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-primary" role="progressbar"
+                                     aria-valuenow="40"
+                                     aria-valuemin="0" aria-valuemax="100"
+                                     style="width:{% widthratio bsl_no_complete_done_count bsl_count 100 %}%"><span
+                                        class="sr-only"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                    <h4 class="text-muted vb">第一阶段
+                                    </h4>
+
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                    <h4 class="counter text-right m-t-15 text-danger">{{ bsl_no_complete_done_phase1_count }}</h4>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                    <h4 class="text-muted vb">第二阶段
+                                    </h4>
+
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                    <h4 class="counter text-right m-t-15 text-danger">{{ bsl_no_complete_done_phase2_count }}</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6  b-0">
+                    <div class="col-in row">
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <h2 class="text-muted vb">今日审核</h2>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <h3 class="counter text-right m-t-15 text-success">{{ bsl_today_complete_done_count }}</h3>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12" style="height: 22px">
+
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <h4 class="text-muted vb">第一阶段
+                                </h4>
+
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <h4 class="counter text-right m-t-15 text-danger">{{ bsl_today_complete_done_phase1_count }}</h4>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <h4 class="text-muted vb">第二阶段
+                                </h4>
+
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <h4 class="counter text-right m-t-15 text-danger">{{ bsl_today_complete_done_phase2_count }}</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    {% if user.district == '碑林区' or user.get_group_name.name == '长乐坊' %}
+        <div class="white-box">
+            <div class="row row-in">
+                <div class="col-lg-3 col-sm-6 row-in-br">
+                    <div class="col-in row">
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <h2 class="text-muted vb" style="font-weight: 800">长乐坊
+                                <small>(总数)</small>
+                            </h2>
+
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <h3 class="counter text-right m-t-15 text-danger">{{ clf_count }}</h3>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="40"
+                                     aria-valuemin="0" aria-valuemax="100" style="width: 100%"><span
+                                        class="sr-only"></span></div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <h4 class="text-muted vb">第一阶段
+                                </h4>
+
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <h4 class="counter text-right m-t-15 text-danger">{{ clf_phase1_count }}</h4>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <h4 class="text-muted vb">第二阶段
+                                </h4>
+
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <h4 class="counter text-right m-t-15 text-danger">{{ clf_phase2_count }}</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6 row-in-br  b-r-none">
+                    <div class="col-in row">
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <h2 class="text-muted vb">已审核 </h2>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <h3 class="counter text-right m-t-15 text-megna">{{ clf_complete_done_count }}</h3>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-megna" role="progressbar"
+                                     aria-valuenow="40"
+                                     aria-valuemin="0" aria-valuemax="100"
+                                     style="width:{% widthratio 0 total_count 100 %}%"><span
+                                        class="sr-only"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <h4 class="text-muted vb">第一阶段
+                                </h4>
+
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <h4 class="counter text-right m-t-15 text-danger">{{ clf_complete_done_phase1_count }}</h4>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <h4 class="text-muted vb">第二阶段
+                                </h4>
+
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <h4 class="counter text-right m-t-15 text-danger">{{ clf_complete_done_phase2_count }}</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6 row-in-br">
+                    <div class="col-in row">
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <h2 class="text-muted vb">未审核</h2>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <h3 class="counter text-right m-t-15 text-primary">{{ clf_no_complete_done_count }}</h3>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-primary" role="progressbar"
+                                     aria-valuenow="40"
+                                     aria-valuemin="0" aria-valuemax="100"
+                                     style="width:{% widthratio clf_no_complete_done_count clf_count 100 %}%"><span
+                                        class="sr-only"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                    <h4 class="text-muted vb">第一阶段
+                                    </h4>
+
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                    <h4 class="counter text-right m-t-15 text-danger">{{ clf_no_complete_done_phase1_count }}</h4>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                    <h4 class="text-muted vb">第二阶段
+                                    </h4>
+
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                    <h4 class="counter text-right m-t-15 text-danger">{{ clf_no_complete_done_phase2_count }}</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6  b-0">
+                    <div class="col-in row">
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <h2 class="text-muted vb">今日审核</h2>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <h3 class="counter text-right m-t-15 text-success">{{ clf_today_complete_done_count }}</h3>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12" style="height: 22px">
+
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <h4 class="text-muted vb">第一阶段
+                                </h4>
+
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <h4 class="counter text-right m-t-15 text-danger">{{ clf_today_complete_done_phase1_count }}</h4>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <h4 class="text-muted vb">第二阶段
+                                </h4>
+
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <h4 class="counter text-right m-t-15 text-danger">{{ clf_today_complete_done_phase2_count }}</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    {% if user.district == '碑林区' or user.get_group_name.name == '东关南' %}
+        <div class="white-box">
+            <div class="row row-in">
+                <div class="col-lg-3 col-sm-6 row-in-br">
+                    <div class="col-in row">
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <h2 class="text-muted vb" style="font-weight: 800">东关南
+                                <small>(总数)</small>
+                            </h2>
+
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <h3 class="counter text-right m-t-15 text-danger">{{ dgn_count }}</h3>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="40"
+                                     aria-valuemin="0" aria-valuemax="100" style="width: 100%"><span
+                                        class="sr-only"></span></div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <h4 class="text-muted vb">第一阶段
+                                </h4>
+
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <h4 class="counter text-right m-t-15 text-danger">{{ dgn_phase1_count }}</h4>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <h4 class="text-muted vb">第二阶段
+                                </h4>
+
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <h4 class="counter text-right m-t-15 text-danger">{{ dgn_phase2_count }}</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6 row-in-br  b-r-none">
+                    <div class="col-in row">
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <h2 class="text-muted vb">已审核 </h2>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <h3 class="counter text-right m-t-15 text-megna">{{ dgn_complete_done_count }}</h3>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-megna" role="progressbar"
+                                     aria-valuenow="40"
+                                     aria-valuemin="0" aria-valuemax="100"
+                                     style="width:{% widthratio 0 total_count 100 %}%"><span
+                                        class="sr-only"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <h4 class="text-muted vb">第一阶段
+                                </h4>
+
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <h4 class="counter text-right m-t-15 text-danger">{{ dgn_complete_done_phase1_count }}</h4>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <h4 class="text-muted vb">第二阶段
+                                </h4>
+
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <h4 class="counter text-right m-t-15 text-danger">{{ dgn_complete_done_phase2_count }}</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6 row-in-br">
+                    <div class="col-in row">
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <h2 class="text-muted vb">未审核</h2>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <h3 class="counter text-right m-t-15 text-primary">{{ dgn_no_complete_done_count }}</h3>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-primary" role="progressbar"
+                                     aria-valuenow="40"
+                                     aria-valuemin="0" aria-valuemax="100"
+                                     style="width:{% widthratio dgn_no_complete_done_count dgn_count 100 %}%"><span
+                                        class="sr-only"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                    <h4 class="text-muted vb">第一阶段
+                                    </h4>
+
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                    <h4 class="counter text-right m-t-15 text-danger">{{ dgn_no_complete_done_phase1_count }}</h4>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                    <h4 class="text-muted vb">第二阶段
+                                    </h4>
+
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                    <h4 class="counter text-right m-t-15 text-danger">{{ dgn_no_complete_done_phase2_count }}</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6  b-0">
+                    <div class="col-in row">
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <h2 class="text-muted vb">今日审核</h2>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <h3 class="counter text-right m-t-15 text-success">{{ dgn_today_complete_done_count }}</h3>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12" style="height: 22px">
+
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <h4 class="text-muted vb">第一阶段
+                                </h4>
+
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <h4 class="counter text-right m-t-15 text-danger">{{ dgn_today_complete_done_phase1_count }}</h4>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <h4 class="text-muted vb">第二阶段
+                                </h4>
+
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <h4 class="counter text-right m-t-15 text-danger">{{ dgn_today_complete_done_phase2_count }}</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    {% if user.district == '碑林区' or user.get_group_name.name == '太乙路' %}
+        <div class="white-box">
+            <div class="row row-in">
+                <div class="col-lg-3 col-sm-6 row-in-br">
+                    <div class="col-in row">
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <h2 class="text-muted vb" style="font-weight: 800">太乙路
+                                <small>(总数)</small>
+                            </h2>
+
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <h3 class="counter text-right m-t-15 text-danger">{{ tyl_count }}</h3>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="40"
+                                     aria-valuemin="0" aria-valuemax="100" style="width: 100%"><span
+                                        class="sr-only"></span></div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <h4 class="text-muted vb">第一阶段
+                                </h4>
+
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <h4 class="counter text-right m-t-15 text-danger">{{ tyl_phase1_count }}</h4>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <h4 class="text-muted vb">第二阶段
+                                </h4>
+
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <h4 class="counter text-right m-t-15 text-danger">{{ tyl_phase2_count }}</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6 row-in-br  b-r-none">
+                    <div class="col-in row">
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <h2 class="text-muted vb">已审核 </h2>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <h3 class="counter text-right m-t-15 text-megna">{{ tyl_complete_done_count }}</h3>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-megna" role="progressbar"
+                                     aria-valuenow="40"
+                                     aria-valuemin="0" aria-valuemax="100"
+                                     style="width:{% widthratio 0 total_count 100 %}%"><span
+                                        class="sr-only"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <h4 class="text-muted vb">第一阶段
+                                </h4>
+
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <h4 class="counter text-right m-t-15 text-danger">{{ tyl_complete_done_phase1_count }}</h4>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <h4 class="text-muted vb">第二阶段
+                                </h4>
+
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <h4 class="counter text-right m-t-15 text-danger">{{ tyl_complete_done_phase2_count }}</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6 row-in-br">
+                    <div class="col-in row">
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <h2 class="text-muted vb">未审核</h2>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <h3 class="counter text-right m-t-15 text-primary">{{ tyl_no_complete_done_count }}</h3>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-primary" role="progressbar"
+                                     aria-valuenow="40"
+                                     aria-valuemin="0" aria-valuemax="100"
+                                     style="width:{% widthratio tyl_no_complete_done_count tyl_count 100 %}%"><span
+                                        class="sr-only"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                    <h4 class="text-muted vb">第一阶段
+                                    </h4>
+
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                    <h4 class="counter text-right m-t-15 text-danger">{{ tyl_no_complete_done_phase1_count }}</h4>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                    <h4 class="text-muted vb">第二阶段
+                                    </h4>
+
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                    <h4 class="counter text-right m-t-15 text-danger">{{ tyl_no_complete_done_phase2_count }}</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6  b-0">
+                    <div class="col-in row">
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <h2 class="text-muted vb">今日审核</h2>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <h3 class="counter text-right m-t-15 text-success">{{ tyl_today_complete_done_count }}</h3>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12" style="height: 22px">
+
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <h4 class="text-muted vb">第一阶段
+                                </h4>
+
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <h4 class="counter text-right m-t-15 text-danger">{{ tyl_today_complete_done_phase1_count }}</h4>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <h4 class="text-muted vb">第二阶段
+                                </h4>
+
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <h4 class="counter text-right m-t-15 text-danger">{{ tyl_today_complete_done_phase2_count }}</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    {% if user.district == '碑林区' or user.get_group_name.name == '文艺路' %}
+        <div class="white-box">
+            <div class="row row-in">
+                <div class="col-lg-3 col-sm-6 row-in-br">
+                    <div class="col-in row">
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <h2 class="text-muted vb" style="font-weight: 800">文艺路
+                                <small>(总数)</small>
+                            </h2>
+
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <h3 class="counter text-right m-t-15 text-danger">{{ wyl_count }}</h3>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="40"
+                                     aria-valuemin="0" aria-valuemax="100" style="width: 100%"><span
+                                        class="sr-only"></span></div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <h4 class="text-muted vb">第一阶段
+                                </h4>
+
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <h4 class="counter text-right m-t-15 text-danger">{{ wyl_phase1_count }}</h4>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <h4 class="text-muted vb">第二阶段
+                                </h4>
+
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <h4 class="counter text-right m-t-15 text-danger">{{ wyl_phase2_count }}</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6 row-in-br  b-r-none">
+                    <div class="col-in row">
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <h2 class="text-muted vb">已审核 </h2>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <h3 class="counter text-right m-t-15 text-megna">{{ wyl_complete_done_count }}</h3>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-megna" role="progressbar"
+                                     aria-valuenow="40"
+                                     aria-valuemin="0" aria-valuemax="100"
+                                     style="width:{% widthratio 0 total_count 100 %}%"><span
+                                        class="sr-only"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <h4 class="text-muted vb">第一阶段
+                                </h4>
+
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <h4 class="counter text-right m-t-15 text-danger">{{ wyl_complete_done_phase1_count }}</h4>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <h4 class="text-muted vb">第二阶段
+                                </h4>
+
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <h4 class="counter text-right m-t-15 text-danger">{{ wyl_complete_done_phase2_count }}</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6 row-in-br">
+                    <div class="col-in row">
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <h2 class="text-muted vb">未审核</h2>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <h3 class="counter text-right m-t-15 text-primary">{{ wyl_no_complete_done_count }}</h3>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-primary" role="progressbar"
+                                     aria-valuenow="40"
+                                     aria-valuemin="0" aria-valuemax="100"
+                                     style="width:{% widthratio wyl_no_complete_done_count wyl_count 100 %}%"><span
+                                        class="sr-only"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                    <h4 class="text-muted vb">第一阶段
+                                    </h4>
+
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                    <h4 class="counter text-right m-t-15 text-danger">{{ wyl_no_complete_done_phase1_count }}</h4>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                    <h4 class="text-muted vb">第二阶段
+                                    </h4>
+
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                    <h4 class="counter text-right m-t-15 text-danger">{{ wyl_no_complete_done_phase2_count }}</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6  b-0">
+                    <div class="col-in row">
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <h2 class="text-muted vb">今日审核</h2>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <h3 class="counter text-right m-t-15 text-success">{{ wyl_today_complete_done_count }}</h3>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12" style="height: 22px">
+
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <h4 class="text-muted vb">第一阶段
+                                </h4>
+
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <h4 class="counter text-right m-t-15 text-danger">{{ wyl_today_complete_done_phase1_count }}</h4>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <h4 class="text-muted vb">第二阶段
+                                </h4>
+
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <h4 class="counter text-right m-t-15 text-danger">{{ wyl_today_complete_done_phase2_count }}</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    {% if user.district == '碑林区' or user.get_group_name.name == '长安路' %}
+        <div class="white-box">
+            <div class="row row-in">
+                <div class="col-lg-3 col-sm-6 row-in-br">
+                    <div class="col-in row">
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <h2 class="text-muted vb" style="font-weight: 800">长安路
+                                <small>(总数)</small>
+                            </h2>
+
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <h3 class="counter text-right m-t-15 text-danger">{{ cal_count }}</h3>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="40"
+                                     aria-valuemin="0" aria-valuemax="100" style="width: 100%"><span
+                                        class="sr-only"></span></div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <h4 class="text-muted vb">第一阶段
+                                </h4>
+
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <h4 class="counter text-right m-t-15 text-danger">{{ cal_phase1_count }}</h4>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <h4 class="text-muted vb">第二阶段
+                                </h4>
+
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <h4 class="counter text-right m-t-15 text-danger">{{ cal_phase2_count }}</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6 row-in-br  b-r-none">
+                    <div class="col-in row">
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <h2 class="text-muted vb">已审核 </h2>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <h3 class="counter text-right m-t-15 text-megna">{{ cal_complete_done_count }}</h3>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-megna" role="progressbar"
+                                     aria-valuenow="40"
+                                     aria-valuemin="0" aria-valuemax="100"
+                                     style="width:{% widthratio 0 total_count 100 %}%"><span
+                                        class="sr-only"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <h4 class="text-muted vb">第一阶段
+                                </h4>
+
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <h4 class="counter text-right m-t-15 text-danger">{{ cal_complete_done_phase1_count }}</h4>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <h4 class="text-muted vb">第二阶段
+                                </h4>
+
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <h4 class="counter text-right m-t-15 text-danger">{{ cal_complete_done_phase2_count }}</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6 row-in-br">
+                    <div class="col-in row">
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <h2 class="text-muted vb">未审核</h2>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <h3 class="counter text-right m-t-15 text-primary">{{ cal_no_complete_done_count }}</h3>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-primary" role="progressbar"
+                                     aria-valuenow="40"
+                                     aria-valuemin="0" aria-valuemax="100"
+                                     style="width:{% widthratio cal_no_complete_done_count cal_count 100 %}%"><span
+                                        class="sr-only"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                    <h4 class="text-muted vb">第一阶段
+                                    </h4>
+
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                    <h4 class="counter text-right m-t-15 text-danger">{{ cal_no_complete_done_phase1_count }}</h4>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                    <h4 class="text-muted vb">第二阶段
+                                    </h4>
+
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                    <h4 class="counter text-right m-t-15 text-danger">{{ cal_no_complete_done_phase2_count }}</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6  b-0">
+                    <div class="col-in row">
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <h2 class="text-muted vb">今日审核</h2>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <h3 class="counter text-right m-t-15 text-success">{{ cal_today_complete_done_count }}</h3>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12" style="height: 22px">
+
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <h4 class="text-muted vb">第一阶段
+                                </h4>
+
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <h4 class="counter text-right m-t-15 text-danger">{{ cal_today_complete_done_phase1_count }}</h4>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <h4 class="text-muted vb">第二阶段
+                                </h4>
+
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <h4 class="counter text-right m-t-15 text-danger">{{ cal_today_complete_done_phase2_count }}</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    {% if user.district == '碑林区' or user.get_group_name.name == '张家村' %}
+        <div class="white-box">
+            <div class="row row-in">
+                <div class="col-lg-3 col-sm-6 row-in-br">
+                    <div class="col-in row">
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <h2 class="text-muted vb" style="font-weight: 800">张家村
+                                <small>(总数)</small>
+                            </h2>
+
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <h3 class="counter text-right m-t-15 text-danger">{{ zjc_count }}</h3>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="40"
+                                     aria-valuemin="0" aria-valuemax="100" style="width: 100%"><span
+                                        class="sr-only"></span></div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <h4 class="text-muted vb">第一阶段
+                                </h4>
+
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <h4 class="counter text-right m-t-15 text-danger">{{ zjc_phase1_count }}</h4>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <h4 class="text-muted vb">第二阶段
+                                </h4>
+
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <h4 class="counter text-right m-t-15 text-danger">{{ zjc_phase2_count }}</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6 row-in-br  b-r-none">
+                    <div class="col-in row">
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <h2 class="text-muted vb">已审核 </h2>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <h3 class="counter text-right m-t-15 text-megna">{{ zjc_complete_done_count }}</h3>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-megna" role="progressbar"
+                                     aria-valuenow="40"
+                                     aria-valuemin="0" aria-valuemax="100"
+                                     style="width:{% widthratio 0 total_count 100 %}%"><span
+                                        class="sr-only"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <h4 class="text-muted vb">第一阶段
+                                </h4>
+
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <h4 class="counter text-right m-t-15 text-danger">{{ zjc_complete_done_phase1_count }}</h4>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <h4 class="text-muted vb">第二阶段
+                                </h4>
+
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <h4 class="counter text-right m-t-15 text-danger">{{ zjc_complete_done_phase2_count }}</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6 row-in-br">
+                    <div class="col-in row">
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <h2 class="text-muted vb">未审核</h2>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <h3 class="counter text-right m-t-15 text-primary">{{ zjc_no_complete_done_count }}</h3>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-primary" role="progressbar"
+                                     aria-valuenow="40"
+                                     aria-valuemin="0" aria-valuemax="100"
+                                     style="width:{% widthratio zjc_no_complete_done_count zjc_count 100 %}%"><span
+                                        class="sr-only"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                    <h4 class="text-muted vb">第一阶段
+                                    </h4>
+
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                    <h4 class="counter text-right m-t-15 text-danger">{{ zjc_no_complete_done_phase1_count }}</h4>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                    <h4 class="text-muted vb">第二阶段
+                                    </h4>
+
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                    <h4 class="counter text-right m-t-15 text-danger">{{ zjc_no_complete_done_phase2_count }}</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6  b-0">
+                    <div class="col-in row">
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <h2 class="text-muted vb">今日审核</h2>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <h3 class="counter text-right m-t-15 text-success">{{ zjc_today_complete_done_count }}</h3>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12" style="height: 22px">
+
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <h4 class="text-muted vb">第一阶段
+                                </h4>
+
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <h4 class="counter text-right m-t-15 text-danger">{{ zjc_today_complete_done_phase1_count }}</h4>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <h4 class="text-muted vb">第二阶段
+                                </h4>
+
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <h4 class="counter text-right m-t-15 text-danger">{{ zjc_today_complete_done_phase2_count }}</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+
+
+
+
+
+
+    <!--row -->
+    <!-- /.row  信息表格统计-->
+
+    <!-- /.row -->
+    <!-- .row -->
+    {#    <div class="row">#}
+    {#        <div class="col-md-12 col-lg-12 col-sm-12">#}
+    {#            <div class="white-box">#}
+    {#                <div class="row row-in">#}
+    {#                    <div class="col-lg-3 col-sm-6 row-in-br">#}
+    {#                        <div class="col-in row">#}
+    {#                            <div class="col-md-6 col-sm-6 col-xs-6"><i data-icon="E" class="linea-icon linea-basic"></i>#}
+    {#                                <h5 class="text-muted vb">总数</h5>#}
+    {#                            </div>#}
+    {#                            <div class="col-md-6 col-sm-6 col-xs-6">#}
+    {#                                <h3 class="counter text-right m-t-15 text-danger">9000</h3>#}
+    {#                            </div>#}
+    {#                            <div class="col-md-12 col-sm-12 col-xs-12">#}
+    {#                                <div class="progress">#}
+    {#                                    <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="40"#}
+    {#                                         aria-valuemin="0" aria-valuemax="100" style="width: 100%"><span#}
+    {#                                            class="sr-only">40% Complete (success)</span></div>#}
+    {#                                </div>#}
+    {#                            </div>#}
+    {#                        </div>#}
+    {#                    </div>#}
+    {#                    <div class="col-lg-3 col-sm-6 row-in-br  b-r-none">#}
+    {#                        <div class="col-in row">#}
+    {#                            <div class="col-md-6 col-sm-6 col-xs-6"><i class="linea-icon linea-basic"#}
+    {#                                                                       data-icon="&#xe01b;"></i>#}
+    {#                                <h5 class="text-muted vb">已通知数</h5>#}
+    {#                            </div>#}
+    {#                            <div class="col-md-6 col-sm-6 col-xs-6">#}
+    {#                                <h3 class="counter text-right m-t-15 text-megna">2333</h3>#}
+    {#                            </div>#}
+    {#                            <div class="col-md-12 col-sm-12 col-xs-12">#}
+    {#                                <div class="progress">#}
+    {#                                    <div class="progress-bar progress-bar-megna" role="progressbar" aria-valuenow="40"#}
+    {#                                         aria-valuemin="0" aria-valuemax="100" style="width: 40%"><span class="sr-only">40% Complete (success)</span>#}
+    {#                                    </div>#}
+    {#                                </div>#}
+    {#                            </div>#}
+    {#                        </div>#}
+    {#                    </div>#}
+    {#                    <div class="col-lg-3 col-sm-6 row-in-br">#}
+    {#                        <div class="col-in row">#}
+    {#                            <div class="col-md-6 col-sm-6 col-xs-6"><i class="linea-icon linea-basic"#}
+    {#                                                                       data-icon="&#xe00b;"></i>#}
+    {#                                <h5 class="text-muted vb">未通知数</h5>#}
+    {#                            </div>#}
+    {#                            <div class="col-md-6 col-sm-6 col-xs-6">#}
+    {#                                <h3 class="counter text-right m-t-15 text-primary">5566</h3>#}
+    {#                            </div>#}
+    {#                            <div class="col-md-12 col-sm-12 col-xs-12">#}
+    {#                                <div class="progress">#}
+    {#                                    <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="40"#}
+    {#                                         aria-valuemin="0" aria-valuemax="100" style="width: 40%"><span class="sr-only">40% Complete (success)</span>#}
+    {#                                    </div>#}
+    {#                                </div>#}
+    {#                            </div>#}
+    {#                        </div>#}
+    {#                    </div>#}
+    {#                    <div class="col-lg-3 col-sm-6  b-0">#}
+    {#                        <div class="col-in row">#}
+    {#                            <div class="col-md-6 col-sm-6 col-xs-6"><i class="linea-icon linea-basic"#}
+    {#                                                                       data-icon="&#xe016;"></i>#}
+    {#                                <h5 class="text-muted vb">今日通知数</h5>#}
+    {#                            </div>#}
+    {#                            <div class="col-md-6 col-sm-6 col-xs-6">#}
+    {#                                <h3 class="counter text-right m-t-15 text-success">431</h3>#}
+    {#                            </div>#}
+    {#                            <div class="col-md-12 col-sm-12 col-xs-12">#}
+    {#                                <div class="progress">#}
+    {#                                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40"#}
+    {#                                         aria-valuemin="0" aria-valuemax="100" style="width: 40%"><span class="sr-only">40% Complete (success)</span>#}
+    {#                                    </div>#}
+    {#                                </div>#}
+    {#                            </div>#}
+    {#                        </div>#}
+    {#                    </div>#}
+    {#                </div>#}
+    {#            </div>#}
+    {#        </div>#}
+    {##}
+    {#    </div>#}
+    <!-- /.row -->
+    <!-- .row -->
+
+    <!-- /.row -->
+    <!-- .row -->
+    <div class="row">
+        {% comment %} <div class="col-md-12 col-lg-12 col-xs-12">
+            <div class="white-box">
+                <h3 class="box-title">各街道办普查底册</h3>
+                <div class="flot-chart">
+                    <div class="sales-bars-chart" style="width:100%;height: 320px;"></div>
+                </div>
+            </div>
+        </div> {% endcomment %}
+        <!-- /.row -->
+        <!-- .right-sidebar -->
+        <!-- /.right-sidebar -->
+    </div>
+    <!-- /row  -->
+
+{% endblock %}
+
+{% block js %}
+    {% load static %}
+    <!-- Flot Charts JavaScript -->
+    {#    <script src={% static "plugins/bower_components/flot/excanvas.min.js" %}></script>#}
+    {#    <script src={% static "plugins/bower_components/flot/jquery.flot.js" %}></script>#}
+    {#    <script src={% static "plugins/bower_components/flot/jquery.flot.pie.js" %}></script>#}
+    {#    <script src={% static "plugins/bower_components/flot/jquery.flot.resize.js" %}></script>#}
+    {#    <script src={% static "plugins/bower_components/flot/jquery.flot.time.js" %}></script>#}
+    {#    <script src={% static "plugins/bower_components/flot/jquery.flot.stack.js" %}></script>#}
+    {#    <script src={% static "plugins/bower_components/flot/jquery.flot.crosshair.js" %}></script>#}
+    {#    <script src={% static "plugins/bower_components/flot.tooltip/js/jquery.flot.tooltip.min.js" %}></script>#}
+    {#    <script src={% static "js/flot-data.js" %}></script>#}
+{% endblock %}

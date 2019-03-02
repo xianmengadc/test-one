@@ -1,0 +1,1586 @@
+{% extends "base.html" %}
+{% block css %}
+
+    {% load  static %}
+    <link href={% static "plugins/bower_components/bootstrap-datepicker/bootstrap-datepicker.min.css" %} rel="stylesheet"
+          type="text/css"/>
+    <link href={% static "plugins/bower_components/custom-select/custom-select.css" %} rel="stylesheet" ype="text/css"/>
+    <link href={% static "plugins/bower_components/switchery/dist/switchery.min.css" %} rel="stylesheet"/>
+    <link href={% static "plugins/bower_components/bootstrap-select/bootstrap-select.min.css" %} rel="stylesheet"/>
+    <link href={% static "plugins/bower_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.css" %} rel="stylesheet"/>
+    <link href={% static "plugins/bower_components/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.css" %} rel="stylesheet"/>
+    <link href={% static "plugins/bower_components/multiselect/css/multi-select.css" %} rel="stylesheet"
+          type="text/css"/>
+    <style>
+        label {
+            text-align: right !important;
+        }
+
+        {#标题分割线#}
+        h3 {
+            border-bottom: 1px solid rgba(120, 130, 140, 0.28);
+            marging-bottom: 12px;
+        }
+
+        .control-label {
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+
+    </style>
+{% endblock %}
+
+{% block breadcum %}
+    <a href="{% url 'basedata' street_district %}">{{ street_district }}普查数据</a>
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+
+        <form class="form-horizontal" data-toggle="validator" id="base_form" novalidate>{% csrf_token %}
+            <ul class="wizard-steps" role="tablist">
+                <li class="tab1 need now  {% if companies.done_611 == True %} done {% endif %}" role="tab">
+                    <h4>
+                        <a href="{% url 'edit_com' street_district cid %}"><span>主表</span>611
+                        </a>
+                    </h4>
+                </li>
+                <li class="tab1  {% if companies.need_611_1 == True %} need {% endif %}{% if companies.done_611_1 == True and companies.need_611_1 == True %} done {% endif %}"
+                    role="tab">
+                    <h4>
+                        {% if companies.need_611_1 == False %} <span>1</span>611-1
+                        {% endif %}
+                        {% if companies.need_611_1 == True %}
+                            <a href="{% url 'edit_611_1' cid %}"><span>1</span>611-1
+                            </a>{% endif %}
+                    </h4>
+                </li>
+                <li class="tab2 {% if companies.need_611_2 == True %} need {% endif %}{% if companies.done_611_2 == True and companies.need_611_2 == True %} done {% endif %}"
+                    role="tab">
+                    <h4>
+                        {% if companies.need_611_2 == False %} <span>2</span>611-2
+                        {% endif %}
+                        {% if companies.need_611_2 == True %}
+                            <a href="{% url 'edit_611_2' cid %}"><span>2</span>611-2
+                            </a>{% endif %}
+                    </h4>
+                </li>
+                <li class="tab3 {% if companies.need_611_3 == True %} need {% endif %}{% if companies.done_611_3 == True and companies.need_611_3 == True %} done {% endif %}"
+                    role="tab">
+                    <h4>
+                        {% if companies.need_611_3 == False %} <span>3</span>611-3
+                        {% endif %}
+                        {% if companies.need_611_3 == True %}
+                            <a href="{% url 'edit_611_3' cid %}"><span>3</span>611-3
+                            </a>{% endif %}
+                    </h4>
+                </li>
+                <li class="tab4 {% if companies.need_611_4 == True %} need {% endif %}{% if companies.done_611_4 == True and companies.need_611_4 == True %} done {% endif %}"
+                    role="tab">
+                    <h4>
+                        {% if companies.need_611_4 == False %} <span>4</span>611-4
+                        {% endif %}
+                        {% if companies.need_611_4 == True %}
+                            <a href="{% url 'edit_611_4' cid %}"><span>4</span>611-4
+                            </a>{% endif %}
+                    </h4>
+                </li>
+                <li class="tab5 {% if companies.need_611_5 == True %} need {% endif %}{% if companies.done_611_5 == True and companies.need_611_5 == True %} done {% endif %}"
+                    role="tab">
+                    <h4>
+                        {% if companies.need_611_5 == False %} <span>5</span>611-5
+                        {% endif %}
+                        {% if companies.need_611_5 == True %}
+                            <a href="{% url 'edit_611_5' cid %}"><span>5</span>611-5
+                            </a>{% endif %}
+                    </h4>
+                </li>
+                <li class="tab6 {% if companies.need_611_6 == True %} need {% endif %}{% if companies.done_611_6 == True and companies.need_611_6 == True %} done {% endif %}"
+                    role="tab">
+                    <h4>
+                        {% if companies.need_611_6 == False %} <span>6</span>611-6
+                        {% endif %}
+                        {% if companies.need_611_6 == True %}
+                            <a href="{% url 'edit_611_6' cid %}"><span>6</span>611-6
+                            </a>{% endif %}
+                    </h4>
+                </li>
+            </ul>
+
+            <div class="col-sm-12 white-box">
+                <div class=" card-base">
+                    <h3 class="box-title">一、基础信息</h3>
+
+
+                    <div class="col-md-6">
+                        <div>
+                            <label class="control-label col-sm-6" for="comp_type">（110）单位类型*</label>
+                            <div class="radio-list col-sm-6">
+                                <label class="radio-list">
+                                    <div class="radio radio-info">
+                                        <input type="radio" name="comp_type" id="comp_type_1" required
+                                               value="1"
+                                               {% if companies.comp_type == '1' %}checked="true"{% endif %}>
+                                        <label for="radio1">法人单位</label>
+                                    </div>
+                                </label>
+                                <label class="radio-list">
+                                    <div class="radio radio-info">
+                                        <input type="radio" name="comp_type" id="comp_type_2" reqlsuired
+                                               value="2"
+                                               {% if companies.comp_type == '2' %}checked="true"{% endif %}>
+                                        <label for="radio2">产业活动单位 </label>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    {#                    后期管理员填入的值#}
+                    {#                    <div class="col-md-6">#}
+                    {#                        <div class="form-group">#}
+                    {#                            <label for="inputEmail3" class="col-sm-6 control-label">（111）普查小区代码</label>#}
+                    {#                            <div class="col-sm-6">#}
+                    {#                                <input type=" text" class="form-control" id="inputComCode" readonly>#}
+                    {#                            </div>#}
+                    {#                        </div>#}
+                    {#                    </div>#}
+                    {#                    <div class="col-md-6">#}
+                    {#                        <div class="form-group">#}
+                    {#                            <label for="inputEmail3" class="col-sm-6 control-label">（112）建筑物编码</label>#}
+                    {#                            <div class="col-sm-6">#}
+                    {#                                <input type="text" class="form-control" id="inputBuildCode" readonly>#}
+                    {#                            </div>#}
+                    {#                        </div>#}
+                    {#                    </div>#}
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-sm-6">（114）专业类别</label>
+                            <div class="col-sm-6">
+                                <select class="form-control" name="profess_category">
+                                    <option selected value="Z">请选择</option>
+                                    <option value="A" {% if companies.profess_category == 'A' %}selected{% endif %}>A
+                                        农业
+                                    </option>
+                                    <option value="B" {% if companies.profess_category == 'B' %}selected{% endif %}>B
+                                        工业
+                                    </option>
+                                    <option value="C" {% if companies.profess_category == 'C' %}selected{% endif %}>C
+                                        建筑业
+                                    </option>
+                                    <option value="E" {% if companies.profess_category == 'E' %}selected{% endif %}>E
+                                        批发和零售业
+                                    </option>
+                                    <option value="S" {% if companies.profess_category == 'S' %}selected{% endif %}>S
+                                        住宿和餐饮业
+                                    </option>
+                                    <option value="X" {% if companies.profess_category == 'X' %}selected{% endif %}>X
+                                        房地产开发经营业
+                                    </option>
+                                    <option value="H" {% if companies.profess_category == 'H' %}selected{% endif %}>H
+                                        投资
+                                    </option>
+                                    <option value="I" {% if companies.profess_category == 'I' %}selected{% endif %}>I
+                                        劳资
+                                    </option>
+                                    <option value="L" {% if companies.profess_category == 'L' %}selected{% endif %}>L
+                                        社科文
+                                    </option>
+                                    <option value="F" {% if companies.profess_category == 'F' %}selected{% endif %}>F
+                                        服务业
+                                    </option>
+                                    <option value="J" {% if companies.profess_category == 'J' %}selected{% endif %}>J
+                                        名录库
+                                    </option>
+                                </select>
+                                <input type="hidden" id="cid" value="{{ cid }}">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-sm-12 white-box">
+                <div class="card-a">
+                    <h3 class="box-title ">A 法人单位和产业活动单位基本情况</h3>
+                    <div class="small-card">
+                        <p class="col-md-12"> 单位基本信息</p>
+                        <input type="hidden" name="added_by" value="{{ user.id }}">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="social_num"
+                                       class="col-sm-6 control-label">（109）统一社会信用代码</label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" name="social_num" id="social_num"
+                                           data-toggle="validator" data-error="18位" data-minlength="18" maxlength="18"
+                                           placeholder="18位，尚未领取的填写组织机构代码（9位）"
+                                           value="{{ companies.social_num|default_if_none:"" }}">
+                                    <span class="help-block with-errors"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="org_num" class="col-sm-6 control-label">组织机构代码</label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" name="org_num" id="org_num"
+                                           data-toggle="validator" data-error="9位" data-minlength="9" maxlength="9"
+                                           placeholder="9位，如果都没有填9个0"
+                                           value="{{ companies.org_num|default_if_none:"" }}">
+                                    <span class="help-block with-errors"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="name" class="col-sm-6 control-label">（102）单位详细名称*</label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" name="name" id="name"
+                                           data-toggle="validator" data-error="必填项" required
+                                           placeholder="请输入..." value="{{ companies.name|default_if_none:"" }}">
+                                    <span class="help-block with-errors"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="legal_person" class="col-sm-6 control-label">（201）法定代表人（单位负责人）*</label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" name="legal_person"
+                                           id="legal_person"
+                                           data-toggle="validator" data-error="必填项" required
+                                           placeholder="请输入..."
+                                           value="{{ companies.legal_person |default_if_none:"" }}">
+                                    <span class="help-block with-errors"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="est_year"
+                                       class="col-sm-6 control-label">（202）开业（成立）时间--年*</label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" name="est_year"
+                                           id="est_year"
+                                           data-toggle="validator" data-error="必填项" required maxlength="4" max="4"
+                                           placeholder="请输入年份（eg:2018）"
+                                           value="{{ companies.est_year|default_if_none:"" }}">
+                                    <span class="help-block with-errors"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="est_month"
+                                       class="col-sm-6 control-label">开业（成立）时间--月*</label>
+                                <div class="col-sm-6">
+                                    <input type=" text" class="form-control" name="est_month"
+                                           id="est_month"
+                                           data-toggle="validator" data-error="必填项" required maxlength="2"
+                                           placeholder="请输入月份（eg:01）"
+                                           value="{{ companies.est_month |default_if_none:"" }}">
+                                    <span class="help-block with-errors"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="small-card">
+                        <p class="col-md-12"> (203)联系方式</p>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="landline_area_code"
+                                       class="col-sm-6 control-label">长途区号</label>
+                                <div class="col-sm-6">
+                                    <input type="number" class="form-control" name="landline_area_code"
+                                           id="landline_area_code"
+                                           data-toggle="validator" data-error="请输入3-5位数字" data-minlength="3"
+                                           maxlength="5"
+                                           placeholder="请输入长途区号"
+                                           value="{{ companies.landline_area_code|default_if_none:"" }}">
+                                    <span class="help-block with-errors"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="landline_num"
+                                       class="col-sm-6 control-label">固定电话</label>
+                                <div class="col-sm-6">
+                                    <input type="number" class="form-control" name="landline_num" maxlength="8"
+                                           maxlength="8"
+                                           id="landline_num"
+                                           placeholder="请输入固定电话"
+                                           value="{{ companies.landline_num|default_if_none:"" }}">
+                                    ——
+                                    <input type="number" class="form-control" name="landline_branch_num"
+                                           id="landline_branch_num"
+                                           placeholder="请输入分机号"
+                                           value="{{ companies.landline_branch_num|default_if_none:"" }}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="mobile" class="col-sm-6 control-label">移动电话</label>
+                                <div class="col-sm-6">
+                                    <input type="tel" class="form-control" name="mobile"
+                                           id="mobile"
+                                           placeholder="请输入11位数字"
+                                           data-toggle="validator" data-error="请输入11位数字" data-minlength="11"
+                                           maxlength="11"
+                                           value="{{ companies.mobile |default_if_none:"" }}">
+                                    <span class="help-block with-errors"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="fax_code" class="col-sm-6 control-label">传真号码</label>
+                                <div class="col-sm-6">
+                                    <input type="number" class="form-control" name="fax_code" maxlength="8"
+                                           id="fax_code"
+                                           placeholder="请输入传真号码"
+                                           value="{{ companies.fax_code |default_if_none:"" }}">
+                                    ——
+                                    <input type="number" class="form-control" name="fax_branch_code" maxlength="5"
+                                           id="fax_branch_code"
+                                           placeholder="请输入分机号"
+                                           value="{{ companies.fax_branch_code|default_if_none:"" }}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="postalcode" class="col-sm-6 control-label">邮政编码</label>
+                                <div class="col-sm-6">
+                                    <input type="number" class="form-control" name="postalcode"
+                                           id="postalcode"
+                                           placeholder="6位"
+                                           data-toggle="validator" data-error="请输入6位数字" data-minlength="6" maxlength="6"
+                                           value="{{ companies.postalcode |default_if_none:"" }}">
+                                    <span class="help-block with-errors"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="email" class="col-sm-6 control-label">电子邮箱</label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" name="email" id="email"
+                                           placeholder="请输入..."
+                                           value="{{ companies.email |default_if_none:"" }}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="website" class="col-sm-6 control-label">网址</label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" name="website"
+                                           id="website"
+                                           placeholder="请输入..."
+                                           value="{{ companies.website |default_if_none:"" }}">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="small-card">
+                        <p class="col-md-12">(105)单位所在地及区划 </p>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="province" class="col-sm-6 control-label">省*</label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" name="province"
+                                           id="province"
+                                           data-toggle="validator" data-error="必填" required
+                                           value="{{ companies.province |default:"陕西省" }}">
+                                    <span class="help-block with-errors"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="city" class="col-sm-6 control-label">市*</label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" name="city" id="city"
+                                           data-toggle="validator" data-error="必填" required
+                                           value="{{ companies.city |default:"西安市" }}">
+                                    <span class="help-block with-errors"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="district" class="col-sm-6 control-label">区*</label>
+                                <div class="col-sm-6">
+                                    {% if user.district == '西咸新区' %}
+                                        <input type="text" class="form-control" name="district"
+                                           id="district"
+                                           data-toggle="validator" data-error="必填" required
+                                           value="{{ companies.district|default:"西咸新区" }}">
+                                    {% else %}
+                                        <input type="text" class="form-control" name="district"
+                                           id="district"
+                                           data-toggle="validator" data-error="必填" required
+                                           value="{{ companies.district|default:"碑林区" }}">
+                                    {% endif %}
+                                    <span class="help-block with-errors"></span>
+                                </div>
+                            </div>
+                        </div>
+                        {#                    <div class="col-md-6">#}
+                        {#                        <div class="form-group">#}
+                        {#                            <label for="inputEmail3" class="col-sm-6 control-label">乡</label>#}
+                        {#                            <div class="col-sm-6">#}
+                        {#                                <input type="text" class="form-control" id="inputVillage" placeholder="请输入...">#}
+                        {#                            </div>#}
+                        {#                        </div>#}
+                        {#                    </div>#}
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="address" class="col-sm-6 control-label">街（村）,门牌号*</label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" name="address"
+                                           id="address"
+                                           placeholder="请输入..."
+                                           data-toggle="validator" data-error="必填" required
+                                           value="{{ companies.address |default_if_none:"" }}">
+                                    <span class="help-block with-errors"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">单位位于：</div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="street_district"
+                                       class="col-sm-6 control-label">街道办事处*</label>
+                                <div class="col-sm-6">
+                                    {% if user.district == '西咸新区' %}
+                                        <select class="form-control" name="street_district" id="street_district">
+                                            <option selected value disabled>请选择</option>
+                                            <option value="西咸新区" {% if street_district == '西咸新区' %}selected{% endif %}>西咸新区
+                                            </option>
+                                        </select>
+                                    {% else %}
+                                        <select class="form-control" name="street_district" id="street_district">
+                                            <option selected value disabled>请选择</option>
+                                            <option value="南院门" {% if street_district == '南院门' %}selected{% endif %}>南院门
+                                            </option>
+                                            <option value="柏树林" {% if street_district == '柏树林' %}selected{% endif %}>柏树林
+                                            </option>
+                                            <option value="长乐坊" {% if street_district == '长乐坊' %}selected{% endif %}>长乐坊
+                                            </option>
+                                            <option value="东关南" {% if street_district == '东关南' %}selected{% endif %}>东关南
+                                            </option>
+                                            <option value="太乙路" {% if street_district == '太乙路' %}selected{% endif %}>太乙路
+                                            </option>
+                                            <option value="文艺路" {% if street_district == '文艺路' %}selected{% endif %}>文艺路
+                                            </option>
+                                            <option value="长安路" {% if street_district == '长安路' %}selected{% endif %}>长安路
+                                            </option>
+                                            <option value="张家村" {% if street_district == '张家村' %}selected{% endif %}>张家村
+                                            </option>
+                                        </select>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="community" class="col-sm-6 control-label">社区</label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" name="community"
+                                           id="community"
+                                           placeholder="请输入..."
+                                           data-toggle="validator" data-error="必填"
+                                           value="{{ companies.community|default_if_none:"" }}">
+                                    <span class="help-block with-errors"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {#                    <div class="col-md-6">#}
+                    {#                        <div class="form-group">#}
+                    {#                            <label for="inputEmail3" class="col-sm-6 control-label">园区企业所属园区详细名称：</label>#}
+                    {#                            <div class="col-sm-6">#}
+                    {#                                <input type="text" class="form-control" id="inputBuildCode" placeholder="请输入...">#}
+                    {#                            </div>#}
+                    {#                        </div>#}
+                    {#                    </div>#}
+                    {#                    <div class="col-md-6">#}
+                    {#                        <div class="form-group">#}
+                    {#                            <label for="inputEmail3" class="col-sm-6 control-label">所属园区代码</label>#}
+                    {#                            <div class="col-sm-6">#}
+                    {#                                <input type="text" class="form-control" id="inputBuildCode" placeholder="请输入...">#}
+                    {#                            </div>#}
+                    {#                        </div>#}
+                    {#                    </div>#}
+                    {#                    <div class="col-md-6">#}
+                    {#                        <div class="form-group">#}
+                    {#                            <label for="inputEmail3" class="col-sm-6 control-label">区划代码</label>#}
+                    {#                            <div class="col-sm-6">#}
+                    {#                                <input type="text" class="form-control" id="inputBuildCode" placeholder="请输入...">#}
+                    {#                            </div>#}
+                    {#                        </div>#}
+                    {#                    </div>#}
+                    {#                    <div class="col-md-6">#}
+                    {#                        <div class="form-group">#}
+                    {#                            <label for="inputEmail3" class="col-sm-6 control-label">城乡代码</label>#}
+                    {#                            <div class="col-sm-6">#}
+                    {#                                <input type="text" class="form-control" id="inputBuildCode" placeholder="请输入...">#}
+                    {#                            </div>#}
+                    {#                        </div>#}
+                    {#                    </div>#}
+                    {#                    如果为建筑单位，直接隐藏#}
+                    <div class="small-card">
+{#                        {% if companies.profess_category == 'C' %}#}
+
+                            <p class="col-md-12">(106)单位注册地及区划（建筑单位需填写本项，其他单位与单位所在地一致的，免填）</p>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="register_province"
+                                           class="col-sm-6 control-label">省</label>
+                                    <div class="col-sm-6">
+                                        <input type="text" class="form-control" name="register_province"
+                                               id="register_province" placeholder="请输入..."
+                                               value="{{ companies.register_province|default_if_none:"" }}">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="register_city" class="col-sm-6 control-label">市</label>
+                                    <div class="col-sm-6">
+                                        <input type="text" class="form-control" name="register_city"
+                                               id="register_city"
+                                               placeholder="请输入..."
+                                               value="{{ companies.register_city|default_if_none:"" }}">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="register_district"
+                                           class="col-sm-6 control-label">区</label>
+                                    <div class="col-sm-6">
+                                        <input type="text" class="form-control" name="register_district"
+                                               id="register_district" placeholder="请输入..."
+                                               value="{{ companies.register_district|default_if_none:"" }}">
+                                    </div>
+                                </div>
+                            </div>
+
+{#                        {% endif %}#}
+
+                        {#                    <div class="col-md-6">#}
+                        {#                        <div class="form-group">#}
+                        {#                            <label for="inputEmail3" class="col-sm-6 control-label">乡</label>#}
+                        {#                            <div class="col-sm-6">#}
+                        {#                                <input type="text" class="form-control" id="inputRegisterVillage" placeholder="请输入...">#}
+                        {#                            </div>#}
+                        {#                        </div>#}
+                        {#                    </div>#}
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="register_address" class="col-sm-6 control-label">街（村）,门牌号</label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" name="register_address"
+                                           id="register_address" placeholder="请输入..."
+                                           value="{{ companies.register_address|default_if_none:"" }}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">注册地位于：</div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="register_street_district"
+                                       class="col-sm-6 control-label">街道办事处</label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" name="register_street_district"
+                                           id="register_street_district"
+                                           placeholder="请输入..."
+                                           value="{{ companies.register_street_district|default_if_none:"" }}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="register_community"
+                                       class="col-sm-6 control-label">社区</label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" name="register_community"
+                                           id="register_community" placeholder="请输入..."
+                                           value="{{ companies.register_community|default_if_none:"" }}">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {#                    <div class="col-md-6">#}
+                    {#                        <div class="form-group">#}
+                    {#                            <label for="inputEmail3" class="col-sm-6 control-label">园区企业所属园区详细名称：</label>#}
+                    {#                            <div class="col-sm-6">#}
+                    {#                                <input type="text" class="form-control" id="inputBuildCode" placeholder="请输入...">#}
+                    {#                            </div>#}
+                    {#                        </div>#}
+                    {#                    </div>#}
+                    {#                    <div class="col-md-6">#}
+                    {#                        <div class="form-group">#}
+                    {#                            <label for="inputEmail3" class="col-sm-6 control-label">所属园区代码</label>#}
+                    {#                            <div class="col-sm-6">#}
+                    {#                                <input type="text" class="form-control" id="inputBuildCode" placeholder="请输入...">#}
+                    {#                            </div>#}
+                    {#                        </div>#}
+                    {#                    </div>#}
+                    {#                    <div class="col-md-6">#}
+                    {#                        <div class="form-group">#}
+                    {#                            <label for="inputEmail3" class="col-sm-6 control-label">区划代码</label>#}
+                    {#                            <div class="col-sm-6">#}
+                    {#                                <input type="text" class="form-control" id="inputBuildCode" placeholder="请输入...">#}
+                    {#                            </div>#}
+                    {#                        </div>#}
+                    {#                    </div>#}
+                    {#                    <div class="col-md-6">#}
+                    {#                        <div class="form-group">#}
+                    {#                            <label for="inputEmail3" class="col-sm-6 control-label">城乡代码</label>#}
+                    {#                            <div class="col-sm-6">#}
+                    {#                                <input type="text" class="form-control" id="inputBuildCode" placeholder="请输入...">#}
+                    {#                            </div>#}
+                    {#                        </div>#}
+                    {#                    </div>#}
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-sm-6"
+                                   for="operate_status">(208)运营状态*</label>
+                            <div class="col-sm-6">
+                                <select class="form-control" name="operate_status"
+                                        data-toggle="validator" data-error="必填" required
+                                        id="operate_status">
+                                    <option selected value>请选择</option>
+                                    <option value="1" {% if companies.operate_status == '1' %}selected{% endif %}>1
+                                        正常运营
+                                    </option>
+                                    <option value="2" {% if companies.operate_status == '2' %}selected{% endif %}>2
+                                        停业（歇业）
+                                    </option>
+                                    <option value="3" {% if companies.operate_status == '3' %}selected{% endif %}>3 筹建
+                                    </option>
+                                    <option value="4" {% if companies.operate_status == '4' %}selected{% endif %}>4
+                                        当年关闭
+                                    </option>
+                                    <option value="5" {% if companies.operate_status == '5' %}selected{% endif %}>5
+                                        当年破产
+                                    </option>
+                                    <option value="6" {% if companies.operate_status == '6' %}selected{% endif %}>6
+                                        当年注销
+                                    </option>
+                                    <option value="7" {% if companies.operate_status == '7' %}selected{% endif %}>7
+                                        当年吊销
+                                    </option>
+                                    <option value="9" {% if companies.operate_status == '9' %}selected{% endif %}>9 其他
+                                    </option>
+                                </select>
+                                <span class="help-block with-errors"></span>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-md-6 operate-status-hide">
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-6 control-label">(103)主要业务活动*</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" name="main_activity_1" id="inputBuildCode"
+                                       value="{{ companies.main_activity_1|default_if_none:"" }}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 disable-card operate-status-hide">
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-6 control-label">行业代码（GB/T 47754-2017）</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control disable-card" name="industry_code"
+                                       id="inputBuildCode"
+                                       value="{{ companies.industry_code|default_if_none:"" }}" readonly>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 operate-status-hide">
+                        <div class="form-group">
+                            <label class="control-label col-sm-6" for="org_type">(211)机构类型*</label>
+                            <div class="col-sm-6">
+                                <select class="form-control" name="org_type" id="org_type">
+                                    <option selected value>请选择</option>
+                                    <option value="10" {% if companies.org_type == '10' %}selected{% endif %}>10 企业
+                                    </option>
+                                    <option value="20" {% if companies.org_type == '20' %}selected{% endif %}>20 事业单位
+                                    </option>
+                                    <option value="30" {% if companies.org_type == '30' %}selected{% endif %}>30 机关
+                                    </option>
+                                    <option value="40" {% if companies.org_type == '40' %}selected{% endif %}>40 社会团体
+                                    </option>
+                                    <option value="51" {% if companies.org_type == '51' %}selected{% endif %}>51
+                                        民办非企业单位
+                                    </option>
+                                    <option value="52" {% if companies.org_type == '52' %}selected{% endif %}>52 基金会
+                                    </option>
+                                    <option value="53" {% if companies.org_type == '53' %}selected{% endif %}>53 居委会
+                                    </option>
+                                    <option value="54" {% if companies.org_type == '54' %}selected{% endif %}>54 村委会
+                                    </option>
+                                    <option value="55" {% if companies.org_type == '55' %}selected{% endif %}>55
+                                        农民专业合作社
+                                    </option>
+                                    <option value="56" {% if companies.org_type == '56' %}selected{% endif %}>56
+                                        农村集体经济组织
+                                    </option>
+                                    <option value="90" {% if companies.org_type == '90' %}selected{% endif %}>90
+                                        其他组织代码
+                                    </option>
+
+                                </select>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-md-6 operate-status-hide">
+                        <div class="form-group">
+                            <label class="control-label col-sm-6"
+                                   for="register_type">(205)登记注册类型</label>
+                            <div class="col-sm-6">
+                                <select class="form-control" name="register_type"
+                                        id="register_type">
+                                    <optgroup label="内资">
+                                        <option value="110"
+                                                {% if companies.register_type == '110' %}selected{% endif %}>110 国有
+                                        </option>
+                                        <option value="120"
+                                                {% if companies.register_type == '120' %}selected{% endif %}>120 集体
+                                        </option>
+                                        <option value="130"
+                                                {% if companies.register_type == '130' %}selected{% endif %}>130 股份合作
+                                        </option>
+                                        <option value="141"
+                                                {% if companies.register_type == '141' %}selected{% endif %}>141 国有联营
+                                        </option>
+                                        <option value="142"
+                                                {% if companies.register_type == '142' %}selected{% endif %}>142 集体联营
+                                        </option>
+                                        <option value="143"
+                                                {% if companies.register_type == '143' %}selected{% endif %}>143 国有与集体联营
+                                        </option>
+                                        <option value="149"
+                                                {% if companies.register_type == '149' %}selected{% endif %}>149 其他联营
+                                        </option>
+                                        <option value="151"
+                                                {% if companies.register_type == '151' %}selected{% endif %}>151 国有独资公司
+                                        </option>
+                                        <option value="159"
+                                                {% if companies.register_type == '159' %}selected{% endif %}>159
+                                            其他有限责任公司
+                                        </option>
+                                        <option value="160"
+                                                {% if companies.register_type == '160' %}selected{% endif %}>160 股份有限公司
+                                        </option>
+                                        <option value="171"
+                                                {% if companies.register_type == '171' %}selected{% endif %}>171 私营独资
+                                        </option>
+                                        <option value="172"
+                                                {% if companies.register_type == '172' %}selected{% endif %}>172 私营合伙
+                                        </option>
+                                        <option value="173"
+                                                {% if companies.register_type == '173' %}selected{% endif %}>173
+                                            私营有限责任公司
+                                        </option>
+                                        <option value="174"
+                                                {% if companies.register_type == '174' %}selected{% endif %}>174
+                                            私营股份有限公司
+                                        </option>
+                                        <option value="190"
+                                                {% if companies.register_type == '190' %}selected{% endif %}>190 其他
+                                        </option>
+                                    </optgroup>
+                                    <optgroup label="港澳台商投资">
+                                        <option value="210"
+                                                {% if companies.register_type == '210' %}selected{% endif %}>210
+                                            与港澳台商合资经营
+                                        </option>
+                                        <option value="220"
+                                                {% if companies.register_type == '220' %}selected{% endif %}>220
+                                            与港澳台商合作经营
+                                        </option>
+                                        <option value="230"
+                                                {% if companies.register_type == '230' %}selected{% endif %}>230 港澳台商独资
+                                        </option>
+                                        <option value="240"
+                                                {% if companies.register_type == '240' %}selected{% endif %}>240
+                                            港澳台商投资股份有限公司
+                                        </option>
+                                        <option value="290"
+                                                {% if companies.register_type == '290' %}selected{% endif %}>290 其他港澳台投资
+                                        </option>
+                                    </optgroup>
+                                    <optgroup label="外商投资">
+                                        <option value="310"
+                                                {% if companies.register_type == '310' %}selected{% endif %}>310 中外合资经营
+                                        </option>
+                                        <option value="320"
+                                                {% if companies.register_type == '320' %}selected{% endif %}>320 中外合作经营
+                                        </option>
+                                        <option value="330"
+                                                {% if companies.register_type == '330' %}selected{% endif %}>330 外资企业
+                                        </option>
+                                        <option value="340"
+                                                {% if companies.register_type == '340' %}selected{% endif %}>340
+                                            外商投资股份有限公司
+                                        </option>
+                                        <option value="390"
+                                                {% if companies.register_type == '390' %}selected{% endif %}>390 其他外商投资
+                                        </option>
+                                    </optgroup>
+
+                                </select>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-md-12 operate-status-hide">
+                        <div class="form-group">
+                            <label for="is_piling" class="col-sm-6 control-label">是否为批发、零售、住宿或者餐饮法人或产业活动单位*</label>
+                            <div class="radio-list col-sm-6">
+                                <label class="radio-list">
+                                    <div class="radio radio-info">
+                                        <input type="radio" name="is_piling" value="1"
+                                               {% if companies.is_piling == '1' %}checked="true"{% endif %}>
+
+                                        <label for="radio1">是</label>
+                                    </div>
+                                </label>
+                                <label class="radio-list">
+                                    <div class="radio radio-info">
+                                        <input type="radio" name="is_piling" value="2"
+                                               {% if companies.is_piling == '2' %}checked="true"{% endif %}>
+                                        <label for="radio2">否 </label>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="col-sm-12 white-box operate-status-hide">
+                <div class="card-b ">
+                    <h3 class="box-title ">B 批发和零售业、住宿和餐饮业法人单位和产业活动单位填报</h3>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-sm-6">(ES1)批发和零售业、住宿和餐饮业单位经营形式</label>
+                            <div class="col-sm-6">
+                                <select class="form-control " name="retail_management_form"
+                                        id="retail_management_form">
+                                    <option selected value>请选择</option>
+                                    <option value="1"
+                                            {% if companies.retail_management_form == '1' %}selected{% endif %}>1 独立门店
+                                    </option>
+                                    <option value="2"
+                                            {% if companies.retail_management_form == '2' %}selected{% endif %}>2
+                                        连锁总店（总部）
+                                    </option>
+                                    <option value="3"
+                                            {% if companies.retail_management_form == '3' %}selected{% endif %}>3 连锁直营店
+                                    </option>
+                                    <option value="4"
+                                            {% if companies.retail_management_form == '4' %}selected{% endif %}>4 连锁加盟店
+                                    </option>
+                                    <option value="9"
+                                            {% if companies.retail_management_form == '9' %}selected{% endif %}>9 其他
+                                    </option>
+                                </select>
+                            </div>
+
+                        </div>
+                    </div>
+                    {#                    {% if companies.retail_management_form == '2'|| %}#}
+                    {#                        #}
+                    {#                    {% endif %}#}
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="retail_management_brand" class="col-sm-6 control-label">连锁品牌（商标或者商号名称）</label>
+                            <div class="col-sm-6">
+                                <input type=" text" class="form-control" name="retail_management_brand"
+                                       id="retail_management_brand"
+                                       placeholder="经营形式选2.3.4的单位填报"
+                                       value="{{ companies.retail_management_brand |default_if_none:"" }}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-sm-6" for="retail_opetrate_type">(E02)零售业态(最多选择三个)</label>
+                            <div class="col-sm-6">
+                                <select class="select2 m-b-10 select2-multiple" multiple="multiple"
+                                        id="retail_opetrate_type" data-placeholder="请选择"
+                                        name="retail_opetrate_type">
+                                    <optgroup label="有店铺零售">
+                                        <option value="1010"
+                                                {% if companies.retail_opetrate_type == '1010' %}selected{% endif %}>
+                                            1010 食杂店
+                                        </option>
+                                        <option value="1020"
+                                                {% if companies.retail_opetrate_type == '1020' %}selected{% endif %}>
+                                            1020 便利店
+                                        </option>
+                                        <option value="1030"
+                                                {% if companies.retail_opetrate_type == '1030' %}selected{% endif %}>
+                                            1030 折扣店
+                                        </option>
+                                        <option value="1040"
+                                                {% if companies.retail_opetrate_type == '1040' %}selected{% endif %}>
+                                            1040 超市
+                                        </option>
+                                        <option value="1050"
+                                                {% if companies.retail_opetrate_type == '1050' %}selected{% endif %}>
+                                            1050 大型超市
+                                        </option>
+                                        <option value="1060"
+                                                {% if companies.retail_opetrate_type == '1060' %}selected{% endif %}>
+                                            1060 仓储会员店
+                                        </option>
+                                        <option value="1070"
+                                                {% if companies.retail_opetrate_type == '1070' %}selected{% endif %}>
+                                            1070 百货店
+                                        </option>
+                                        <option value="1080"
+                                                {% if companies.retail_opetrate_type == '1080' %}selected{% endif %}>
+                                            1080 专业店
+                                        </option>
+                                        <option value="1090"
+                                                {% if companies.retail_opetrate_type == '1090' %}selected{% endif %}>
+                                            1090 专卖店
+                                        </option>
+                                        <option value="1100"
+                                                {% if companies.retail_opetrate_type == '1100' %}selected{% endif %}>
+                                            1100 家居建材商店
+                                        </option>
+                                        <option value="1110"
+                                                {% if companies.retail_opetrate_type == '1110' %}selected{% endif %}>
+                                            1110 购物中心
+                                        </option>
+                                        <option value="1120"
+                                                {% if companies.retail_opetrate_type == '1120' %}selected{% endif %}>
+                                            1120 厂家直销中心
+                                        </option>
+                                    </optgroup>
+                                    <optgroup label="无店铺零售">
+                                        <option value="2010"
+                                                {% if companies.retail_opetrate_type == '2010' %}selected{% endif %}>
+                                            2010 电视购物
+                                        </option>
+                                        <option value="2020"
+                                                {% if companies.retail_opetrate_type == '2020' %}selected{% endif %}>
+                                            2020 邮购
+                                        </option>
+                                        <option value="2030"
+                                                {% if companies.retail_opetrate_type == '2030' %}selected{% endif %}>
+                                            2030 网上商店
+                                        </option>
+                                        <option value="2040"
+                                                {% if companies.retail_opetrate_type == '2040' %}selected{% endif %}>
+                                            2040 自动售货亭
+                                        </option>
+                                        <option value="2050"
+                                                {% if companies.retail_opetrate_type == '2050' %}selected{% endif %}>
+                                            2050 电话购物
+                                        </option>
+                                        <option value="2090"
+                                                {% if companies.retail_opetrate_type == '2090' %}selected{% endif %}>
+                                            2090 其他
+                                        </option>
+                                    </optgroup>
+                                </select>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="retail_business_area"
+                                   class="col-sm-6 control-label">(E03)批发和零售业年末零售营业面积（平方米）</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" name="retail_business_area"
+                                       id="retail_business_area"
+                                       placeholder="请输入..."
+                                       value="{{ companies.retail_business_area |default_if_none:"" }}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-sm-6" for="retail_hotel_diet_star">(S02)住宿业单位星级评定情况</label>
+                            <div class="col-sm-6">
+                                <select class="form-control " id="retail_hotel_diet_star"
+                                        name="retail_hotel_diet_star">
+                                    <option selected value>请选择</option>
+                                    <option value="1"
+                                            {% if companies.retail_hotel_diet_star == '1' %}selected{% endif %}>1 一星
+                                    </option>
+                                    <option value="2"
+                                            {% if companies.retail_hotel_diet_star == '2' %}selected{% endif %}>2 二星
+                                    </option>
+                                    <option value="3"
+                                            {% if companies.retail_hotel_diet_star == '3' %}selected{% endif %}>3 三星
+                                    </option>
+                                    <option value="4"
+                                            {% if companies.retail_hotel_diet_star == '4' %}selected{% endif %}>4 四星
+                                    </option>
+                                    <option value="5"
+                                            {% if companies.retail_hotel_diet_star == '5' %}selected{% endif %}>5 五星
+                                    </option>
+                                    <option value="9"
+                                            {% if companies.retail_hotel_diet_star == '9' %}selected{% endif %}>9 其他
+                                    </option>
+
+                                </select>
+                            </div>
+
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="retail_hotel_diet_area"
+                                       class="col-sm-6 control-label">(S03)住宿和餐饮业年末零售营业面积（平方米）</label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" name="retail_hotel_diet_area"
+                                           id="retail_hotel_diet_area"
+                                           placeholder="请输入..."
+                                           value="{{ companies.retail_hotel_diet_area |default_if_none:"" }}">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="col-sm-12 white-box operate-status-hide">
+
+                <div class="card-c ">
+                    <h3 class="box-title ">C 法人单位填报</h3>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-sm-6"
+                                   for="legal_unite_hkmatai">(216)港澳台商投资情况(限港澳台投资企业填报/可多选)</label>
+                            <div class="col-sm-6">
+                                <select class="select2 m-b-10 select2-multiple" name="legal_unite_hkmatai"
+                                        multiple="multiple"
+                                        id="legal_unite_hkmatai" data-placeholder="请选择">
+                                    <option value>请选择</option>
+                                    <option value="1" {% if companies.legal_unite_hkmatai == '1' %}selected{% endif %}>1
+                                        港商投资
+                                    </option>
+                                    <option value="2" {% if companies.legal_unite_hkmatai == '2' %}selected{% endif %}>2
+                                        澳商投资
+                                    </option>
+                                    <option value="3" {% if companies.legal_unite_hkmatai == '3' %}selected{% endif %}>3
+                                        台商投资
+                                    </option>
+                                </select>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-sm-6" for="legal_unite_hypotaxis">(207)隶属关系</label>
+                            <div class="col-sm-6">
+                                <select class="form-control " id="legal_unite_hypotaxis"
+                                        name="legal_unite_hypotaxis">
+                                    <option selected value>请选择</option>
+                                    <option value="10"
+                                            {% if companies.legal_unite_hypotaxis == '10' %}selected{% endif %}>10 中央
+                                    </option>
+                                    <option value="11"
+                                            {% if companies.legal_unite_hypotaxis == '11' %}selected{% endif %}>11 地方
+                                    </option>
+                                    <option value="90"
+                                            {% if companies.legal_unite_hypotaxis == '90' %}selected{% endif %}>90 其他
+                                    </option>
+                                </select>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-sm-6"
+                                   for="legal_unite_stake">(206)企业控股情况</label>
+                            <div class="col-sm-6">
+                                <select class="form-control " id="legal_unite_stake"
+                                        name="legal_unite_stake">
+                                    <option selected value>请选择</option>
+                                    <option value="1" {% if companies.legal_unite_stake == '1' %}selected{% endif %}>1
+                                        国有控股
+                                    </option>
+                                    <option value="2" {% if companies.legal_unite_stake == '2' %}selected{% endif %}>2
+                                        集体控股
+                                    </option>
+                                    <option value="3" {% if companies.legal_unite_stake == '3' %}selected{% endif %}>3
+                                        私人控股
+                                    </option>
+                                    <option value="4" {% if companies.legal_unite_stake == '4' %}selected{% endif %}>4
+                                        港澳台商控股
+                                    </option>
+                                    <option value="5" {% if companies.legal_unite_stake == '5' %}selected{% endif %}>5
+                                        外商控股
+                                    </option>
+                                    <option value="9" {% if companies.legal_unite_stake == '1' %}selected{% endif %}>9
+                                        其他
+                                    </option>
+                                </select>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-sm-6"
+                                   for="accounting_rule">(209)执行会计标准情况</label>
+                            <div class="col-sm-6">
+                                <select class="form-control " id="accounting_rule"
+                                        name="accounting_rule">
+                                    <option selected value>请选择</option>
+                                    <option value="1" {% if companies.accounting_rule == '1' %}selected{% endif %}>1
+                                        企业会计制度
+                                    </option>
+                                    <option value="2" {% if companies.accounting_rule == '2' %}selected{% endif %}>2
+                                        事业单位会计制度
+                                    </option>
+                                    <option value="3" {% if companies.accounting_rule == '3' %}selected{% endif %}>3
+                                        行政单位会计制度
+                                    </option>
+                                    <option value="4" {% if companies.accounting_rule == '4' %}selected{% endif %}>4
+                                        民间非盈利组织会计制度
+                                    </option>
+                                    <option value="9" {% if companies.accounting_rule == '9' %}selected{% endif %}>9
+                                        其他
+                                    </option>
+                                </select>
+                                <span style="color: #a94442;"></span>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-sm-6" for="c">(210)执行企业会计准则情况</label>
+                            <div class="col-sm-6">
+                                <select class="form-control "
+                                        id="legal_unite_accounting_standard"
+                                        name="legal_unite_accounting_standard">
+                                    <option selected value="0">请选择</option>
+                                    <option value="1"
+                                            {% if companies.legal_unite_accounting_standard == '1' %}selected{% endif %}>
+                                        1 执行企业会计准则
+                                    </option>
+                                    <option value="2"
+                                            {% if companies.legal_unite_accounting_standard == '2' %}selected{% endif %}>
+                                        2 执行《小企业会计准则》
+                                    </option>
+                                    <option value="9"
+                                            {% if companies.legal_unite_accounting_standard == '9' %}selected{% endif %}>
+                                        9 执行其他企业会计制度
+                                    </option>
+                                </select>
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div class="disable-card">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label col-sm-6"
+                                       for="legal_unite_company_size">(191)单位规模</label>
+                                <div class="col-sm-6">
+
+                                    <select class="form-control "
+                                            id="legal_unite_company_size"
+                                            name="legal_unite_company_size"
+                                            disabled>
+                                        <option selected value>请选择</option>
+                                        <option value="1"
+                                                {% if companies.legal_unite_company_size == '1' %}selected{% endif %}>1
+                                            大型
+                                        </option>
+                                        <option value="2"
+                                                {% if companies.legal_unite_company_size == '2' %}selected{% endif %}>2
+                                            中型
+                                        </option>
+                                        <option value="3"
+                                                {% if companies.legal_unite_company_size == '3' %}selected{% endif %}>3
+                                            小型
+                                        </option>
+                                        <option value="4"
+                                                {% if companies.legal_unite_company_size == '4' %}selected{% endif %}>4
+                                            微型
+                                        </option>
+                                    </select>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="legal_unite_obtainemploy"
+                                       class="col-sm-6 control-label">(192)从业人员期末人数（人）</label>
+                                <div class="col-sm-6">
+                                    <input type=" text" class="form-control" id="legal_unite_obtainemploy_1"
+                                           name="legal_unite_obtainemploy"
+                                           value="{{ companies.legal_unite_obtainemploy |default_if_none:"" }}"
+                                           readonly>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputEmail3" class="col-sm-6 control-label">其中女性（人）:</label>
+                                <div class="col-sm-6">
+                                    <input type=" text" class="form-control" id="legal_unite_obtainemploy_2"
+                                           value="{{ companies.legal_unite_obtainemploy_female|default_if_none:"" }}"
+                                           readonly>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <p>(193)企业法人单位填报</p>
+                            <div class="form-group">
+                                <label for="legal_unite_person_income" class="col-sm-6 control-label">营业收入（元）</label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" id="legal_unite_person_income"
+                                           name="legal_unite_person_income" readonly
+                                           value="{{ companies.legal_unite_person_income |default_if_none:"" }}"
+                                    >
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="legal_unite_person_assets" class="col-sm-6 control-label">资产合计（元）</label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" id="legal_unite_person_assets"
+                                           name="legal_unite_person_assets" readonly
+                                           value="{{ companies.legal_unite_person_assets |default_if_none:"" }}"
+                                    >
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="legal_unite_person_taxes" class="col-sm-6 control-label">税金及附加（元）</label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" id="legal_unite_person_taxes" readonly
+                                           value="{{ companies.legal_unite_person_taxes |default_if_none:"" }}"
+                                    >
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <p>(194)非企业法人填报</p>
+                            <div class="form-group">
+                                <label for="legal_unite_nonperson_defray"
+                                       class="control-label col-sm-6">非企业单位支出（费用/元）</label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" id="legal_unite_nonperson_defray" readonly
+                                           value="{{ companies.legal_unite_nonperson_defray|default_if_none:"" }}"
+                                    >
+                                </div>
+
+                            </div>
+                            <div class="form-group">
+                                <label for="legal_unite_nonperson_assets" class="control-label col-sm-6">资产总计（元）</label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" id="legal_unite_nonperson_assets" readonly
+                                           value="{{ companies.legal_unite_nonperson_assets|default_if_none:"" }}"
+                                    >
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="small-card">
+                        <div class="col-md-6">
+                            <p>(214)法人单位的上级法人单位情况</p>
+                            <div class="form-group ">
+                                <label class="control-label col-sm-6" for="is_higher_legal">本法人单位是否有上一级法人</label>
+                                <div class="radio-list col-sm-6">
+                                    <label class="radio-list">
+                                        <div class="radio radio-info">
+                                            <input type="radio" name="is_higher_legal"
+                                                   id="is_higher_legal_1" value="1"
+                                                   {% if companies.is_higher_legal == True %}checked="true"{% endif %}>
+                                            <label for="radio1">1 是</label>
+                                        </div>
+                                    </label>
+                                    <label class="radio-list">
+                                        <div class="radio radio-info">
+                                            <input type="radio" name="is_higher_legal"
+                                                   id="is_higher_legal_0" value="0"
+                                                   {% if companies.is_higher_legal == False %}checked="true"{% endif %}>
+                                            <label for="radio2">2 否 </label>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="legal-unite">
+                                <div class="form-group">
+                                    <label for="legal_unite_social_num"
+                                           class="control-label col-sm-6">上一级法人统一社会信用代码</label>
+                                    <div class="col-sm-6">
+                                        <input type="text" class="form-control" name="legal_unite_social_num"
+                                               id="legal_unite_social_num" maxlength="18"
+                                               placeholder="请输入..."
+                                               value="{{ companies.legal_unite_social_num|default_if_none:"" }}">
+                                    </div>
+
+                                </div>
+                                <div class="form-group">
+                                    <label for="legal_unite_social_num"
+                                           class="control-label col-sm-6">组织机构代码</label>
+                                    <div class="col-sm-6">
+                                        <input type="text" class="form-control" name="legal_unite_org_num"
+                                               id="legal_unite_org_num" maxlength="9"
+                                               placeholder="请输入..."
+                                               value="{{ companies.legal_unite_org_num|default_if_none:"" }}">
+                                    </div>
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="legal_unite_name" class="control-label col-sm-6">上一级法人单位详细名称</label>
+                                    <div class="col-sm-6">
+                                        <input type="text" class="form-control" name="legal_unite_name"
+                                               id="legal_unite_name"
+                                               placeholder="请输入..."
+                                               value="{{ companies.legal_unite_name | default_if_none:"" }}">
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="form-group ">
+                                <label class="control-label col-sm-6" for="has_branch">本法人单位是否有下属产业活动单位</label>
+                                <div class="radio-list col-sm-6">
+                                    <label class="radio-list">
+                                        <div class="radio radio-info">
+                                            <input type="radio" name="has_branch" id="has_branch_1"
+                                                   value="1"
+                                                   {% if companies.has_branch == '1' %}checked="true"{% endif %}>
+                                            <label for="radio1">1 是</label>
+                                        </div>
+                                    </label>
+                                    <label class="radio-list">
+                                        <div class="radio radio-info">
+                                            <input type="radio" name="has_branch" id="has_branch_2"
+                                                   value="2"
+                                                   {% if companies.has_branch == '2' %}checked="true"{% endif %}>
+                                            <label for="radio2">2 否 </label>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </div>
+            <div class="col-sm-12 white-box operate-status-hide">
+
+                <div class="card-d ">
+                    <h3 class="box-title ">D 产业活动单位归属法人情况及主要经济指标</h3>
+
+                    <p>（182）产业活动单位归属法人单位情况</p>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-sm-6" for="parent_type">单位类别</label>
+                            <div class="col-sm-6">
+                                <select class="form-control " name="parent_type"
+                                        id="parent_type">
+                                    <option selected value>请选择</option>
+                                    <option disabled value="1" {% if companies.parent_type == '1' %}selected{% endif %}>
+                                        1
+                                        法人单位本部（总部、本店、本所等）
+                                    </option>
+                                    <option value="2" {% if companies.parent_type == '2' %}selected{% endif %}>2
+                                        法人单位分支机构（分布、分厂、分店、支所等）
+                                    </option>
+                                </select>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="parent_comp_social_num" class="col-sm-6 control-label">法人单位统一社会信用代码</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" name="parent_comp_social_num"
+                                       id="parent_comp_social_num" maxlength="18"
+                                       placeholder="请输入"
+                                       value="{{ companies.parent_comp_social_num|default_if_none:"" }}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="parent_comp_social_num" class="col-sm-6 control-label">组织机构代码</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" name="parent_comp_org_num"
+                                       id="parent_comp_org_num" maxlength="9"
+                                       placeholder="请输入"
+                                       value="{{ companies.parent_comp_org_num|default_if_none:"" }}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="parent_comp_name" class="col-sm-6 control-label">法人单位详细名称</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" name="parent_comp_name"
+                                       id="parent_comp_name"
+                                       placeholder="请输入" value="{{ companies.parent_comp_name|default_if_none:"" }}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="parent_comp_address" class="col-sm-6 control-label">法人单位详细地址</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" name="parent_comp_address"
+                                       id="parent_comp_address"
+                                       placeholder="请输入" value="{{ companies.parent_comp_address|default_if_none:"" }}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="branch_comp_count_obtainemploy"
+                                   class="col-sm-6 control-label">(198)从业人员期末人数（人）</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" name="branch_comp_count_obtainemploy"
+                                       id="branch_comp_count_obtainemploy"
+                                       placeholder="请输入"
+                                       value="{{ companies.branch_comp_count_obtainemploy|default_if_none:"" }}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="branch_comp_count_obtainemploy_female"
+                                   class="col-sm-6 control-label">其中：女性（人）</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" name="branch_comp_count_obtainemploy_female"
+                                       id="branch_comp_count_obtainemploy_female"
+                                       placeholder="请输入"
+                                       value="{{ companies.branch_comp_count_obtainemploy_female|default_if_none:"" }}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <p>经营性单位填报</p>
+                        <div class="form-group">
+                            <label for="branch_comp_operate_income"
+                                   class="col-sm-6 control-label">(195)经营性单位收入（元）</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" name="branch_comp_operate_income"
+                                       id="branch_comp_operate_income"
+                                       placeholder="请输入"
+                                       value="{{ companies.branch_comp_operate_income |default_if_none:"" }}">
+                            </div>
+                        </div>
+                        <p>非经营性单位填报</p>
+                        <div class="form-group">
+                            <label for="branch_comp_nooperate_defray"
+                                   class="col-sm-6 control-label">(196)非经营性单位支出（费用/元）</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" name="branch_comp_nooperate_defray"
+                                       id="branch_comp_nooperate_defray"
+                                       placeholder="请输入"
+                                       value="{{ companies.branch_comp_nooperate_defray|default_if_none:"" }}">
+                            </div>
+                        </div>
+                        <p>房地产开发经营产业活动单位填报</p>
+                        <div class="form-group">
+                            <label for="branch_comp_house_sale_area"
+                                   class="col-sm-6 control-label">(197)本年商品房销售面积（平方米）</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" name="branch_comp_house_sale_area"
+                                       id="branch_comp_house_sale_area"
+                                       placeholder="请输入"
+                                       value="{{ companies.branch_comp_house_sale_area |default_if_none:"" }}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="branch_comp_house_nosale_area"
+                                   class="col-sm-6 control-label">年末商品房待售面积（平方米）</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" name="branch_comp_house_nosale_area"
+                                       id="branch_comp_house_nosale_area"
+                                       placeholder="请输入"
+                                       value="{{ companies.branch_comp_house_nosale_area|default_if_none:"" }}">
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="col-sm-12 white-box ">
+                <div class="form-group">
+                    <label for="branch_comp_house_nosale_area"
+                           class="col-sm-6 control-label">申报人*</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" name="interviewee"
+                               id="interviewee"
+                               placeholder="请输入" required
+                               value="{{ companies.interviewee|default_if_none:"" }}">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="branch_comp_house_nosale_area"
+                           class="col-sm-6 control-label">联系电话*</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" name="interviewee_contact"
+                               id="interviewee_contact"
+                               placeholder="请输入" required maxlength="11"
+                               value="{{ companies.interviewee_contact|default_if_none:"" }}">
+                    </div>
+                </div>
+            </div>
+            {% if  permission == True %}
+                <div class="col-sm-12 white-box ">
+                    <button type="submit" id="onClickButton"
+                            class="btn  btn-default btn-outline btn-danger pull-right">提交
+                    </button>
+                    <div style="clear:both "></div>
+                </div>
+            {% endif %}
+
+        </form>
+    </div>
+
+{% endblock %}
+
+{% block js %}
+    {% load static %}
+    <script src= {% static  "plugins/bower_components/switchery/dist/switchery.min.js" %}></script>
+    <script src={% static  "plugins/bower_components/custom-select/custom-select.min.js" %} type="text/javascript"></script>
+    <script src={% static  "plugins/bower_components/bootstrap-select/bootstrap-select.min.js" %} type="text/javascript"></script>
+    <script src={% static  "plugins/bower_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js" %}></script>
+    <script src={% static  "plugins/bower_components/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js" %} type="text/javascript"></script>
+    <script type="text/javascript"
+            src={% static  "plugins/bower_components/multiselect/js/jquery.multi-select.js" %}></script>
+    <script src={% static "js/xianmeng/edit-com.js" %}></script>
+
+    <script>
+        jQuery(document).ready(function () {
+
+            // For select 2
+            $(".select2").select2();
+            $('.selectpicker').selectpicker();
+            {#console.log({{ companies }});#}
+
+        });
+
+    </script>
+
+{% endblock %}

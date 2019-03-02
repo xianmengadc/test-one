@@ -1,0 +1,602 @@
+{% extends "base.html" %}
+{% block css %}
+
+    {% load  static %}
+    <link href={% static "plugins/bower_components/bootstrap-datepicker/bootstrap-datepicker.min.css" %} rel="stylesheet"
+          type="text/css"/>
+    <link href={% static "plugins/bower_components/custom-select/custom-select.css" %} rel="stylesheet"
+          type="text/css"/>
+    <link href={% static "plugins/bower_components/switchery/dist/switchery.min.css" %} rel="stylesheet"/>
+    <link href={% static "plugins/bower_components/bootstrap-select/bootstrap-select.min.css" %} rel="stylesheet"/>
+    <link href={% static "plugins/bower_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.css" %} rel="stylesheet"/>
+    <link href={% static "plugins/bower_components/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.css" %} rel="stylesheet"/>
+    <link href={% static "plugins/bower_components/multiselect/css/multi-select.css" %} rel="stylesheet"
+          type="text/css"/>
+
+    <style>
+        label {
+            text-align: right !important;
+        }
+
+        .card-a label {
+        }
+
+        {#标题分割线#}
+        h3 {
+            border-bottom: 1px solid rgba(120, 130, 140, 0.28);
+            padding-bottom: 12px;
+        }
+    </style>
+
+
+
+
+{% endblock %}
+{% block breadcum %}
+    <a href="{% url 'basedata' companies.street_district %}">{{ companies.street_district }}普查数据</a>
+{% endblock %}
+{% block content %}
+    <div class="row">
+        <ul class="wizard-steps" role="tablist">
+
+
+            <li class="tab1 need  {% if companies.done_611 == True %} done {% endif %}" role="tab">
+                <h4>
+                    <a href="{% url 'edit_com' companies.street_district cid %}"><span>主表</span>611
+                    </a>
+                </h4>
+            </li>
+
+            <li class="tab1  {% if companies.need_611_1 == True %} need {% endif %}{% if companies.done_611_1 == True and companies.need_611_1 == True %} done {% endif %}"
+                role="tab">
+                <h4>
+                    {% if companies.need_611_1 == False %} <span>1</span>611-1
+                    {% endif %}
+                    {% if companies.need_611_1 == True %}
+                        <a href="{% url 'edit_611_1' cid %}"><span>1</span>611-1
+                        </a>{% endif %}
+                </h4>
+            </li>
+
+
+            <li class="tab2 {% if companies.need_611_2 == True %} need {% endif %}{% if companies.done_611_2 == True and companies.need_611_2 == True %} done {% endif %}"
+                role="tab">
+                <h4>
+                    {% if companies.need_611_2 == False %} <span>2</span>611-2
+                    {% endif %}
+                    {% if companies.need_611_2 == True %}
+                        <a href="{% url 'edit_611_2' cid %}"><span>2</span>611-2
+                        </a>{% endif %}
+
+                </h4>
+            </li>
+            <li class="tab3 now {% if companies.need_611_3 == True %} need {% endif %}{% if companies.done_611_3 == True and companies.need_611_3 == True %} done {% endif %}"
+                role="tab">
+                <h4>
+                    {% if companies.need_611_3 == False %} <span>3</span>611-3
+                    {% endif %}
+                    {% if companies.need_611_3 == True %}
+                        <a href="{% url 'edit_611_3' cid %}"><span>3</span>611-3
+                        </a>{% endif %}
+
+                </h4>
+            </li>
+            <li class="tab4 {% if companies.need_611_4 == True %} need {% endif %}{% if companies.done_611_4 == True and companies.need_611_4 == True %} done {% endif %}"
+                role="tab">
+                <h4>
+                    {% if companies.need_611_4 == False %} <span>4</span>611-4
+                    {% endif %}
+                    {% if companies.need_611_4 == True %}
+                        <a href="{% url 'edit_611_4' cid %}"><span>4</span>611-4
+                        </a>{% endif %}
+                </h4>
+            </li>
+            <li class="tab5 {% if companies.need_611_5 == True %} need {% endif %}{% if companies.done_611_5 == True and companies.need_611_5 == True %} done {% endif %}"
+                role="tab">
+                <h4>
+                    {% if companies.need_611_5 == False %} <span>5</span>611-5{% endif %}
+                    {% if companies.need_611_5 == True %}
+                        <a href="{% url 'edit_611_5' cid %}"><span>5</span>611-5</a>{% endif %}
+                </h4>
+            </li>
+            <li class="tab6 {% if companies.need_611_6 == True %} need {% endif %}{% if companies.done_611_6 == True and companies.need_611_6 == True %} done {% endif %}"
+                role="tab">
+                <h4>
+                    {% if companies.need_611_6 == False %} <span>6</span>611-6{% endif %}
+                    {% if companies.need_611_6 == True %}
+                        <a href="{% url 'edit_611_6' cid %}"><span>6</span>611-6</a>{% endif %}
+                </h4>
+            </li>
+        </ul>
+        <div>
+            <form action="" class="form-horizontal">
+                <h3 class="box-title">非一套表企业法人主要经济指标（2018）611-3</h3>
+                <div class="col-md-6">
+                    <div class="disable-card">
+                        <div class="form-group">
+                            <label for="social_num" class="col-sm-6 control-label">统一社会信用代码</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="social_num"
+                                       name="social_num" value="{{ companies.social_num|default_if_none:"" }}" readonly>
+                                <input type="hidden" name="main_social_num" value="{{ cid }}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="main_org_num" class="col-sm-6 control-label">组织机构代码</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="main_org_num"
+                                       name="org_num" value="{{ companies.org_num |default_if_none:"" }}" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="main_name" class="col-sm-6 control-label">单位详细名称</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="main_name"
+                                       name="name" value="{{ companies.name|default_if_none:"" }}" readonly>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+        <form class="form-horizontal" data-toggle="validator" id="base_form_611_3">{% csrf_token %}
+
+            <div class="col-sm-12 white-box">
+
+
+                <div class="white-box col-sm-12 card-a">
+                    <h3 class="box-title m-b-0">资产负债表（所有单位填报 单位：元）</h3>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="depreciation" class="col-sm-6 control-label">本年折旧</label>
+                            <div class="col-sm-6">
+                                <input type="number" class="form-control" id="depreciation"
+                                       required data-error="必填项或输入有误"
+                                       placeholder="请输入" name="depreciation"
+                                       value="{{ legalobj.depreciation|default_if_none:"" }}">
+                                <span class="help-block with-errors"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="fixed_asset_value" class="col-sm-6 control-label">固定资产净值</label>
+                            <div class="col-sm-6">
+                                <input type="number" class="form-control" id="fixed_asset_value"
+                                       placeholder="请输入" name="fixed_asset_value"
+                                       required data-error="必填项或输入有误"
+                                       value="{{ legalobj.fixed_asset_value|default_if_none:"" }}">
+                                <span class="help-block with-errors"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="doing_project" class="col-sm-6 control-label">在建工程</label>
+                            <div class="col-sm-6">
+                                <input type="number" class="form-control" id="doing_project"
+                                       required data-error="必填项或输入有误"
+                                       placeholder="请输入" name="doing_project"
+                                       value="{{ legalobj.doing_project |default_if_none:"" }}">
+                                <span class="help-block with-errors"></span>
+                                <input type="hidden" name="is_piling" value="{{ is_piling }}">
+                                <input type="hidden" name="is_plzc_write" value="{{ is_plzc_write }}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="asset_all" class="col-sm-6 control-label">资产合计</label>
+                            <div class="col-sm-6">
+                                <input type="number" class="form-control" id="asset_all"
+                                       required data-error="必填项或输入有误"
+                                       placeholder="请输入" name="asset_all"
+                                       value="{{ legalobj.asset_all|default_if_none:"" }}">
+                                <span class="help-block with-errors"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="debt_all" class="col-sm-6 control-label">负债合计</label>
+                            <div class="col-sm-6">
+                                <input type="number" class="form-control" id="debt_all"
+                                       required data-error="必填项或输入有误"
+                                       placeholder="请输入" name="debt_all"
+                                       value="{{ legalobj.debt_all|default_if_none:"" }}">
+                                <span class="help-block with-errors"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="early_inventory" class="col-sm-6 control-label">年初存货</label>
+                            <div class="col-sm-6">
+                                <input type="number" class="form-control" id="early_inventory"
+                                       required data-error="必填项或输入有误"
+                                       placeholder="请输入" name="early_inventory"
+                                       value="{{ legalobj.early_inventory |default_if_none:"" }}">
+                                <span class="help-block with-errors"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="end_inventory" class="col-sm-6 control-label">期末存货</label>
+                            <div class="col-sm-6">
+                                <input type="number" class="form-control" id="end_inventory"
+                                       required data-error="必填项或输入有误"
+                                       placeholder="请输入" name="end_inventory"
+                                       value="{{ legalobj.end_inventory|default_if_none:"" }}">
+                                <span class="help-block with-errors"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="white-box col-sm-12  card-b">
+                    <h3 class="box-title m-b-0">损益分配、人工成本及增值税（所有单位填报 单位：元）</h3>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="business_income" class="col-sm-6 control-label">营业收入</label>
+                            <div class="col-sm-6">
+                                <input type="number" class="form-control" id="business_income"
+                                       required data-error="必填项或输入有误"
+                                       placeholder="请输入" name="business_income"
+                                       value="{{ legalobj.business_income|default_if_none:"" }}">
+                                <span class="help-block with-errors"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="business_cost" class="col-sm-6 control-label">营业成本</label>
+                            <div class="col-sm-6">
+                                <input type="number" class="form-control" id="business_cost"
+                                       required data-error="必填项或输入有误"
+                                       placeholder="请输入" name="business_cost"
+                                       value="{{ legalobj.business_cost|default_if_none:"" }}">
+                                <span class="help-block with-errors"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="business_tax_more" class="col-sm-6 control-label">税金及附加</label>
+                            <div class="col-sm-6">
+                                <input type="number" class="form-control" id="business_tax_more"
+                                       placeholder="请输入" name="business_tax_more"
+                                       required data-error="必填项或输入有误"
+                                       value="{{ legalobj.business_tax_more|default_if_none:"" }}">
+                                <span class="help-block with-errors"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="invest_income" class="col-sm-6 control-label">投资收益</label>
+                            <div class="col-sm-6">
+                                <input type="number" class="form-control" id="invest_income"
+                                       required data-error="必填项或输入有误"
+                                       placeholder="请输入" name="invest_income"
+                                       value="{{ legalobj.invest_income|default_if_none:"" }}">
+                                <span class="help-block with-errors"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="business_profit" class="col-sm-6 control-label">营业利润</label>
+                            <div class="col-sm-6">
+                                <input type="number" class="form-control" id="business_profit"
+                                       required data-error="必填项或输入有误"
+                                       placeholder="请输入" name="business_profit"
+                                       value="{{ legalobj.business_profit|default_if_none:"" }}">
+                                <span class="help-block with-errors"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="staff_wages" class="col-sm-6 control-label">应付职工薪酬（本年贷方累计发生额）</label>
+                            <div class="col-sm-6">
+                                <input type="number" class="form-control" id="staff_wages"
+                                       required data-error="必填项或输入有误"
+                                       placeholder="请输入" name="staff_wages"
+                                       value="{{ legalobj.staff_wages|default_if_none:"" }}">
+                                <span class="help-block with-errors"></span>
+                            </div>
+                        </div>
+                        <div class="form-group staff_wages_explain">
+                            <label for="staff_wages_explain" class="col-sm-6 control-label">应付职工薪酬 情况说明:</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="staff_wages_explain"
+                                       placeholder="请填写情况说明" name="staff_wages_explain"
+                                       value="{{ legalobj.staff_wages_explain |default_if_none:"" }}"
+                                >
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="added_tax_value" class="col-sm-6 control-label">应交增值税</label>
+                            <div class="col-sm-6">
+                                <input type="number" class="form-control" id="added_tax_value"
+                                       required data-error="必填项或输入有误"
+                                       placeholder="请输入" name="added_tax_value"
+                                       value="{{ legalobj.added_tax_value|default_if_none:"" }}">
+                                <span class="help-block with-errors"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% if is_plzc_write == True %}
+                    {% if is_piling == True %}
+                        <div class="white-box col-sm-12 col-md-6 card-c">
+                            <h3 class="box-title m-b-0">批发业和零售业经营情况（仅批发和零售业单位填报 单位：元）</h3>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="piling_product_cost" class="col-sm-6 control-label">商品购进额</label>
+                                    <div class="col-sm-6">
+                                        <input type="number" class="form-control" id="piling_product_cost"
+                                               placeholder="请输入" name="piling_product_cost"
+                                               value="{{ legalobj.piling_product_cost|default_if_none:"" }}">
+                                    </div>
+                                </div>
+                                <div class="form-group explain">
+                                    <label for="explain" class="col-sm-6 control-label">商品购进额为0 情况说明:</label>
+                                    <div class="col-sm-6">
+                                        <input type="text" class="form-control" id="explain"
+                                               placeholder="请填写情况说明" name="explain"
+                                               value="{{ legalobj.explain |default_if_none:"" }}">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="piling_product_sale" class="col-sm-6 control-label">商品销售额</label>
+                                    <div class="col-sm-6">
+                                        <input type="number" class="form-control" id="piling_product_sale"
+                                               placeholder="请输入" name="piling_product_sale"
+                                               value="{{ legalobj.piling_product_sale|default_if_none:"" }}">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="piling_product_online_sale"
+                                           class="col-sm-6 control-label">其中：通过公共网络实现的商品销售额</label>
+                                    <div class="col-sm-6">
+                                        <input type="number" class="form-control" id="piling_product_online_sale"
+                                               placeholder="请输入" name="piling_product_online_sale"
+                                               value="{{ legalobj.piling_product_online_sale|default_if_none:"" }}">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="piling_product_offline_sale"
+                                           class="col-sm-6 control-label">其中：零售额</label>
+                                    <div class="col-sm-6">
+                                        <input type="number" class="form-control" id="piling_product_offline_sale"
+                                               placeholder="请输入" name="piling_product_offline_sale"
+                                               value="{{ legalobj.piling_product_offline_sale|default_if_none:"" }}">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="piling_product_stock" class="col-sm-6 control-label">期末商品库存额</label>
+                                    <div class="col-sm-6">
+                                        <input type="number" class="form-control" id="piling_product_stock"
+                                               placeholder="请输入" name="piling_product_stock"
+                                               value="{{ legalobj.piling_product_stock|default_if_none:"" }}">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="piling_operate_turnover" class="col-sm-6 control-label">服务营业额</label>
+                                    <div class="col-sm-6">
+                                        <input type="number" class="form-control" id="piling_operate_turnover"
+                                               placeholder="请输入" name="piling_operate_turnover"
+                                               value="{{ legalobj.piling_operate_turnover|default_if_none:"" }}">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% elif is_piling == False %}
+                        <div class="white-box col-sm-12 col-md-6 card-d">
+                            <h3 class="box-title m-b-0">住宿业和餐饮业经营情况（仅住宿业和餐饮业单位填报 单位：元）</h3>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="catering_turnover" class="col-sm-6 control-label">营业额</label>
+                                    <div class="col-sm-6">
+                                        <input type="number" class="form-control" id="catering_turnover"
+                                               placeholder="请输入" name="catering_turnover"
+                                               value="{{ legalobj.catering_turnover |default_if_none:"" }}">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="catering_turnover_online"
+                                           class="col-sm-6 control-label">其中：通过公共网络实现的营业额</label>
+                                    <div class="col-sm-6">
+                                        <input type="number" class="form-control" id="catering_turnover_online"
+                                               placeholder="请输入" name="catering_turnover_online"
+                                               value="{{ legalobj.catering_turnover_online |default_if_none:"" }}">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="catering_guest_room" class="col-sm-6 control-label">其中：客房收入</label>
+                                    <div class="col-sm-6">
+                                        <input type="number" class="form-control" id="catering_guest_room"
+                                               placeholder="请输入" name="catering_guest_room"
+                                               value="{{ legalobj.catering_guest_room |default_if_none:"" }}">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputComCode" class="col-sm-6 control-label">餐费收入</label>
+                                    <div class="col-sm-6">
+                                        <input type="number" class="form-control" id="inputComCode"
+                                               placeholder="请输入" name="catering_meals"
+                                               value="{{ legalobj.catering_meals|default_if_none:"" }}">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endif %}
+
+
+            </div>
+
+            {% if  permission == True %}
+                <div class="col-sm-12 white-box ">
+                    <button type="submit" id="onClickButton"
+                            class="btn  btn-default btn-outline btn-danger pull-right">提交
+                    </button>
+                    <div style="clear:both "></div>
+                </div>
+            {% endif %}
+        </form>
+    </div>
+
+
+
+{% endblock %}
+
+{% block js %}
+    {% load static %}
+    <script src= {% static  "plugins/bower_components/switchery/dist/switchery.min.js" %}></script>
+    <script src={% static  "plugins/bower_components/custom-select/custom-select.min.js" %} type="text/javascript"></script>
+    <script src={% static  "plugins/bower_components/bootstrap-select/bootstrap-select.min.js" %} type="text/javascript"></script>
+    <script src={% static  "plugins/bower_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js" %}></script>
+    <script src={% static  "plugins/bower_components/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js" %} type="text/javascript"></script>
+    <script type="text/javascript"
+            src={% static  "plugins/bower_components/multiselect/js/jquery.multi-select.js" %}></script>
+    {#    <script src={% static "js/xianmeng/edit-com.js" %}></script>#}
+
+    <script>
+        jQuery(document).ready(function () {
+            if ('{{ done_611_2 }}' == 'False') {
+                alert('请先填写611-2表')
+                window.location.replace('/edit_611_2/' + '{{ cid }}/')
+            }
+
+
+            //判断 商品购进额
+            if ('{{ is_piling }}' == 'True') {
+                if ($('#piling_product_cost')[0].value == '0') {
+                    $('.explain').show()
+                } else {
+                    $('.explain').hide()
+                }
+                $('#piling_product_cost').on('input propertychange', function (e) {
+                    console.log(this.value)
+                    if (this.value == '0') {
+                        $('.explain').show()
+
+                    } else {
+                        $('.explain').hide()
+                    }
+                })
+            }
+            //判断是否需要填写应付职工薪酬
+            var a = parseInt($('#staff_wages')[0].value);
+            var b = parseInt('{{ count_job }}')
+            var c = a / b
+            if ($('#staff_wages')[0].value == '0' || c < 10000) {
+                $('.staff_wages_explain').show()
+            } else {
+                $('.staff_wages_explain').hide()
+            }
+            $('#staff_wages').on('input propertychange', function (e) {
+                var a = parseInt($('#staff_wages')[0].value);
+                var b = parseInt('{{ count_job }}')
+                var c = a / b
+                {#console.log(a)#}
+                {#console.log(b)#}
+                {#console.log(c)#}
+                if (this.value == '0' || c < 10000) {
+                    $('.staff_wages_explain').show()
+
+                } else {
+                    $('.staff_wages_explain').hide()
+                }
+            })
+
+            $("#onClickButton").click(function () {
+                var data = $("#base_form_611_3").serializeArray();
+
+                var postData = {};
+                for (var x in data) {
+                    postData[data[x].name] = data[x].value;
+                    if (data[x].value == '') {
+                        if (data[x].name == 'explain' || data[x].name == 'staff_wages_explain') {
+
+                        } else {
+                            toastr.error("不能有空选项");
+                            $("#" + data[x].name).parent().parent().addClass("has-error")
+                            return false
+                        }
+
+                    }
+                }
+                console.log(postData)
+                //核实性审核
+                if (parseInt(postData.business_cost) > (parseInt(postData.business_income)*100)) {
+                    toastr.warning("营业成本过高(是营业收入的100倍以上)，请核实!");
+                }
+
+                if (parseInt(postData.business_cost) < (parseInt(postData.business_income)/1000)) {
+                    toastr.warning("营业成本过低(不足营业收入的1/1000)，请核实！");
+                }
+
+                if (parseInt(postData.staff_wages) >= 500000) {
+                    toastr.warning("年人均应付职工薪酬＞＝50万，请核实！");
+                }
+
+                if (parseInt(postData.fixed_asset_value) >= 5000000 ) {
+                    toastr.warning("固定资产投资＞＝500万元，请核实！");
+                }
+
+
+                // 审核关系
+
+                if ($('#staff_wages')[0].value == '0' && postData.staff_wages_explain == '') {
+                    toastr.error("请填写 应付职工薪酬 情况说明");
+                    $("#staff_wages_explain").parent().parent().addClass("has-error")
+                    return false
+                }
+                // if (parseInt(postData.fixed_asset_value) > parseInt(postData.asset_all)) {
+                //     toastr.error("“资产总计”应大于等于“固定资产净值”");
+                //     return false
+                // }
+                // if ((parseInt(postData.fixed_asset_value)+parseInt(postData.doing_project)+parseInt(postData.end_inventory)) > parseInt(postData.asset_all)) {
+                //     toastr.error("“资产总计”应大于等于“固定资产净值”、“在建工程”与“期末存货”之和");
+                //     return false
+                // }
+
+                //批发零售
+                if (parseInt(postData.piling_product_sale) < parseInt(postData.piling_product_online_sale)) {
+                    toastr.error("商品销售额必须大于等于通过公共网络实现的商品销售额");
+                    return false
+                }
+                if (parseInt(postData.piling_product_sale) < parseInt(postData.piling_product_offline_sale)) {
+                    toastr.error("商品销售额必须大于等于零售额");
+                    return false
+                }
+
+                //住宿餐饮
+                if (parseInt(postData.catering_turnover) < parseInt(postData.catering_turnover_online)) {
+                    toastr.error("住宿餐饮营业额必须大于通过公共网路实现的营业额");
+                    return false
+                }
+
+                if (parseInt(postData.catering_turnover) < (parseInt(postData.catering_guest_room)+parseInt(postData.catering_meals))) {
+                    toastr.error("营业额 应大于等于 客房收入+餐费收入之和");
+                    return false
+                }
+                if (parseInt(postData.catering_turnover) < parseInt(postData.catering_guest_room)) {
+                    toastr.error("住宿餐饮营业额必须大于客房收入");
+                    return false
+                }
+                if (parseInt(postData.catering_turnover) < parseInt(postData.catering_meals)) {
+                    toastr.error("住宿餐饮营业额必须大于餐费收入");
+                    return false
+                }
+
+
+                var next_url = '/edit_611_4/{{ cid }}/';
+                $.post('/edit_611_3/{{ cid }}/?next=' + next_url, postData, function (res) {
+                    console.log(res);
+                    if (res.code == 0) {
+                        toastr.success("保存成功");
+                        window.setTimeout(function () {
+                            window.location.reload()
+                        }, 1000);
+
+
+                    } else {
+                        for (var msg1 in res.msg) {
+                            toastr.error(msg1 + "," + res.msg[msg1]);
+                        }
+                    }
+                }).fail(function (jqXHR, textStatus, errorThrown) {
+                    toastr.error('提交失败请稍后重试');
+                });
+                return false;
+            })
+
+
+        });
+
+    </script>
+
+{% endblock %}

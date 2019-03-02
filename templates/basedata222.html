@@ -1,0 +1,213 @@
+{% extends "base.html" %}
+{% block css %}
+    <!-- Editable CSS -->
+    {% load static %}
+    <link type="text/css" rel="stylesheet" href={% static "plugins/bower_components/jsgrid/dist/jsgrid.min.css" %}/>
+
+    <link type="text/css" rel="stylesheet"
+          href={% static "plugins/bower_components/jsgrid/dist/jsgrid-theme.min.css" %}/>
+
+    <link href={% static "js/libs/datatables.net-bs4/css/dataTables.bootstrap4.css" %} rel="stylesheet">
+    <link href={% static "js/libs/bootstrap-datepicker/dist/css/bootstrap-datepicker.standalone.min.css" %} rel="stylesheet">
+
+    <style>
+        .mytable-head-color {
+            background-color: #ff684947;
+            opacity: 0.7;
+        }
+
+        .mytable-head th {
+            text-align: center;
+            vertical-align: center;
+        }
+
+        .exportExcel {
+            margin-bottom: 10px;
+        }
+
+    </style>
+
+{% endblock %}
+
+{% block content %}
+    <div class="row bg-title">
+        <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+            <h4 class="page-title"> 各街办经查数据汇总</h4>
+        </div>
+        <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+            <ol class="breadcrumb">
+                <li><a href="#">主面板</a></li>
+                <li class="active">南院门汇总</li>
+            </ol>
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="white-box">
+                <h3 class="box-title">普查数据
+                    {#                    <button class="btn btn-success waves-effect waves-light pull-right" type="button"><span#}
+                    {#                            class="btn-label"><i class="fa fa-check"></i></span>导出EXCEL#}
+                    {#                    </button>#}
+                </h3>
+                <h4>
+                </h4>
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <table id="file_export" class="table table-striped table-bordered" style="width:100%">
+                            <thead>
+                            <tr>
+                                <th>Rank</th>
+                                <th>Artist</th>
+
+                                {% for d in data %}
+                                    <tr>
+                                        <td>{% if d.is_notice == False %}否{% else %}是{% endif %}</td>
+                                        <td>{% if d.social_num %} {{ d.social_num }} {% else %}{% endif %}</td>
+                                        {% comment %} <td>{{ d.get_legal_unite_company_size_display }}</td> {% endcomment %}
+                                        <td class="comp-id"><a href="{% url 'edit_com' d.id %}">{{ d.name }}</a>
+                                        </td>
+                                        <td>{{ d.address }}</td>
+                                        <td>{{ d.street_district }}</td>
+                                        <td>{{ d.community }}</td>
+                                        <td></td>
+                                        <td>{{ d.legal_person }}</td>
+                                        <td>{{ d.mobile }}</td>
+                                        <td>{{ d.get_comp_type_display }}</td>
+                                        <td>{{ d.multi_branch }}</td>
+                                        <td>{{ d.get_accounting_rule_display }}</td>
+                                        <td>{{ d.main_activity_1 }}</td>
+                                        <td>
+                                            {% if d.need_611_2 == '是' %}
+                                                {% if d.done_611_2 == True %}
+                                                    <a href="{% url 'edit_611_2' d.id %}"><i
+                                                            class="fa fa-check-square-o" aria-hidden="true"></i></a>
+                                                {% else %}
+                                                    <a href="{% url 'edit_611_2' d.id %}"><i class="fa fa-square-o"
+                                                                                             aria-hidden="true"></i></a>
+                                                {% endif %}
+
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            {% if d.need_611_4 == '是' %}
+                                                {% if d.done_611_4 == True %}
+                                                    <a href="{% url 'edit_611_4' d.id %}"><i
+                                                            class="fa fa-check-square-o" aria-hidden="true"></i></a>
+                                                {% else %}
+                                                    <a href="{% url 'edit_611_4' d.id %}"><i class="fa fa-square-o"
+                                                                                             aria-hidden="true"></i></a>
+                                                {% endif %}
+
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            {% if d.need_611_1 == '是' %}
+                                                {% if d.done_611_1 == True %}
+                                                    <a href="{% url 'edit_611_1' d.id %}"><i
+                                                            class="fa fa-check-square-o" aria-hidden="true"></i></a>
+                                                {% else %}
+                                                    <a href="{% url 'edit_611_1' d.id %}"><i class="fa fa-square-o"
+                                                                                             aria-hidden="true"></i></a>
+                                                {% endif %}
+
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            {% if d.need_611_3 == '是' %}
+                                                {% if d.done_611_3 == True %}
+                                                    <a href="{% url 'edit_611_3' d.id %}"><i
+                                                            class="fa fa-check-square-o" aria-hidden="true"></i></a>
+                                                {% else %}
+                                                    <a href="{% url 'edit_611_3' d.id %}"><i class="fa fa-square-o"
+                                                                                             aria-hidden="true"></i></a>
+                                                {% endif %}
+
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            {% if d.need_611_5 == '是' %}
+                                                {% if d.done_611_5 == True %}
+                                                    <a href="{% url 'edit_611_5' d.id %}"><i
+                                                            class="fa fa-check-square-o" aria-hidden="true"></i></a>
+                                                {% else %}
+                                                    <a href="{% url 'edit_611_5' d.id %}"><i class="fa fa-square-o"
+                                                                                             aria-hidden="true"></i></a>
+                                                {% endif %}
+
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            {% if d.need_611_6 == '是' %}
+                                                {% if d.done_611_6 == True %}
+                                                    <a href="{% url 'edit_611_6' d.id %}"><i
+                                                            class="fa fa-check-square-o" aria-hidden="true"></i></a>
+                                                {% else %}
+                                                    <a href="{% url 'edit_611_6' d.id %}"><i class="fa fa-square-o"
+                                                                                             aria-hidden="true"></i></a>
+                                                {% endif %}
+
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+
+{% block js %}
+    {% load static %}
+    <script src={% static "js/DataTables/datatables.min.js" %}></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.flash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.html5.min.js"></script>
+    <script src={% static "js/libs/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js" %} charset="UTF-8"></script>
+    {#    <script src={% static "js/DataTables/jquery.dataTables.yadcf.js" %}></script>#}
+
+    <!-- Editable -->
+    <script src={% static "plugins/bower_components/jsgrid/db.js" %}></script>
+    <script type="text/javascript" src={% static "plugins/bower_components/jsgrid/dist/jsgrid.min.js" %}></script>
+    {#    <script src={% static "js/jsgrid-init.js" %}></script>#}
+    <script src={% static "js/xianmeng/jsgrid.js" %}></script>
+
+    <script>
+        $(document).ready(function () {
+            var mytable = $('#file_export').DataTable(
+                {
+                    "serverSide": true,
+                    "ajax": "/api/companyList/?format=datatables",
+                    "columns": [
+                        {% if not is_notice %}
+                            {
+                                "data": "is_notice",
+                                'render': function (data, type, row) {
+                                    return "否";
+                                }
+                            },
+
+                        {% endif %}
+                        {#{"data": "is_notice", "is_notice":"is_notice"},#}
+                        // Use dot notation to reference nested serializers.
+                        // This data: could alternatively be displayed with the serializer's ReadOnlyField as well, as seen in the minimal example.
+                        {"data": "name", "name": "name"},
+
+                    ]
+                }
+            );
+
+        });
+
+
+    </script>
+{% endblock %}

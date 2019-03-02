@@ -1,0 +1,729 @@
+{% extends "base.html" %}
+<script src="https://code.jquery.com/color/jquery.color-2.1.2.min.js"></script>
+{% block css %}
+
+    {% load  static %}
+    <link href={% static "plugins/bower_components/bootstrap-datepicker/bootstrap-datepicker.min.css" %} rel="stylesheet"
+          type="text/css"/>
+    <link href={% static "plugins/bower_components/custom-select/custom-select.css" %} rel="stylesheet"
+          type="text/css"/>
+    <link href={% static "plugins/bower_components/switchery/dist/switchery.min.css" %} rel="stylesheet"/>
+    <link href={% static "plugins/bower_components/bootstrap-select/bootstrap-select.min.css" %} rel="stylesheet"/>
+    <link href={% static "plugins/bower_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.css" %} rel="stylesheet"/>
+    <link href={% static "plugins/bower_components/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.css" %} rel="stylesheet"/>
+    <link href={% static "plugins/bower_components/multiselect/css/multi-select.css" %} rel="stylesheet"
+          type="text/css"/>
+
+    <style>
+        label {
+            text-align: left !important;
+        }
+
+        .card-a label {
+        }
+
+        {#标题分割线#}
+        h3 {
+            border-bottom: 1px solid rgba(120, 130, 140, 0.28);
+            padding-bottom: 12px;
+        }
+
+        #comp-card label {
+            width: 50%;
+            padding-top: 7px;
+            margin-bottom: 0;
+            padding-left: 7.5px;
+            padding-right: 7.5px;
+            float: left;
+        }
+
+        #comp-card input {
+            display: block;
+            font-size: 14px;
+            line-height: 1.42857143;
+            width: 100%;
+            background: #353c48;
+            border: 1px solid rgba(120, 130, 140, 0.2);
+            border-radius: 0px;
+            box-shadow: none;
+            color: #96a2b4;
+            height: 38px;
+            max-width: 100%;
+            padding: 7px 12px;
+            transition: all 300ms linear 0s;
+        }
+
+        #empty-row {
+            display: none
+        }
+
+        .new-parent-row {
+        {#background-color: rgb(75, 186, 228);#}
+        }
+
+    </style>
+
+{% endblock %}
+{% block breadcum %}
+    <a href="{% url 'basedata' companies.street_district %}">{{ companies.street_district }}普查数据</a>
+{% endblock %}
+{% block content %}
+
+    <ul class="wizard-steps" role="tablist">
+        <li class="tab1 need  {% if companies.done_611 == True %} done {% endif %}" role="tab">
+            <h4>
+                <a href="{% url 'edit_com' companies.street_district cid %}"><span>主表</span>611
+                </a>
+            </h4>
+        </li>
+        <li class="tab1 now  {% if companies.need_611_1 == True %} need {% endif %}{% if companies.done_611_1 == True and companies.need_611_1 == True %} done {% endif %}"
+            role="tab">
+            <h4>
+                {% if companies.need_611_1 == False %} <span>1</span>611-1
+                {% endif %}
+                {% if companies.need_611_1 == True %}
+                    <a href="{% url 'edit_611_1' cid %}"><span>1</span>611-1
+                    </a>{% endif %}
+            </h4>
+        </li>
+        <li class="tab2 {% if companies.need_611_2 == True %} need {% endif %}{% if companies.done_611_2 == True and companies.need_611_2 == True %} done {% endif %}"
+            role="tab">
+            <h4>
+                {% if companies.need_611_2 == False %} <span>2</span>611-2
+                {% endif %}
+                {% if companies.need_611_2 == True %}
+                    <a href="{% url 'edit_611_2' cid %}"><span>2</span>611-2
+                    </a>{% endif %}
+            </h4>
+        </li>
+        <li class="tab3 {% if companies.need_611_3 == True %} need {% endif %}{% if companies.done_611_3 == True and companies.need_611_3 == True %} done {% endif %}"
+            role="tab">
+            <h4>
+                {% if companies.need_611_3 == False %} <span>3</span>611-3
+                {% endif %}
+                {% if companies.need_611_3 == True %}
+                    <a href="{% url 'edit_611_3' cid %}"><span>3</span>611-3
+                    </a>{% endif %}
+            </h4>
+        </li>
+        <li class="tab4 {% if companies.need_611_4 == True %} need {% endif %}{% if companies.done_611_4 == True and companies.need_611_4 == True %} done {% endif %}"
+            role="tab">
+            <h4>
+                {% if companies.need_611_4 == False %} <span>4</span>611-4
+                {% endif %}
+                {% if companies.need_611_4 == True %}
+                    <a href="{% url 'edit_611_4' cid %}"><span>4</span>611-4
+                    </a>{% endif %}
+            </h4>
+        </li>
+        <li class="tab5 {% if companies.need_611_5 == True %} need {% endif %}{% if companies.done_611_5 == True and companies.need_611_5 == True %} done {% endif %}"
+            role="tab">
+            <h4>
+                {% if companies.need_611_5 == False %} <span>5</span>611-5
+                {% endif %}
+                {% if companies.need_611_5 == True %}
+                    <a href="{% url 'edit_611_5' cid %}"><span>5</span>611-5
+                    </a>{% endif %}
+            </h4>
+        </li>
+        <li class="tab6 {% if companies.need_611_6 == True %} need {% endif %}{% if companies.done_611_6 == True and companies.need_611_6 == True %} done {% endif %}"
+            role="tab">
+            <h4>
+                {% if companies.need_611_6 == False %} <span>6</span>611-6
+                {% endif %}
+                {% if companies.need_611_6 == True %}
+                    <a href="{% url 'edit_611_6' cid %}"><span>6</span>611-6
+                    </a>{% endif %}
+            </h4>
+        </li>
+    </ul>
+
+    <div class="col-sm-12 white-box">
+
+        <div>
+
+            <h3 class="box-title m-b-0">法人单位所属产业活动各单位情况（2018）611-1</h3>
+            <div class="col-md-6">
+                <div class="disable-card">
+                    <div class="form-group">
+                        <label for="main_social_num"
+                               class="col-sm-6 control-label">统一社会信用代码</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" name="first_social_num"
+                                   id="main_social_num"
+                                   value="{{ companies.social_num|default_if_none:"" }}" readonly>
+                            <input type="hidden" name="main_social_num" value="{{ cid }}">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="main_org_num"
+                               class="col-sm-6 control-label">组织机构代码</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" name="main_org_num"
+                                   id="main_org_num"
+                                   value="{{ companies.org_num |default_if_none:"" }}" readonly>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="main_name" class="col-sm-6 control-label">单位详细名称</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" name="main_name" id="main_name"
+                                   value="{{ companies.name |default_if_none:"" }}" readonly>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-6 control-label">本法人单位所属产业活动单位共（个）</div>
+                    <div class="col-sm-6">
+                        <input type="number" name="count" class="compNumber btn  btn-default" readonly
+                               style="border: none"
+                               value="{{ count }}">
+                        <button class="btn  btn-default btn-outline btn-danger addComp">添加(+1)</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% for form in activities %}
+        <div class="white-box finish-card">
+            <form method="post" novalidate>{% csrf_token %}
+                <input value="{{ form.id }}" type="hidden" name="id">
+                <div class="card-list">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="unit_category" class="col-sm-6 control-label">单位类别</label>
+                            <div class="col-sm-6">
+                                <select class="form-control " name="unit_category"
+                                        id="unit_category">
+                                    <option value="1" {% if form.parent_type == '1' %}selected{% endif %}>1
+                                        法人单位
+                                    </option>
+                                    <option value="2" {% if form.parent_type == '2' %}selected{% endif %}>2
+                                        法人单位分支机构
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="social_num" class="col-sm-6 control-label">统一社会信用代码</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" name="social_num" id="social_num" maxlength="18"
+                                       value="{{ form.social_num }}" placeholder="请输入">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="org_num" class="col-sm-6 control-label">尚未领取统一社会信用代码的组织机构代码</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" maxlength="9"
+                                       value="{{ form.org_num }}"
+                                       name="org_num" id="org_num" placeholder="请输入">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="name" class="col-sm-6 control-label">单位详细名称</label>
+                            <div class="col-sm-6">
+                                <input type="text"
+                                       value="{{ form.name }}"
+                                       class="form-control" name="name" id="name" placeholder="请输入">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="address" class="col-sm-6 control-label">详细地址</label>
+                            <div class="col-sm-6">
+                                <input type=" text"
+                                       value="{{ form.address }}"
+                                       class="form-control" name="address" id="address" placeholder="请输入">
+                            </div>
+                        </div>
+                        <div class="form-group disable-card">
+                            <label for="zone_num" class="col-sm-6 control-label">区划代码（六位）</label>
+                            <div class="col-sm-6">
+                                <input type=" text"
+                                       value="{{ form.zone_num }}"
+                                       class="form-control" id="zone_num" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="mobile" class="col-sm-6 control-label">联系电话</label>
+                            <div class="col-sm-6">
+                                <input type=" text" maxlength="11"
+                                       value="{{ form.mobile }}"
+                                       class="form-control" name="mobile" id="mobile" placeholder="请输入">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="main_activity" class="col-sm-6 control-label">主要业务活动</label>
+                            <div class="col-sm-6">
+                                <input type=" text" class="form-control"
+                                       value="{{ form.main_activity }}"
+                                       name="main_activity" id="main_activity"
+                                       placeholder="请输入">
+                            </div>
+                        </div>
+                        <div class="form-group disable-card">
+                            <label for="catrgory_code" class="col-sm-6  control-label">行业代码（小类 GB/T4754-2017）</label>
+                            <div class="col-sm-6">
+                                <input type=" text" class="form-control"
+                                       value="{{ form.catrgory_code }}"
+                                       id="catrgory_code"
+                                       readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="incumbency_num" class="col-sm-6 control-label">从业人员期末人数（人数）</label>
+                            <div class="col-sm-6">
+                                <input type=" text" class="form-control"
+                                       value="{{ form.incumbency_num }}"
+                                       name="incumbency_num" id="incumbency_num"
+                                       placeholder="请输入">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="manage_income" class="col-sm-6 control-label">经营性单位收入（元）</label>
+                            <div class="col-sm-6">
+                                <input type=" text" class="form-control"
+                                       value="{{ form.manage_income }}"
+                                       name="manage_income" id="manage_income"
+                                       placeholder="请输入">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inmanage_pay" class="col-sm-6 control-label">非经营性单位支出（费用/元）</label>
+                            <div class="col-sm-6">
+                                <input type=" text" class="form-control" name="inmanage_pay" id="inmanage_pay"
+                                       value="{{ form.inmanage_pay }}"
+                                       placeholder="请输入">
+                            </div>
+                        </div>
+                        {% if  permission == True %}
+                            <div class="form-group" style="height: 10px">
+                                <button class="pull-right btn button btn-warning deleteBtn">删除</button>
+                                <button class="btn button btn-success addBtn">保存</button>
+                            </div>
+                        {% endif %}
+
+                    </div>
+
+
+                </div>
+
+            </form>
+        </div>
+
+
+    {% endfor %}
+
+    <div id="comp-card">
+
+    </div>
+
+    <div class="form-group second-add-btn">
+        <div class="col-sm-6 control-label">本法人单位所属产业活动单位共（个）</div>
+        <div class="col-sm-6">
+            <input type="number" name="count" class="compNumber btn  btn-default" readonly
+                   style="border: none"
+                   value="{{ count }}">
+            <button class="btn  btn-default btn-outline btn-danger addComp">添加(+1)</button>
+        </div>
+    </div>
+
+    {#            <div class="col-sm-12 white-box ">#}
+    {#                <button type="button" id="onClickButton"#}
+    {#                        class="btn  btn-default btn-outline btn-danger pull-right">提交#}
+    {#                </button>#}
+    {#                <div style="clear:both "></div>#}
+    {#            </div>#}
+
+
+
+
+{% endblock %}
+
+{% block js %}
+    {% load static %}
+    <script src= {% static  "plugins/bower_components/switchery/dist/switchery.min.js" %}></script>
+    <script src={% static  "plugins/bower_components/custom-select/custom-select.min.js" %} type="text/javascript"></script>
+    <script src={% static  "plugins/bower_components/bootstrap-select/bootstrap-select.min.js" %} type="text/javascript"></script>
+    <script src={% static  "plugins/bower_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js" %}></script>
+    <script src={% static  "plugins/bower_components/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js" %} type="text/javascript"></script>
+    <script type="text/javascript"
+            src={% static  "plugins/bower_components/multiselect/js/jquery.multi-select.js" %}></script>
+    <script src={% static "js/xianmeng/edit-611-1.js" %}></script>
+    <script type="text/javascript">
+        {#存储默认有几个机构#}
+        sessionStorage.setItem('staticNum', $(".compNumber")[0].value);
+
+
+    </script>
+
+    <script>
+        jQuery(document).ready(function () {
+            // Switchery
+            var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
+            $('.js-switch').each(function () {
+                new Switchery($(this)[0], $(this).data());
+
+            });
+            // For select 2
+
+            $(".select2").select2();
+            $('.selectpicker').selectpicker();
+
+            //Bootstrap-TouchSpin
+            $(".vertical-spin").TouchSpin({
+                verticalbuttons: true,
+                verticalupclass: 'ti-plus',
+                verticaldownclass: 'ti-minus'
+            });
+            var vspinTrue = $(".vertical-spin").TouchSpin({
+                verticalbuttons: true
+            });
+            if (vspinTrue) {
+                $('.vertical-spin').prev('.bootstrap-touchspin-prefix').remove();
+            }
+
+            $("input[name='tch1']").TouchSpin({
+                min: 0,
+                max: 100,
+                step: 0.1,
+                decimals: 2,
+                boostat: 5,
+                maxboostedstep: 10,
+                postfix: '%'
+            });
+            $("input[name='tch2']").TouchSpin({
+                min: -1000000000,
+                max: 1000000000,
+                stepinterval: 50,
+                maxboostedstep: 10000000,
+                prefix: '$'
+            });
+            $("input[name='tch3']").TouchSpin();
+
+            $("input[name='tch3_22']").TouchSpin({
+                initval: 40
+            });
+
+            $("input[name='tch5']").TouchSpin({
+                prefix: "pre",
+                postfix: "post"
+            });
+
+            // For multiselect
+
+            $('#pre-selected-options').multiSelect();
+            $('#optgroup').multiSelect({selectableOptgroup: true});
+
+            $('#public-methods').multiSelect();
+            $('#select-all').click(function () {
+                $('#public-methods').multiSelect('select_all');
+                return false;
+            });
+            $('#deselect-all').click(function () {
+                $('#public-methods').multiSelect('deselect_all');
+                return false;
+            });
+            $('#refresh').on('click', function () {
+                $('#public-methods').multiSelect('refresh');
+                return false;
+            });
+            $('#add-option').on('click', function () {
+                $('#public-methods').multiSelect('addOption', {value: 42, text: 'test 42', index: 0});
+                return false;
+            });
+            $(".addComp").click(function (e) {
+                $(".compNumber")[0].value++
+                $(".compNumber")[1].value++
+                var i = $(".compNumber")[0];
+                console.log(i);
+                e.preventDefault()
+                $("#comp-card").append(
+                    `
+            <form  class="white-box" method="post"  novalidate>{% csrf_token %}
+            <input  value="" type="hidden" name="id" >
+                <div class="card-list">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="unit_category" class="col-sm-6 control-label">单位类别</label>
+                            <div class="col-sm-6">
+                                <select class="form-control " name="unit_category"
+                                        id="unit_category">
+                                    <option selected value>请选择</option>
+                                    <option value="1" >1
+                                        法人单位
+                                    </option>
+                                    <option value="2">2
+                                        法人单位分支机构
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="social_num" class="col-sm-6 control-label">统一社会信用代码</label>
+                            <div class="col-sm-6">
+                                <input type=" text" class="form-control" name="social_num" id="social_num" maxlength="18"
+                                       value="" placeholder="请输入">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="org_num" class="col-sm-6 control-label">尚未领取统一社会信用代码的组织机构代码</label>
+                            <div class="col-sm-6">
+                                <input type=" text" class="form-control"
+                                       value="" maxlength="9"
+                                       name="org_num" id="org_num" placeholder="请输入">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="name" class="col-sm-6 control-label">单位详细名称</label>
+                            <div class="col-sm-6">
+                                <input type=" text"
+                                       value=""
+                                       class="form-control" name="name" id="name" placeholder="请输入">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="address" class="col-sm-6 control-label">详细地址</label>
+                            <div class="col-sm-6">
+                                <input type=" text"
+                                       value=""
+                                       class="form-control" name="address" id="address" placeholder="请输入">
+                            </div>
+                        </div>
+                        <div class="form-group disable-card">
+                            <label for="zone_num" class="col-sm-6 control-label">区划代码（六位）</label>
+                            <div class="col-sm-6">
+                                <input type=" text"
+                                       value=""
+                                       class="form-control"  id="zone_num" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="mobile" class="col-sm-6 control-label">联系电话</label>
+                            <div class="col-sm-6">
+                                <input type=" text"
+                                       value=""
+                                       class="form-control" name="mobile" id="mobile" placeholder="请输入">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="main_activity" class="col-sm-6 control-label">主要业务活动</label>
+                            <div class="col-sm-6">
+                                <input type=" text" class="form-control"
+                                       value=""
+                                       name="main_activity" id="main_activity"
+                                       placeholder="请输入">
+                            </div>
+                        </div>
+                        <div class="form-group disable-card">
+                            <label for="catrgory_code" class="col-sm-6  control-label">行业代码（小类 GB/T4754-2017）</label>
+                            <div class="col-sm-6">
+                                <input type=" text" class="form-control"
+                                       value=""
+                                       id="catrgory_code"
+                                       readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="incumbency_num" class="col-sm-6 control-label">从业人员期末人数（人数）</label>
+                            <div class="col-sm-6">
+                                <input type=" text" class="form-control"
+                                       value=""
+                                       name="incumbency_num" id="incumbency_num"
+                                       placeholder="请输入">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="manage_income" class="col-sm-6 control-label">经营性单位收入（元）</label>
+                            <div class="col-sm-6">
+                                <input type=" text" class="form-control"
+                                       value=""
+                                       name="manage_income" id="manage_income"
+                                       placeholder="请输入">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inmanage_pay" class="col-sm-6 control-label">非经营性单位支出（费用/元）</label>
+                            <div class="col-sm-6">
+                                <input type=" text" class="form-control" name="inmanage_pay" id="inmanage_pay"
+                                       value=""
+                                       placeholder="请输入">
+                            </div>
+                        </div>
+                    </div>
+                    {% if  permission == True %}
+                    <div class="form-group" style="height: 10px">
+                            <button class="pull-right btn button btn-warning deleteBuildBtn" click="" >删除</button>
+                            <button class="btn button btn-success addBtn">保存</button>
+                        </div>
+                    {% endif %}
+
+                </div>
+
+            </form> `
+                )
+
+            })
+
+            {#获取有几个机构#}
+            var staticA = parseInt($(".compNumber")[0].value)
+
+            {#删除按钮#}
+            $(".deleteBtn").click(function (e) {
+                e.preventDefault()
+                console.log(e.target.form[1].value)
+                var r = confirm("确定删除？")
+                var comp_611_1_list_id = e.target.form[1].value
+
+                if (r == true) {
+                    $.ajax({
+                        type: "POST",
+                        url: "/delete_611_1/{{ cid }}/",
+                        data: {comp_611_1_list_id: comp_611_1_list_id},
+                        beforeSend: function (request) {
+                            request.setRequestHeader("X-CSRFToken", '{{ csrf_token }}');
+                        },
+                        success: function (res) {
+                            console.log(res);
+                            if (res.code == 0) {
+                                toastr.success("删除成功");
+                                window.setTimeout(function () {
+                                    {
+                                        window.location.reload()
+                                    }
+                                }, 1000);
+                            } else {
+                                for (var msg1 in res.msg) {
+                                    toastr.error(msg1 + "," + res.msg[msg1]);
+                                }
+                            }
+                        },
+                        fail: function (jqXHR, textStatus, errorThrown) {
+                            toastr.error('提交失败请稍后重试');
+                        }
+                    });
+                } else {
+                    alert("您取消了删除！")
+                }
+
+
+            })
+
+            $("#comp-card").on('click', '.deleteBuildBtn', function (e) {
+                e.preventDefault()
+                console.log(e.target.form)
+                $(e.target.form).remove()
+                $(".compNumber")[0].value--
+                $(".compNumber")[1].value--
+            })
+
+
+            {#保存按钮#}
+            $("#comp-card").on('click', '.addBtn', function (e) {
+                e.preventDefault()
+                var data = $(e.target.form).serializeArray();
+                var postData = {};
+                for (var x in data) {
+                    postData[data[x].name] = data[x].value;
+                }
+
+                for (var x in data) {
+                    postData[data[x].name] = data[x].value;
+                    if (data[x].value == '') {
+                        if (data[x].name == 'id' || data[x].name == 'social_num' || data[x].name == 'org_num' || data[x].name == 'manage_income'
+                            || data[x].name == 'inmanage_pay') {
+                        } else {
+                            toastr.error("不能有空选项");
+                            {#$("#" + data[x].name).parent().parent().addClass("has-error")#}
+                            return false
+                        }
+
+                    }
+                }
+
+                if (postData.social_num == '' && postData.org_num == '') {
+                    toastr.error("统一社会信用代码和组织机构代码不能都为空，必须填一个");
+                    return false
+                }
+                if (postData.inmanage_pay == '' && postData.manage_income == '') {
+                    toastr.error("经营性收入和非经营性单位支出不能同时填写！！！");
+                    return false
+                }
+
+                {#return false#}
+                $.post('/edit_611_1/{{ cid }}/', postData, function (res) {
+                    console.log(res);
+                    if (res.code == 0) {
+                        toastr.success("保存成功");
+                        window.setTimeout(function () {
+                            {#window.location.reload()#}
+                        }, 1000);
+                    } else {
+                        for (var msg1 in res.msg) {
+                            toastr.error(msg1 + "," + res.msg[msg1]);
+                        }
+                    }
+                }).fail(function (jqXHR, textStatus, errorThrown) {
+                    toastr.error('提交失败请稍后重试');
+                });
+                return false;
+            })
+
+            $(".finish-card").on('click', '.addBtn', function (e) {
+                e.preventDefault()
+                var data = $(e.target.form).serializeArray();
+                var postData = {};
+                for (var x in data) {
+                    postData[data[x].name] = data[x].value;
+                }
+
+                for (var x in data) {
+                    postData[data[x].name] = data[x].value;
+                    if (data[x].value == '') {
+                        if (data[x].name == 'id' || data[x].name == 'social_num' || data[x].name == 'org_num') {
+
+                        } else {
+                            toastr.error("不能有空选项");
+                            {#$("#" + data[x].name).parent().parent().addClass("has-error")#}
+                            return false
+                        }
+
+                    }
+                }
+
+                if (postData.social_num == '' && postData.org_num == '') {
+                    toastr.error("统一社会信用代码和组织机构代码不能都为空，必须填一个");
+                    return false
+                }
+                {#return false#}
+                $.post('/edit_611_1/{{ cid }}/', postData, function (res) {
+                    console.log(res);
+                    if (res.code == 0) {
+                        toastr.success("保存成功");
+                        window.setTimeout(function () {
+                            {#window.location.reload()#}
+                        }, 1000);
+                    } else {
+                        for (var msg1 in res.msg) {
+                            toastr.error(msg1 + "," + res.msg[msg1]);
+                        }
+                    }
+                }).fail(function (jqXHR, textStatus, errorThrown) {
+                    toastr.error('提交失败请稍后重试');
+                });
+                return false;
+            })
+
+
+        });
+
+    </script>
+
+{% endblock %}

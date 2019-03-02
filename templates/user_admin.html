@@ -1,0 +1,379 @@
+{% extends "base.html" %}
+{% block content %}
+    {{ group_name }}
+
+    {% if group_name == '南院门管理员' %}
+    <div class="white-box">
+        <div class="row row-in">
+            {{ nym_user_count }}
+            <div class="col-lg-3 col-sm-6 row-in-br  b-r-none">
+                <div class="col-in row">
+                    <div class="col-md-6 col-sm-6 col-xs-6">
+                        <h2 class="text-muted vb">组内今日统计 </h2>
+                    </div>
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-megna" role="progressbar"
+                                 aria-valuenow="40"
+                                 aria-valuemin="0" aria-valuemax="100"
+                                 style="width:100%"><span
+                                    class="sr-only"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <h4 class="text-muted vb">用户
+                            </h4>
+
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <h4 class="counter text-right m-t-15 text-danger">审核量</h4>
+                        </div>
+                    </div>
+                    {% for user_count_key in nym_user_count %}
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <h4 class="text-muted vb">{{ user_count_key }}</h4>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <h4 class="counter text-right m-t-15 text-danger"></h4>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+        </div>
+    </div>
+    {% endif %}
+
+    {% if group_name == '柏树林管理员' %}
+    <div class="white-box">
+        <div class="row row-in">
+            {{ bsl_user_count }}
+            <div class="col-lg-3 col-sm-6 row-in-br  b-r-none">
+                <div class="col-in row">
+                    <div class="col-md-6 col-sm-6 col-xs-6">
+                        <h2 class="text-muted vb">组内今日统计 </h2>
+                    </div>
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-megna" role="progressbar"
+                                 aria-valuenow="40"
+                                 aria-valuemin="0" aria-valuemax="100"
+                                 style="width:100%"><span
+                                    class="sr-only"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <h4 class="text-muted vb">用户
+                            </h4>
+
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <h4 class="counter text-right m-t-15 text-danger">审核量</h4>
+                        </div>
+                    </div>
+                    {% for user_count_key in bsl_user_count %}
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <h4 class="text-muted vb">{{ user_count_key }}</h4>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <h4 class="counter text-right m-t-15 text-danger"></h4>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+        </div>
+    </div>
+    {% endif %}
+
+    {% if group_name == '长乐坊管理员' %}
+    <div class="white-box">
+        <div class="row row-in">
+            {{ clf_user_count }}
+            <div class="col-lg-3 col-sm-6 row-in-br  b-r-none">
+                <div class="col-in row">
+                    <div class="col-md-6 col-sm-6 col-xs-6">
+                        <h2 class="text-muted vb">组内今日统计 </h2>
+                    </div>
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-megna" role="progressbar"
+                                 aria-valuenow="40"
+                                 aria-valuemin="0" aria-valuemax="100"
+                                 style="width:100%"><span
+                                    class="sr-only"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <h4 class="text-muted vb">用户
+                            </h4>
+
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <h4 class="counter text-right m-t-15 text-danger">审核量</h4>
+                        </div>
+                    </div>
+                    {% for user_count_key in clf_user_count %}
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <h4 class="text-muted vb">{{ user_count_key }}</h4>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <h4 class="counter text-right m-t-15 text-danger"></h4>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+        </div>
+    </div>
+    {% endif %}
+
+    {% if group_name == '东关南管理员' %}
+    <div class="white-box">
+        <div class="row row-in">
+            {{ dgn_user_count }}
+            <div class="col-lg-3 col-sm-6 row-in-br  b-r-none">
+                <div class="col-in row">
+                    <div class="col-md-6 col-sm-6 col-xs-6">
+                        <h2 class="text-muted vb">组内今日统计 </h2>
+                    </div>
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-megna" role="progressbar"
+                                 aria-valuenow="40"
+                                 aria-valuemin="0" aria-valuemax="100"
+                                 style="width:100%"><span
+                                    class="sr-only"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <h4 class="text-muted vb">用户
+                            </h4>
+
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <h4 class="counter text-right m-t-15 text-danger">审核量</h4>
+                        </div>
+                    </div>
+                    {% for user_count_key in dgn_user_count %}
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <h4 class="text-muted vb">{{ user_count_key }}</h4>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <h4 class="counter text-right m-t-15 text-danger"></h4>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+        </div>
+    </div>
+    {% endif %}
+
+    {% if group_name == '太乙路管理员' %}
+    <div class="white-box">
+        <div class="row row-in">
+            {{ tyl_user_count }}
+            <div class="col-lg-3 col-sm-6 row-in-br  b-r-none">
+                <div class="col-in row">
+                    <div class="col-md-6 col-sm-6 col-xs-6">
+                        <h2 class="text-muted vb">组内今日统计 </h2>
+                    </div>
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-megna" role="progressbar"
+                                 aria-valuenow="40"
+                                 aria-valuemin="0" aria-valuemax="100"
+                                 style="width:100%"><span
+                                    class="sr-only"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <h4 class="text-muted vb">用户
+                            </h4>
+
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <h4 class="counter text-right m-t-15 text-danger">审核量</h4>
+                        </div>
+                    </div>
+                    {% for user_count_key in tyl_user_count %}
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <h4 class="text-muted vb">{{ user_count_key }}</h4>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <h4 class="counter text-right m-t-15 text-danger"></h4>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+        </div>
+    </div>
+    {% endif %}
+
+    {% if group_name == '文艺路管理员' %}
+    <div class="white-box">
+        <div class="row row-in">
+            {{ wyl_user_count }}
+            <div class="col-lg-3 col-sm-6 row-in-br  b-r-none">
+                <div class="col-in row">
+                    <div class="col-md-6 col-sm-6 col-xs-6">
+                        <h2 class="text-muted vb">组内今日统计 </h2>
+                    </div>
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-megna" role="progressbar"
+                                 aria-valuenow="40"
+                                 aria-valuemin="0" aria-valuemax="100"
+                                 style="width:100%"><span
+                                    class="sr-only"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <h4 class="text-muted vb">用户
+                            </h4>
+
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <h4 class="counter text-right m-t-15 text-danger">审核量</h4>
+                        </div>
+                    </div>
+                    {% for user_count_key in wyl_user_count %}
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <h4 class="text-muted vb">{{ user_count_key }}</h4>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <h4 class="counter text-right m-t-15 text-danger"></h4>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+        </div>
+    </div>
+    {% endif %}
+
+    {% if group_name == '长安路管理员' %}
+    <div class="white-box">
+        <div class="row row-in">
+            {{ cal_user_count }}
+            <div class="col-lg-3 col-sm-6 row-in-br  b-r-none">
+                <div class="col-in row">
+                    <div class="col-md-6 col-sm-6 col-xs-6">
+                        <h2 class="text-muted vb">组内今日统计 </h2>
+                    </div>
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-megna" role="progressbar"
+                                 aria-valuenow="40"
+                                 aria-valuemin="0" aria-valuemax="100"
+                                 style="width:100%"><span
+                                    class="sr-only"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <h4 class="text-muted vb">用户
+                            </h4>
+
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <h4 class="counter text-right m-t-15 text-danger">审核量</h4>
+                        </div>
+                    </div>
+                    {% for user_count_key in cal_user_count %}
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <h4 class="text-muted vb">{{ user_count_key }}</h4>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <h4 class="counter text-right m-t-15 text-danger"></h4>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+        </div>
+    </div>
+    {% endif %}
+
+    {% if group_name == '张家村管理员' %}
+    <div class="white-box">
+        <div class="row row-in">
+            {{ zjc_user_count }}
+            <div class="col-lg-3 col-sm-6 row-in-br  b-r-none">
+                <div class="col-in row">
+                    <div class="col-md-6 col-sm-6 col-xs-6">
+                        <h2 class="text-muted vb">组内今日统计 </h2>
+                    </div>
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-megna" role="progressbar"
+                                 aria-valuenow="40"
+                                 aria-valuemin="0" aria-valuemax="100"
+                                 style="width:100%"><span
+                                    class="sr-only"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <h4 class="text-muted vb">用户
+                            </h4>
+
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <h4 class="counter text-right m-t-15 text-danger">审核量</h4>
+                        </div>
+                    </div>
+                    {% for user_count_key in zjc_user_count %}
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <h4 class="text-muted vb">{{ user_count_key }}</h4>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <h4 class="counter text-right m-t-15 text-danger"></h4>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+        </div>
+    </div>
+    {% endif %}
+
+    <div class="row">
+    </div>
+{% endblock %}
+
+{% block js %}
+    {% load static %}
+{% endblock %}

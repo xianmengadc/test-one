@@ -1,0 +1,407 @@
+{% extends "base.html" %}
+{% block css %}
+
+    {% load  static %}
+    <link href={% static "plugins/bower_components/bootstrap-datepicker/bootstrap-datepicker.min.css" %} rel="stylesheet"
+          type="text/css"/>
+    <link href={% static "plugins/bower_components/custom-select/custom-select.css" %} rel="stylesheet"
+          type="text/css"/>
+    <link href={% static "plugins/bower_components/switchery/dist/switchery.min.css" %} rel="stylesheet"/>
+    <link href={% static "plugins/bower_components/bootstrap-select/bootstrap-select.min.css" %} rel="stylesheet"/>
+    <link href={% static "plugins/bower_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.css" %} rel="stylesheet"/>
+    <link href={% static "plugins/bower_components/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.css" %} rel="stylesheet"/>
+    <link href={% static "plugins/bower_components/multiselect/css/multi-select.css" %} rel="stylesheet"
+          type="text/css"/>
+
+    <style>
+        label {
+            text-align: right !important;
+        }
+
+        .card-a label {
+        }
+
+        {#标题分割线#}
+        h3 {
+            border-bottom: 1px solid rgba(120, 130, 140, 0.28);
+            padding-bottom: 12px;
+        }
+
+    </style>
+
+{% endblock %}
+{% block breadcum %}
+    <a href="{% url 'basedata' companies.street_district %}">{{ companies.street_district }}普查数据</a>
+{% endblock %}
+{% block content %}
+    <div class="row">
+        <form class="form-horizontal" data-toggle="validator" id="base_form_611_2"> {% csrf_token %}
+            <ul class="wizard-steps" role="tablist">
+
+
+                <li class="tab1 need   {% if companies.done_611 == True %} done {% endif %}" role="tab">
+                    <h4>
+                        <a href="{% url 'edit_com' companies.street_district cid %}"><span>主表</span>611
+                        </a>
+                    </h4>
+                </li>
+
+                <li class="tab1  {% if companies.need_611_1 == True %} need {% endif %}{% if companies.done_611_1 == True and companies.need_611_1 == True %} done {% endif %}"
+                    role="tab">
+                    <h4>
+                        {% if companies.need_611_1 == False %} <span>1</span>611-1
+                        {% endif %}
+                        {% if companies.need_611_1 == True %}
+                            <a href="{% url 'edit_611_1' cid %}"><span>1</span>611-1
+                            </a>{% endif %}
+                    </h4>
+                </li>
+
+
+                <li class="tab2 now {% if companies.need_611_2 == True %} need {% endif %}{% if companies.done_611_2 == True and companies.need_611_2 == True %} done {% endif %}"
+                    role="tab">
+                    <h4>
+                        {% if companies.need_611_2 == False %} <span>2</span>611-2
+                        {% endif %}
+                        {% if companies.need_611_2 == True %}
+                            <a href="{% url 'edit_611_2' cid %}"><span>2</span>611-2
+                            </a>{% endif %}
+
+                    </h4>
+                </li>
+                <li class="tab3 {% if companies.need_611_3 == True %} need {% endif %}{% if companies.done_611_3 == True and companies.need_611_3 == True %} done {% endif %}"
+                    role="tab">
+                    <h4>
+                        {% if companies.need_611_3 == False %} <span>3</span>611-3
+                        {% endif %}
+                        {% if companies.need_611_3 == True %}
+                            <a href="{% url 'edit_611_3' cid %}"><span>3</span>611-3
+                            </a>{% endif %}
+
+                    </h4>
+                </li>
+                <li class="tab4 {% if companies.need_611_4 == True %} need {% endif %}{% if companies.done_611_4 == True and companies.need_611_4 == True %} done {% endif %}"
+                    role="tab">
+                    <h4>
+                        {% if companies.need_611_4 == False %} <span>4</span>611-4
+                        {% endif %}
+                        {% if companies.need_611_4 == True %}
+                            <a href="{% url 'edit_611_4' cid %}"><span>4</span>611-4
+                            </a>{% endif %}
+                    </h4>
+                </li>
+                <li class="tab5 {% if companies.need_611_5 == True %} need {% endif %}{% if companies.done_611_5 == True and companies.need_611_5 == True %} done {% endif %}"
+                    role="tab">
+                    <h4>
+                        {% if companies.need_611_5 == False %} <span>5</span>611-5
+                        {% endif %}
+                        {% if companies.need_611_5 == True %}
+                            <a href="{% url 'edit_611_5' cid %}"><span>5</span>611-5
+                            </a>{% endif %}
+                    </h4>
+                </li>
+                <li class="tab6 {% if companies.need_611_6 == True %} need {% endif %}{% if companies.done_611_6 == True and companies.need_611_6 == True %} done {% endif %}"
+                    role="tab">
+                    <h4>
+                        {% if companies.need_611_6 == False %} <span>6</span>611-6
+                        {% endif %}
+                        {% if companies.need_611_6 == True %}
+                            <a href="{% url 'edit_611_6' cid %}"><span>6</span>611-6
+                            </a>{% endif %}
+                    </h4>
+                </li>
+            </ul>
+
+
+            <div class="col-sm-12 white-box">
+
+                <h3 class="box-title">非一套表单位从业人员情况（2018）611-2</h3>
+                <div>
+
+                    <div class="col-md-6">
+                        <div class="disable-card">
+                            <div class="form-group">
+                                <label for="main_social_num" class="col-sm-6 control-label">统一社会信用代码</label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" id="main_social_num"
+                                           name="social_num"
+                                           value="{{ companies.social_num |default_if_none:"" }}" readonly>
+                                    <input type="hidden" name="main_social_num" value="{{ cid }}">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="main_org_num" class="col-sm-6 control-label">组织机构代码</label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" id="main_org_num"
+                                           name="main_org_num"
+                                           value="{{ companies.org_num |default_if_none:"" }}" readonly>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="main_name" class="col-sm-6 control-label">单位详细名称</label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" id="main_name"
+                                           name="main_name"
+                                           value="{{ companies.name |default_if_none:"" }}" readonly>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="final_count_human" class="col-sm-6 control-label">从业人员期末人数（人）</label>
+                            <div class="col-sm-6">
+                                <input type="number" class="form-control" id="final_count_human"
+                                       placeholder="请输入" name="final_count_human"
+                                       value="{{ employeeobj.final_count_human|default_if_none:"" }}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="final_count_female" class="col-sm-6 control-label">其中：女性（人）</label>
+                            <div class="col-sm-6">
+                                <input type="number" class="form-control" id="final_count_female"
+                                       placeholder="请输入" name="final_count_female"
+                                       value="{{ employeeobj.final_count_female|default_if_none:"" }}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="graduate" class="col-sm-6 control-label">具有研究生学历（位）人员</label>
+                            <div class="col-sm-6">
+                                <input type="number" class="form-control" id="graduate"
+                                       placeholder="请输入" name="graduate"
+                                       value="{{ employeeobj.graduate|default_if_none:"" }}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="bachelor" class="col-sm-6 control-label">具有大学本科学历（位）人员</label>
+                            <div class="col-sm-6">
+                                <input type="number" class="form-control" id="bachelor"
+                                       placeholder="请输入" name="bachelor"
+                                       value="{{ employeeobj.bachelor|default_if_none:"" }}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="junior_college" class="col-sm-6 control-label">具有大学专科学历人员</label>
+                            <div class="col-sm-6">
+                                <input type="number" class="form-control" id="junior_college"
+                                       placeholder="请输入" name="junior_college"
+                                       value="{{ employeeobj.junior_college|default_if_none:"" }}">
+                            </div>
+                        </div>
+                        {% if companies.accounting_rule == '1' %}
+                            <div id="accountingStandardC">
+                                <div class="form-group">
+                                    <label for="skill_count" class="col-sm-6 control-label">其中：技能人员</label>
+                                    <div class="col-sm-6">
+                                        <input type="number" class="form-control" id="skill_count"
+                                               placeholder="请输入" name="skill_count"
+                                               value="{{ employeeobj.skill_count|default_if_none:"" }}">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="technician_one" class="col-sm-6 control-label">高级技师（国家职业资格一级）</label>
+                                    <div class="col-sm-6">
+                                        <input type="number" class="form-control" id="technician_one"
+                                               placeholder="请输入" name="technician_one"
+                                               value="{{ employeeobj.technician_one|default_if_none:"" }}">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="technician_two" class="col-sm-6 control-label">技师（国家职业资格二级）</label>
+                                    <div class="col-sm-6">
+                                        <input type="number" class="form-control" id="technician_two"
+                                               placeholder="请输入" name="technician_two"
+                                               value="{{ employeeobj.technician_two|default_if_none:"" }}">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="technician_three"
+                                           class="col-sm-6 control-label">高级技能人员（国家职业资格三级）</label>
+                                    <div class="col-sm-6">
+                                        <input type="number" class="form-control" id="technician_three"
+                                               placeholder="请输入" name="technician_three"
+                                               value="{{ employeeobj.technician_three |default_if_none:"" }}">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="technician_four" class="col-sm-6 control-label">中级技能人员（国家职业资格四级）</label>
+                                    <div class="col-sm-6">
+                                        <input type="number" class="form-control" id="technician_four"
+                                               placeholder="请输入" name="technician_four"
+                                               value="{{ employeeobj.technician_four|default_if_none:"" }}">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="technician_five"
+                                           class="col-sm-6 control-label">初级技能人员（国家职业资格五级级）</label>
+                                    <div class="col-sm-6">
+                                        <input type="number" class="form-control" id="technician_five"
+                                               placeholder="请输入" name="technician_five"
+                                               value="{{ employeeobj.technician_five|default_if_none:"" }}">
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                        {% endif %}
+
+
+                    </div>
+                </div>
+
+            </div>
+
+             {% if  permission == True %}
+                <div class="col-sm-12 white-box ">
+                    <button type="submit" id="onClickButton"
+                            class="btn  btn-default btn-outline btn-danger pull-right">提交
+                    </button>
+                    <div style="clear:both "></div>
+                </div>
+            {% endif %}
+        </form>
+    </div>
+
+
+
+{% endblock %}
+
+{% block js %}
+    {% load static %}
+    <script src= {% static  "plugins/bower_components/switchery/dist/switchery.min.js" %}></script>
+    <script src={% static  "plugins/bower_components/custom-select/custom-select.min.js" %} type="text/javascript"></script>
+    <script src={% static  "plugins/bower_components/bootstrap-select/bootstrap-select.min.js" %} type="text/javascript"></script>
+    <script src={% static  "plugins/bower_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js" %}></script>
+    <script src={% static  "plugins/bower_components/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js" %} type="text/javascript"></script>
+    <script type="text/javascript"
+            src={% static  "plugins/bower_components/multiselect/js/jquery.multi-select.js" %}></script>
+    {#    <script src={% static "js/xianmeng/edit-com.js" %}></script>#}
+
+    <script>
+        jQuery(document).ready(function () {
+            // Switchery
+            var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
+            $('.js-switch').each(function () {
+                new Switchery($(this)[0], $(this).data());
+
+            });
+            // For select 2
+
+            $(".select2").select2();
+            $('.selectpicker').selectpicker();
+
+            $("#onClickButton").click(function () {
+
+                var data = $("#base_form_611_2").serializeArray();
+                var postData = {};
+                for (var x in data) {
+                    postData[data[x].name] = data[x].value;
+                }
+                console.log(postData)
+                if (postData.final_count_human == '') {
+                    $("#final_count_human").parent().parent().addClass("has-error")
+                    toastr.error("从业人员期末人数不能为空");
+                    return false;
+                }
+                if (postData.final_count_female == '') {
+                    $("#final_count_female").parent().parent().addClass("has-error")
+                    toastr.error("其中：女性人数不能为空");
+                    return false;
+                }
+                if (postData.graduate == '') {
+                    toastr.error("具有研究生学历（位）人员不能为空");
+                    $("#graduate").parent().parent().addClass("has-error")
+                    return false;
+                }
+                if (postData.bachelor == '') {
+                    toastr.error("具有大学本科学历（位）人员不能为空");
+                    $("#bachelor").parent().parent().addClass("has-error")
+                    return false;
+                }
+                if (postData.junior_college == '') {
+                    toastr.error("具有大学专科学历人员不能为空");
+                    $("#junior_college").parent().parent().addClass("has-error")
+                    return false;
+                }
+                {#if (postData.skill_count == '') {#}
+                {#    toastr.error("其中：技能人员不能为空");#}
+                {#    $("#skill_count").parent().parent().addClass("has-error")#}
+                {#    return false;#}
+                {#}#}
+                {#if (postData.technician_one == '') {#}
+                {#    toastr.error("高级技师（国家职业资格一级）不能为空");#}
+                {#    $("#technician_one").parent().parent().addClass("has-error")#}
+                {#    return false;#}
+                {#}#}
+                {#if (postData.technician_two == '') {#}
+                {#    toastr.error("技师（国家职业资格二级）不能为空");#}
+                {#    $("#technician_two").parent().parent().addClass("has-error")#}
+                {#    return false;#}
+                {#}#}
+                {#if (postData.technician_three == '') {#}
+                {#    toastr.error("高级技能人员（国家职业资格三级）不能为空");#}
+                {#    $("#technician_three").parent().parent().addClass("has-error")#}
+                {#    return false;#}
+                {#}#}
+                {#if (postData.technician_four == '') {#}
+                {#    toastr.error("中级技能人员（国家职业资格四级）不能为空");#}
+                {#    $("#technician_four").parent().parent().addClass("has-error")#}
+                {#    return false;#}
+                {#}#}
+                {#if (postData.technician_five == '') {#}
+                {#    toastr.error("初级技能人员（国家职业资格五级级）不能为空");#}
+                {#    $("#technician_five").parent().parent().addClass("has-error")#}
+                {#    return false;#}
+                {#}#}
+
+
+                {#var total_college = parseInt(postData.graduate) + parseInt(postData.bachelor) + parseInt(postData.junior_college)#}
+                {#var total_skill = parseInt(postData.technician_one) + parseInt(postData.technician_two) + parseInt(postData.technician_three) + parseInt(postData.technician_four) + parseInt(postData.technician_five)#}
+                {#// 验证表#}
+                {#if (parseInt(postData.final_count_human) < parseInt(postData.final_count_female)) {#}
+                {#    toastr.error("从业人数赢大于等于女性人数");#}
+                {#    return false;#}
+                {#}#}
+                {#if (parseInt(postData.final_count_human) < total_college) {#}
+                {#    toastr.error("从业人数必须大于等于研究生学历，本科学历，专科学历之和");#}
+                {#    return false;#}
+                {#}#}
+                {#if (parseInt(postData.final_count_human) < parseInt(postData.skill_count)) {#}
+                {#    toastr.error("从业人数必须大于技能人员数");#}
+                {#    return false;#}
+                {#}#}
+                {#if (parseInt(postData.skill_count) != total_skill) {#}
+                {#    toastr.error("技能人员数应该为各个技能人数的总和");#}
+                {#    return false;#}
+                {#}#}
+
+                var next_url = '/edit_611_3/{{ cid }}/';
+
+                $.post('/edit_611_2/{{ cid }}/?next=' + next_url, postData, function (res) {
+                    console.log(res);
+                    if (res.code == 0) {
+
+                        toastr.success("保存成功");
+                        window.setTimeout(function () {
+                            window.location.reload()
+                        }, 1000);
+
+                    } else {
+                        for (var msg1 in res.msg) {
+                            toastr.error(msg1 + "," + res.msg[msg1]);
+                        }
+                    }
+                }).fail(function (jqXHR, textStatus, errorThrown) {
+                    toastr.error('提交失败请稍后重试');
+                });
+                return false;
+            })
+
+
+        });
+
+    </script>
+
+{% endblock %}

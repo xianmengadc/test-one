@@ -1,0 +1,329 @@
+{% extends "base.html" %}
+{% block css %}
+    <!-- Editable CSS -->
+    {% load static %}
+    <link type="text/css" rel="stylesheet" href={% static "plugins/bower_components/jsgrid/dist/jsgrid.min.css" %}/>
+
+    <link type="text/css" rel="stylesheet"
+          href={% static "plugins/bower_components/jsgrid/dist/jsgrid-theme.min.css" %}/>
+
+    <link href={% static "js/libs/datatables.net-bs4/css/dataTables.bootstrap4.css" %} rel="stylesheet">
+    <link href={% static "js/libs/bootstrap-datepicker/dist/css/bootstrap-datepicker.standalone.min.css" %} rel="stylesheet">
+
+    <style>
+        .mytable-head th {
+            text-align: center;
+            vertical-align: center;
+        }
+
+    </style>
+
+{% endblock %}
+
+{% block content %}
+    <div class="row bg-title">
+        <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+            <h4 class="page-title"> 各街办经查数据汇总</h4>
+        </div>
+        <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+            <ol class="breadcrumb">
+                <li><a href="#">主面板</a></li>
+                <li class="active">南院门汇总</li>
+            </ol>
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="white-box">
+                <h3 class="box-title">普查底册
+                    {#                    <button class="btn btn-success waves-effect waves-light pull-right" type="button"><span#}
+                    {#                            class="btn-label"><i class="fa fa-check"></i></span>导出EXCEL#}
+                    {#                    </button>#}
+                </h3>
+                <h4>
+                </h4>
+
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h6 class="card-title " style="color: #9FA8B4; margin-bottom: 5px;">高级搜索</h6>
+                            <form class="form-horizontal">
+                                <div class="card-body">
+
+                                    <div class="row">
+                                        <div class="col-sm-12 col-md-3 col-lg-3">
+                                            <div class="form-group row">
+                                                <label for="fname2"
+                                                       class="col-sm-4 text-right control-label col-form-label">单位名称</label>
+                                                <div class="col-sm-8">
+                                                    <div id="name_search"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 col-md-3 col-lg-3">
+                                            <div class="form-group row">
+                                                <label for="fname2"
+                                                       class="col-sm-4 text-right control-label col-form-label">社会信用代码</label>
+                                                <div class="col-sm-8">
+                                                    <div id="id_search"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 col-md-3 col-lg-3">
+                                            <div class="form-group row">
+                                                <label for="fname2"
+                                                       class="col-sm-4 text-right control-label col-form-label">是否通知</label>
+                                                <div class="col-sm-8">
+                                                    <div id="notice_search"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 col-md-3 col-lg-3">
+                                            <div class="form-group row">
+                                                <label for="fname2"
+                                                       class="col-sm-4 text-right control-label col-form-label">社区</label>
+                                                <div class="col-sm-8">
+                                                    <div id="community_search"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 col-md-3 col-lg-3">
+                                            <div class="form-group row">
+                                                <label for="fname2"
+                                                       class="col-sm-4 text-right control-label col-form-label">单位类型</label>
+                                                <div class="col-sm-8">
+                                                    <div id="comp_type_search"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-sm-12 col-md-3 col-lg-3">
+                                            <div class="form-group row">
+                                                <label for="nname"
+                                                       class="col-sm-4 text-right control-label col-form-label"></label>
+                                                <div class="col-sm-8">
+                                                    <input type="button" value="清空所有搜索条件" id="btn_reset"
+                                                           class="btn btn-block btn-success">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div> <!-- end of saercch card -->
+                                <hr style="margin-top: 0px;">
+                            </form>
+                        </div>
+                        <div class="card-body">
+
+
+                            <div class="table-responsive" style="font-size: small">
+                                <table id="file_export" cellspacing="0" width="100%"
+                                       class="table display compact table-striped table-bordered datatable-select-inputs">
+                                    <thead class="bg-primary text-white">
+                                    <tr class="mytable-head">
+                                        <th rowspan="2">是否通知</th>
+                                        <th rowspan="2">统一社会信用代码</th>
+                                        <th rowspan="2">企业规模</th>
+                                        <th rowspan="2">公司名称</th>
+                                        <th rowspan="2">单位地址</th>
+                                        <th rowspan="2">所属街道</th>
+                                        <th rowspan="2">所属社区</th>
+                                        <th rowspan="2">所属楼宇</th>
+                                        <th rowspan="2">联系人</th>
+                                        <th rowspan="2">联系电话</th>
+                                        <th rowspan="2">单位类型</th>
+                                        <th rowspan="2">是否多产</th>
+                                        <th rowspan="2">会计制度</th>
+                                        <th rowspan="2">业务活动</th>
+                                        <th colspan="1">多产法人</th>
+                                        <th colspan="3">主要经济指标表种</th>
+                                    </tr>
+
+                                    <tr>
+                                        <th>
+                                            611-1
+                                        </th>
+                                        <th>
+                                            611-3
+                                        </th>
+                                        <th>
+                                            611-5
+                                        </th>
+                                        <th>
+                                            611-6
+                                        </th>
+                                    </tr>
+                                    </thead>
+{#                                    <thead id="mySearch">#}
+{#                                    <th>通知</th>#}
+{#                                    <th>统一社会信用代码</th>#}
+{#                                    <th>企业规模</th>#}
+{#                                    <th>公司名称</th>#}
+{#                                    <th>单位地址</th>#}
+{#                                    <th>所属街道</th>#}
+{#                                    <th>所属社区</th>#}
+{#                                    <th>所属楼宇</th>#}
+{#                                    <th>联系人</th>#}
+{#                                    <th>联系电话</th>#}
+{#                                    <th>单位类型</th>#}
+{#                                    <th>多产</th>#}
+{#                                    <th>会计制度</th>#}
+{#                                    <th>业务活动</th>#}
+{#                                    <th>多产法人</th>#}
+{#                                    <th>经济指标表种</th>#}
+{#                                    </thead>#}
+
+                                    <tbody>
+
+                                    {% for d in data %}
+                                        <tr>
+                                            <td>{{ d.is_notice }}</td>
+                                            <td>{{ d.social_num }}</td>
+                                            <td>{{ d.legal_unite_company_size }}</td>
+                                            <td>{{ d.name }}</td>
+                                            <td>{{ d.province }} - {{ d.city }} - {{ d.district }}
+                                                - {{ d.address }}</td>
+                                            <td>{{ d.street_district }}</td>
+                                            <td>{{ d.community }}</td>
+                                            <td>{{ d.building_unique_code }}</td>
+                                            <td>{{ d.legal_person }}</td>
+                                            <td>{{ d.mobile }}</td>
+                                            <td>{{ d.comp_type }}</td>
+                                            <td>{{ d.comp_type }}</td>
+                                            <td>{{ d.legal_unite_accounting_rule }}</td>
+                                            <td>{{ d.main_activity_1 }} - {{ d.main_activity_2 }}
+                                                - {{ d.main_activity_3 }}</td>
+                                            <td>{{ d.is_write_661_1 }}</td>
+                                            <td>{{ d.is_write_661_3 }}</td>
+                                            <td>{{ d.is_write_661_5 }}</td>
+                                            <td>{{ d.is_write_661_6 }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+
+{% block js %}
+    {% load static %}
+    <script src={% static "js/DataTables/datatables.min.js" %}></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.flash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.html5.min.js"></script>
+    <script src={% static "js/libs/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js" %} charset="UTF-8"></script>
+    <script src={% static "js/DataTables/jquery.dataTables.yadcf.js" %}></script>
+
+    <!-- Editable -->
+    <script src={% static "plugins/bower_components/jsgrid/db.js" %}></script>
+    <script type="text/javascript" src={% static "plugins/bower_components/jsgrid/dist/jsgrid.min.js" %}></script>
+    {#    <script src={% static "js/jsgrid-init.js" %}></script>#}
+    <script src={% static "js/xianmeng/jsgrid.js" %}></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#mySearch th').each(function () {
+                var title = $('#mySearch th').eq($(this).index()).text();
+
+                $(this).html('<input type="text" placeholder="查询 ' + title + '" />');
+
+            });
+
+
+            var mytable = $('#file_export').DataTable(
+                {
+                    "language": {
+                        "lengthMenu": "每页 _MENU_ 条记录",
+                        "zeroRecords": "没有找到记录",
+                        "info": "第 _PAGE_ 页 ( 总共 _PAGES_ 页 )",
+                        "infoEmpty": "无记录",
+                        "infoFiltered": "(从 _MAX_ 条记录过滤)"
+                    },
+                    {#排序#}
+                    columnDefs: [{
+                        targets: [4],
+                        orderData: [4, 0]  //如果第五列进行排序，有相同数据则按照第一列顺序排列
+                    }],
+                    dom: 'Bfrtip',
+                    "buttons": [
+                        {
+                            'extend': 'excelHtml5',
+                            'text': '导出excel',//定义导出excel按钮的文字
+                            'exportOptions': {
+                                'modifier': {
+                                    'page': 'current'
+                                }
+                            }
+                        }
+                    ],
+                    searching: false
+                }
+            );
+            $('.buttons-excel').addClass('btn btn-success waves-effect waves-light pull-right');
+            // Apply the search
+
+
+            yadcf.init(mytable, [
+                    {
+                        column_number: 3,
+                        filter_type: "text",
+                        style_class: "form-control",
+                        filter_default_label: "请输入企业名称",
+                        filter_container_id: 'name_search',
+                        filter_reset_button_text: false
+                    },
+                    {
+                        column_number: 1,
+                        filter_type: "text",
+                        style_class: "form-control",
+                        filter_default_label: "请输入社会信用代码",
+                        filter_container_id: 'id_search',
+                        filter_reset_button_text: false
+                    },
+                    {
+                        column_number: 0,
+                        column_data_type: "html", style_class: "form-control",
+                        html_data_type: "text", data: ["是", "否"], filter_default_label: "请选择",
+                        filter_container_selector: '#notice_search',
+                        filter_reset_button_text: false
+                    },
+                    {
+                        column_number: 6,
+                        filter_type: "text",
+                        style_class: "form-control",
+                        filter_default_label: "请输入社区",
+                        filter_container_id: 'community_search',
+                        filter_reset_button_text: false
+                    },
+                    {
+                        column_number: 10,
+                        column_data_type: "html", style_class: "form-control",
+                        html_data_type: "text", data: ["是", "否"], filter_default_label: "请选择",
+                        filter_container_selector: '#comp_type_search',
+                        filter_reset_button_text: false
+                    },
+
+                ]
+            );
+            $('#btn_reset').on('click', function (e) {
+                yadcf.exResetAllFilters(mytable);
+            });
+
+
+        });
+
+
+    </script>
+{% endblock %}

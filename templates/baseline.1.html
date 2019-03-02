@@ -1,0 +1,247 @@
+{% extends "base.html" %}
+{% block css %}
+    <!-- Editable CSS -->
+    {% load static %}
+    <link type="text/css" rel="stylesheet" href={% static "plugins/bower_components/jsgrid/dist/jsgrid.min.css" %}/>
+
+    <link type="text/css" rel="stylesheet"
+          href={% static "plugins/bower_components/jsgrid/dist/jsgrid-theme.min.css" %}/>
+    <style>
+
+        .white-box {
+            background: #ffffff;
+            padding: 25px;
+            margin-bottom: 15px;
+        }
+    </style>
+
+{% endblock %}
+
+{% block content %}
+    <div class="row bg-title">
+        <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+            <h4 class="page-title"> 各街办经查数据汇总</h4>
+        </div>
+        <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+            <ol class="breadcrumb">
+                <li><a href="#">主面板</a></li>
+                <li class="active">南院门汇总</li>
+            </ol>
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="white-box">
+                <h3 class="box-title">普查底册
+                    <button class="btn btn-success waves-effect waves-light pull-right" type="button"><span
+                            class="btn-label"><i class="fa fa-check"></i></span>导出EXCEL
+                    </button>
+                </h3>
+                <div id="basicgrid"></div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+
+{% block js %}
+    {% load static %}
+    <!-- Editable -->
+            <script src={% static "plugins/bower_components/jsgrid/db.js" %}></script>
+    <script type="text/javascript" src={% static "plugins/bower_components/jsgrid/dist/jsgrid.min.js" %}></script>
+    {#    <script src={% static "js/jsgrid-init.js" %}></script>#}
+    <script src={% static "js/xianmeng/jsgrid.js" %}></script>
+
+    <script>
+    $(function () {
+
+
+
+        let clients = [
+
+            {
+                "IfInform": true,
+                "IfExcel": true,
+                "Code": "123456789987654321",
+                "Name": "西安科技大学有限责任公司1",
+                "Address": "陕西省西安市碑林区雁塔中路58号",
+                "BelongStreet": "长乐坡街道",
+                "BelongCommunity": "xxx社区",
+                "BelongBuilding": "万达广场",
+                "Linkman": "张小三",
+                "Tel": "18710647749",
+                "IndustryType": 30,
+                "IfProduct": true,
+                "SystemOfAccounts": 4,
+                "Activity": "我是文字我是文字我是文字我是文字我是文字我是文字我是文字",
+                "Test1": "1312312312313",
+                "Test2": "12311111111111111"
+
+            },
+            {% for d in data %}
+
+                {
+                    "IfInform": false,
+                    "IfExcel": true,
+                    "Code": "11111111111111",
+                    "Name": "西安科技大学有限责任公司2",
+                    "Address": "陕西省西安市碑林区雁塔中路58号" + {{ d }},
+                    "BelongStreet": "长乐坡街道",
+                    "BelongCommunity": "xxx社区",
+                    "BelongBuilding": "万达广场",
+                    "Linkman": "张小三" + {{ d }},
+                    "Tel": "18710647749",
+                    "IndustryType": 10,
+                    "IfProduct": false,
+                    "SystemOfAccounts": 1,
+                    "Activity": "我是文字我是文字我是文字我是文字我是文字我是文字我是文字",
+                    "Test1": "1312312312313",
+                    "Test2": "12311111111111111"
+                },
+            {% endfor %}
+            {
+                "IfInform": false,
+                "IfExcel": true,
+                "Code": "2222222222222222",
+                "Name": "西安科技大学有限责任公司",
+                "Address": "陕西省西安市碑林区雁塔中路58号",
+                "BelongStreet": "长乐坡街道",
+                "BelongCommunity": "xxx社区",
+                "BelongBuilding": "万达广场",
+                "Linkman": "张小三",
+                "Tel": "18710647749",
+                "IndustryType": 30,
+                "IfProduct": true,
+                "SystemOfAccounts": 4,
+                "Activity": "我是文字我是文字我是文字我是文字我是文字我是文字我是文字",
+                "Test1": "1312312312313",
+                "Test2": "12311111111111111"
+
+            }
+        ];
+
+        let systemOfAccounts = [
+            {Name: "企业", Id: 1},
+            {Name: "事业单位", Id: 2},
+            {Name: "行政单位", Id: 3},
+            {Name: "民间非营利", Id: 4},
+            {Name: "其他", Id: 9},
+
+        ];
+        let industryType = [
+            {Name: "企业", Id: 10},
+            {Name: "事业单位", Id: 20},
+            {Name: "机关", Id: 30},
+            {Name: "社会团体", Id: 40},
+            {Name: "民办非企业", Id: 51},
+            {Name: "基金会", Id: 52},
+            {Name: "居委会", Id: 53},
+            {Name: "村委会", Id: 54},
+            {Name: "农民专业合作社", Id: 55},
+            {Name: "农村集体经济组织", Id: 56},
+            {Name: "其他组织机构", Id: 90},
+
+        ];
+        let ifProduct = [
+            {Name: "是", Id: true},
+            {Name: "否", Id: false},
+
+        ];
+        $("#basicgrid").jsGrid({
+            width: "100%",
+            height: "400px",
+            filtering: true, //可查
+            inserting: false, //插入
+            editing: true,
+            sorting: true,
+            paging: true,
+            {#controller:{#}
+            {#    loadData: function(filter) {#}
+            {#        return $.grep(this.clients, function(client) {#}
+            {#            return (!filter.Name || client.Name.indexOf(filter.Name) > -1)#}
+            {#                && (!filter.Code || client.Code === filter.Code)#}
+            {#                && (!filter.Address || client.Address.indexOf(filter.Address) > -1)#}
+            {#                && (!filter.IndustryType || client.IndustryType === filter.IndustryType);#}
+            {#        });#}
+            {#    },#}
+            {##}
+            {#    insertItem: function(insertingClient) {#}
+            {#        this.clients.push(insertingClient);#}
+            {#    },#}
+            {##}
+            {#    updateItem: function(updatingClient) { },#}
+            {##}
+            {#    deleteItem: function(deletingClient) {#}
+            {#        var clientIndex = $.inArray(deletingClient, this.clients);#}
+            {#        this.clients.splice(clientIndex, 1);#}
+            {#    },},#}
+
+
+            {#分页#}
+            pagerContainer: null, //分页容器,JQuery对象,不超过一页时默认不显示 null,
+            pageIndex: 1,
+            pageSize: 5,
+            {#pageButtonCount: 10,#}
+            pagerFormat: "分页: {first} {prev} {pages} {next} {last} {pageIndex} / {pageCount}", //占位符{}，支持的占位如实例 ,
+            pagePrevText: "上一页",
+            pageNextText: "下一页", pageFirstText: "首页",
+            pageLastText: "末页",
+
+            data: clients,
+            fields: [
+                {
+                    type: "control",
+                    width: 100,
+                    deleteButton: false,
+                    editButtonTooltip: "编辑",
+                    searchModeButtonTooltip: "搜索",
+                    searchButtonTooltip: "搜索",
+                    clearFilterButtonTooltip: "清除",
+                    updateButtonTooltip: "更新",
+                    cancelEditButtonTooltip: "取消",
+                },
+                {#{name: "IfExcel", title: "是否导出", editing: true, type: "checkbox", align: "center", width: 150},#}
+                {name: "IfInform", title: "是否通知", editing: true, type: "checkbox", align: "center", width: 150},
+                {
+                    name: "Code",
+                    title: "统一社会信用代码",
+                    editing: false,
+                    type: "text",
+                    align: "center",
+                    width: 150,
+                    validate: "required"
+                },
+                {name: "Name", title: "公司名称", editing: false, type: "text", align: "center", width: 200},
+                {name: "Address", title: "单位地址", editing: false, type: "text", align: "center", width: 250},
+                {name: "BelongStreet", title: "所属街道", editing: false, type: "text", align: "center", width: 150},
+                {name: "BelongCommunity", title: "所属社区", editing: false, type: "text", align: "center", width: 150},
+                {name: "BelongBuilding", title: "所属楼宇", editing: false, type: "text", align: "center", width: 150},
+                {name: "Linkman", title: "联系人", editing: false, type: "text", align: "center", width: 100},
+                {name: "Tel", title: "联系电话", editing: false, type: "text", align: "center", width: 100},
+                {
+                    name: "IndustryType", title: "单位类型", editing: false, type: "select",
+                    items: industryType, valueField: "Id", textField: "Name", align: "center", width: 100
+                },
+                {
+                    name: "IfProduct", title: "是否多产", editing: false, type: "select",
+                    items: ifProduct, valueField: "Id", textField: "Name", align: "center", width: 100
+                },
+                {
+                    name: "SystemOfAccounts", title: "会计制度", editing: false, type: "select",
+                    items: systemOfAccounts, valueField: "Id", textField: "Name", align: "center", width: 100
+                },
+                {name: "Activity", title: "业务活动", editing: false, type: "text", align: "center", width: 200},
+                {name: "Test1", title: "多产法人611-1", editing: false, type: "text", align: "center", width: 100},
+                {name: "Test2", title: "主要经济指标表种611-3", editing: false, type: "text", align: "center", width: 100},
+                {name: "Test2", title: "主要经济指标表种611-5", editing: false, type: "text", align: "center", width: 100},
+                {name: "Test2", title: "主要经济指标表种611-6", editing: false, type: "text", align: "center", width: 100},
+
+            ]
+
+        });
+
+})
+    </script>
+{% endblock %}

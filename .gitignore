@@ -1,0 +1,19 @@
+### Django ###
+*.log
+*.pot
+*.pyc
+*.py.rej
+local_settings.py
+.idea/
+.git/
+.vscode/
+/baseline/__pycache__/
+/beilin_phase2/__pycache__/
+/venv_beilin/
+/baseline/migrations
+/accounts/migrations
+/db.sqlite3
+db.sqlite3
+/beilin_phase2/baseline/script.py
+
+venv/

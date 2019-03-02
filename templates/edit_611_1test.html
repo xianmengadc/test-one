@@ -1,0 +1,688 @@
+{% extends "base.html" %}
+<script src="https://code.jquery.com/color/jquery.color-2.1.2.min.js"></script>
+{% block css %}
+
+    {% load  static %}
+    <link href={% static "plugins/bower_components/bootstrap-datepicker/bootstrap-datepicker.min.css" %} rel="stylesheet"
+          type="text/css"/>
+    <link href={% static "plugins/bower_components/custom-select/custom-select.css" %} rel="stylesheet"
+          type="text/css"/>
+    <link href={% static "plugins/bower_components/switchery/dist/switchery.min.css" %} rel="stylesheet"/>
+    <link href={% static "plugins/bower_components/bootstrap-select/bootstrap-select.min.css" %} rel="stylesheet"/>
+    <link href={% static "plugins/bower_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.css" %} rel="stylesheet"/>
+    <link href={% static "plugins/bower_components/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.css" %} rel="stylesheet"/>
+    <link href={% static "plugins/bower_components/multiselect/css/multi-select.css" %} rel="stylesheet"
+          type="text/css"/>
+
+    <style>
+        label {
+            text-align: right !important;
+        }
+
+        .card-a label {
+        }
+
+        {#标题分割线#}
+        h3 {
+            border-bottom: 1px solid rgba(120, 130, 140, 0.28);
+            padding-bottom: 12px;
+        }
+
+        #comp-card label {
+            width: 50%;
+            padding-top: 7px;
+            margin-bottom: 0;
+            padding-left: 7.5px;
+            padding-right: 7.5px;
+            float: left;
+        }
+
+        #comp-card input {
+            display: block;
+            font-size: 14px;
+            line-height: 1.42857143;
+            width: 100%;
+            background: #353c48;
+            border: 1px solid rgba(120, 130, 140, 0.2);
+            border-radius: 0px;
+            box-shadow: none;
+            color: #96a2b4;
+            height: 38px;
+            max-width: 100%;
+            padding: 7px 12px;
+            transition: all 300ms linear 0s;
+        }
+
+        #empty-row {
+            display: none
+        }
+
+        .new-parent-row {
+        {#background-color: rgb(75, 186, 228);#}
+        }
+
+    </style>
+
+{% endblock %}
+{% block breadcum %}
+    <a href="{% url 'basedata' companies.street_district %}">{{ companies.street_district }}普查数据</a>
+{% endblock %}
+{% block content %}
+    <div class="row">
+
+        <ul class="wizard-steps" role="tablist">
+            <li class="tab1 need  {% if companies.done_611 == True %} done {% endif %}" role="tab">
+                <h4>
+                    <a href="{% url 'edit_com' companies.street_district cid %}"><span>主表</span>611
+                    </a>
+                </h4>
+            </li>
+            <li class="tab1 now  {% if companies.need_611_1 == True %} need {% endif %}{% if companies.done_611_1 == True and companies.need_611_1 == True %} done {% endif %}"
+                role="tab">
+                <h4>
+                    {% if companies.need_611_1 == False %} <span>1</span>611-1
+                    {% endif %}
+                    {% if companies.need_611_1 == True %}
+                        <a href="{% url 'edit_611_1' cid %}"><span>1</span>611-1
+                        </a>{% endif %}
+                </h4>
+            </li>
+            <li class="tab2 {% if companies.need_611_2 == True %} need {% endif %}{% if companies.done_611_2 == True and companies.need_611_2 == True %} done {% endif %}"
+                role="tab">
+                <h4>
+                    {% if companies.need_611_2 == False %} <span>2</span>611-2
+                    {% endif %}
+                    {% if companies.need_611_2 == True %}
+                        <a href="{% url 'edit_611_2' cid %}"><span>2</span>611-2
+                        </a>{% endif %}
+                </h4>
+            </li>
+            <li class="tab3 {% if companies.need_611_3 == True %} need {% endif %}{% if companies.done_611_3 == True and companies.need_611_3 == True %} done {% endif %}"
+                role="tab">
+                <h4>
+                    {% if companies.need_611_3 == False %} <span>3</span>611-3
+                    {% endif %}
+                    {% if companies.need_611_3 == True %}
+                        <a href="{% url 'edit_611_3' cid %}"><span>3</span>611-3
+                        </a>{% endif %}
+                </h4>
+            </li>
+            <li class="tab4 {% if companies.need_611_4 == True %} need {% endif %}{% if companies.done_611_4 == True and companies.need_611_4 == True %} done {% endif %}"
+                role="tab">
+                <h4>
+                    {% if companies.need_611_4 == False %} <span>4</span>611-4
+                    {% endif %}
+                    {% if companies.need_611_4 == True %}
+                        <a href="{% url 'edit_611_4' cid %}"><span>4</span>611-4
+                        </a>{% endif %}
+                </h4>
+            </li>
+            <li class="tab5 {% if companies.need_611_5 == True %} need {% endif %}{% if companies.done_611_5 == True and companies.need_611_5 == True %} done {% endif %}"
+                role="tab">
+                <h4>
+                    {% if companies.need_611_5 == False %} <span>5</span>611-5
+                    {% endif %}
+                    {% if companies.need_611_5 == True %}
+                        <a href="{% url 'edit_611_5' cid %}"><span>5</span>611-5
+                        </a>{% endif %}
+                </h4>
+            </li>
+            <li class="tab6 {% if companies.need_611_6 == True %} need {% endif %}{% if companies.done_611_6 == True and companies.need_611_6 == True %} done {% endif %}"
+                role="tab">
+                <h4>
+                    {% if companies.need_611_6 == False %} <span>6</span>611-6
+                    {% endif %}
+                    {% if companies.need_611_6 == True %}
+                        <a href="{% url 'edit_611_6' cid %}"><span>6</span>611-6
+                        </a>{% endif %}
+                </h4>
+            </li>
+        </ul>
+
+        <div class="col-sm-12 white-box">
+
+            <div>
+
+                <h3 class="box-title m-b-0">法人单位所属产业活动各单位情况（2018）611-1</h3>
+                <div class="col-md-6">
+                    <div class="disable-card">
+                        <div class="form-group">
+                            <label for="main_social_num"
+                                   class="col-sm-6 control-label">统一社会信用代码</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" name="first_social_num"
+                                       id="main_social_num"
+                                       value="{{ companies.social_num|default_if_none:"" }}" readonly>
+                                <input type="hidden" name="main_social_num" value="{{ cid }}">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="main_org_num"
+                                   class="col-sm-6 control-label">组织机构代码</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" name="main_org_num"
+                                       id="main_org_num"
+                                       value="{{ companies.org_num |default_if_none:"" }}" readonly>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="main_name" class="col-sm-6 control-label">单位详细名称</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" name="main_name" id="main_name"
+                                       value="{{ companies.name |default_if_none:"" }}" readonly>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+                        <label for="legal_activity_count" class="col-sm-6 control-label">本法人单位所属产业活动单位共（个）</label>
+                        <div class="col-sm-6">
+                            <input type="number" name="count" class="form-control compNumber" placeholder="请输入"
+                                   value="{{ count }}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="margin-top: 300px">
+            <form id="base_form_611_1">{% csrf_token %}
+                <div id="comp-card"></div>
+                <div class="col-sm-12 white-box ">
+                    <button type="button" id="onClickButton"
+                            class="btn  btn-default btn-outline btn-danger pull-right">提交
+                    </button>
+                    <div style="clear:both "></div>
+                </div>
+            </form>
+        </div>
+
+
+        {#                <div class="add-new-form">添加</div>#}
+        {#        <form class="" id="base_form_611_1">{% csrf_token %}#}
+        {#            <form action=""></form>#}
+        {#            {{ formset.management_form }}#}
+        {#            {% for form in formset %}#}
+        {#                    {{ form }}#}
+        {#                    {% if  forloop.counter %}#}
+        {#                <div id="comp-card">#}
+        {#                    <form action="{% url 'delete_611_1' %}" method="post"#}
+        {#                          class="col-sm-12 white-box comp_611_1">#}
+        {#                        {% csrf_token %}#}
+        {#                        <div style="height: 50px">机构#}
+        {#                        </div>#}
+        {#                        {% for field in form %}#}
+        {#                                    {% if field.name == 'id' %}#}
+        {#                                    {% else %}#}
+        {#                            <div class="form-group"#}
+        {#                                 {% if field.name == 'main_social_num' %}style="display: none"{% endif %}>#}
+        {#                                {{ field.label_tag }}#}
+        {#                                <div class="col-sm-6 value">#}
+        {#                                    {{ field }}#}
+        {#                                </div>#}
+        {#                                {{ field.errors }}#}
+        {#                            </div>#}
+        {#                                    {% endif %}#}
+        {#                        {% endfor %}#}
+        {#                        <button class="pull-right btn button btn-warning deleteBtn" type="submit">删除</button>#}
+        {#                    </form>#}
+        {#                </div>#}
+        {#                    {% endif %}#}
+        {#            {% endfor %}#}
+        {#            <div id='empty-row' class='col-sm-12 white-box'>#}
+        {#                {{ formset.empty_form.as_p }}#}
+        {#            </div>#}
+        {##}
+        {##}
+        {#            <div class="col-sm-12 white-box ">#}
+        {#                <button type="button" id="onClickButton"#}
+        {#                        class="btn  btn-default btn-outline btn-danger pull-right">提交#}
+        {#                </button>#}
+        {#                <div style="clear:both "></div>#}
+        {#            </div>#}
+        {#        </form>#}
+    </div>
+
+
+
+{% endblock %}
+
+{% block js %}
+    {% load static %}
+    <script src= {% static  "plugins/bower_components/switchery/dist/switchery.min.js" %}></script>
+    <script src={% static  "plugins/bower_components/custom-select/custom-select.min.js" %} type="text/javascript"></script>
+    <script src={% static  "plugins/bower_components/bootstrap-select/bootstrap-select.min.js" %} type="text/javascript"></script>
+    <script src={% static  "plugins/bower_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js" %}></script>
+    <script src={% static  "plugins/bower_components/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js" %} type="text/javascript"></script>
+    <script type="text/javascript"
+            src={% static  "plugins/bower_components/multiselect/js/jquery.multi-select.js" %}></script>
+    {#    <script src={% static "js/xianmeng/edit-611-1.js" %}></script>#}
+    <script type="text/javascript">
+
+        function updateEmptyFormIDs(element, totalForms) {
+            var thisInput = element
+            // get current form input name
+            var currentName = element.attr('name')
+            // replace "prefix" with actual number
+            var newName = currentName.replace(/__prefix__/g, totalForms)
+
+            // update input with new name
+            thisInput.attr('name', newName)
+            thisInput.attr('id', "id_" + newName)
+
+
+            // create a new form row id
+            var newFormRow = element.closest(".comp_611_1");
+            var newRowId = "row_id_" + newName
+            newFormRow.attr("id", newRowId)
+
+            // add new class for basic graphic animation
+            newFormRow.addClass("new-parent-row")
+            newFormRow.addClass("row")
+            // update form group id
+            var parentDiv = element.parent();
+            parentDiv.attr("id", "parent_id_" + newName)
+            {#parentDiv.attr('class', 'form-group')#}
+            parentDiv.addClass("row")
+
+            // update label id
+            var inputLabel = parentDiv.find("label")
+            var inputInput = parentDiv.find("input")
+            inputLabel.attr("for", "id_" + newName)
+            inputLabel.attr("class", "col-sm-6")
+            inputInput.attr("class", "col-sm-6 value")
+
+
+            // return created row
+            return newFormRow
+        }
+
+
+        $('.add-new-form').click(function (e) {
+            e.preventDefault()
+            // form id like #id_form-TOTAL_FORMS
+            var formId = "id_form-TOTAL_FORMS"
+
+            // copy empty form
+            var emptyRow = $("#empty-row").clone();
+            // remove id from new form
+            emptyRow.attr("id", null)
+            // Insert row after last row
+
+            // get starting form count for formset
+            var totalForms = parseInt($('#' + formId).val());
+            // create new form row from empty form row
+            var newFormRow;
+            emptyRow.find("input, select, textarea").each(function () {
+                newFormRow = updateEmptyFormIDs($(this), totalForms)
+            })
+
+
+            // insert new form at the end of the last form row
+            $(".comp_611_1:last").after(newFormRow)
+
+            // update total form count (to include new row)
+            $('#' + formId).val(totalForms + 1);
+
+            // scroll page to new row
+            $('html, body').animate({
+                scrollTop: newFormRow.offset().top - 100
+            }, 500, function () {
+                // animate background color
+                // requires: jQuery Color: https://code.jquery.com/color/jquery.color-2.1.2.min.js
+                newFormRow.animate({
+                    backgroundColor: "#fff"
+                }, 1500)
+            });
+
+        });
+    </script>
+
+    <script>
+        jQuery(document).ready(function () {
+            // Switchery
+            var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
+            $('.js-switch').each(function () {
+                new Switchery($(this)[0], $(this).data());
+
+            });
+            // For select 2
+
+            $(".select2").select2();
+            $('.selectpicker').selectpicker();
+
+            //Bootstrap-TouchSpin
+            $(".vertical-spin").TouchSpin({
+                verticalbuttons: true,
+                verticalupclass: 'ti-plus',
+                verticaldownclass: 'ti-minus'
+            });
+            var vspinTrue = $(".vertical-spin").TouchSpin({
+                verticalbuttons: true
+            });
+            if (vspinTrue) {
+                $('.vertical-spin').prev('.bootstrap-touchspin-prefix').remove();
+            }
+
+            $("input[name='tch1']").TouchSpin({
+                min: 0,
+                max: 100,
+                step: 0.1,
+                decimals: 2,
+                boostat: 5,
+                maxboostedstep: 10,
+                postfix: '%'
+            });
+            $("input[name='tch2']").TouchSpin({
+                min: -1000000000,
+                max: 1000000000,
+                stepinterval: 50,
+                maxboostedstep: 10000000,
+                prefix: '$'
+            });
+            $("input[name='tch3']").TouchSpin();
+
+            $("input[name='tch3_22']").TouchSpin({
+                initval: 40
+            });
+
+            $("input[name='tch5']").TouchSpin({
+                prefix: "pre",
+                postfix: "post"
+            });
+
+            // For multiselect
+
+            $('#pre-selected-options').multiSelect();
+            $('#optgroup').multiSelect({selectableOptgroup: true});
+
+            $('#public-methods').multiSelect();
+            $('#select-all').click(function () {
+                $('#public-methods').multiSelect('select_all');
+                return false;
+            });
+            $('#deselect-all').click(function () {
+                $('#public-methods').multiSelect('deselect_all');
+                return false;
+            });
+            $('#refresh').on('click', function () {
+                $('#public-methods').multiSelect('refresh');
+                return false;
+            });
+            $('#add-option').on('click', function () {
+                $('#public-methods').multiSelect('addOption', {value: 42, text: 'test 42', index: 0});
+                return false;
+            });
+
+            {#存储默认有几个机构#}
+            sessionStorage.setItem('staticNum', $(".compNumber")[0].value);
+            {#获取有几个机构#}
+            var staticA = parseInt($(".compNumber")[0].value)
+            if (staticA > 0) {
+                for (let i = 1; i <= staticA; i++) {
+                    $("#comp-card").append(
+                        `<div  class="card-list">
+                         <div class="col-md-6">
+                         <div>机构 ${i}</div>
+                                 <div class="form-group">
+                                     <label for="unit_category" class="col-sm-6 control-label">单位类别</label>
+                                     <div class="col-sm-6">
+                                         <input type=" text" class="form-control" name="unit_category_${i}" id="unit_category"
+                                                placeholder="请输入">
+                                     </div>
+                                 </div>
+                                 <div class="form-group">
+                                     <label for="social_num" class="col-sm-6 control-label">统一社会信用代码</label>
+                                     <div class="col-sm-6">
+                                         <input type=" text" class="form-control" name="social_num_${i}"  id="social_num"
+                                                placeholder="请输入">
+                                     </div>
+                                 </div>
+                                 <div class="form-group">
+                                     <label for="org_num" class="col-sm-6 control-label">尚未领取统一社会信用代码的组织机构代码</label>
+                                     <div class="col-sm-6">
+                                         <input type=" text" class="form-control" name="org_num_${i}" id="org_num"
+                                                placeholder="请输入">
+                                     </div>
+                                 </div>
+                                 <div class="form-group">
+                                     <label for="name" class="col-sm-6 control-label">单位详细名称</label>
+                                     <div class="col-sm-6">
+                                         <input type=" text" class="form-control" name="name_${i}" id="name"
+                                                placeholder="请输入">
+                                     </div>
+                                 </div>
+                                 <div class="form-group">
+                                     <label for="address" class="col-sm-6 control-label">详细地址</label>
+                                     <div class="col-sm-6">
+                                         <input type=" text" class="form-control" name="address_${i}" id="address"
+                                                placeholder="请输入">
+                                     </div>
+                                 </div>
+                                 <div class="form-group disable-card">
+                                     <label for="zone_num" class="col-sm-6 control-label">区划代码（六位）</label>
+                                     <div class="col-sm-6">
+                                         <input type=" text" class="form-control" name="zone_num_${i}" id="zone_num"
+                                                readonly>
+                                     </div>
+                                 </div>
+                                 <div class="form-group">
+                                     <label for="mobile" class="col-sm-6 control-label">联系电话</label>
+                                     <div class="col-sm-6">
+                                         <input type=" text" class="form-control" name="mobile_${i}" id="mobile"
+                                                placeholder="请输入">
+                                     </div>
+                                 </div>
+                                 <div class="form-group">
+                                     <label for="main_activity" class="col-sm-6 control-label">主要业务活动</label>
+                                     <div class="col-sm-6">
+                                         <input type=" text" class="form-control" name="main_activity_${i}" id="main_activity"
+                                                placeholder="请输入">
+                                     </div>
+                                 </div>
+                                 <div class="form-group disable-card">
+                                     <label for="catrgory_code" class="col-sm-6  control-label">行业代码（小类 GB/T4754-2017）</label>
+                                     <div class="col-sm-6">
+                                         <input type=" text" class="form-control" name="catrgory_code_${i}"  id="catrgory_code"
+                                                readonly>
+                                     </div>
+                                 </div>
+                                 <div class="form-group">
+                                     <label for="incumbency_num" class="col-sm-6 control-label">从业人员期末人数（人数）</label>
+                                     <div class="col-sm-6">
+                                         <input type=" text" class="form-control" name="incumbency_num_${i}" id="incumbency_num"
+                                                placeholder="请输入">
+                                     </div>
+                                 </div>
+                                 <div class="form-group">
+                                     <label for="manage_income" class="col-sm-6 control-label">经营性单位收入（元）</label>
+                                     <div class="col-sm-6">
+                                         <input type=" text" class="form-control" name="manage_income_${i}"  id="manage_income"
+                                                placeholder="请输入">
+                                     </div>
+                                 </div>
+                                 <div class="form-group">
+                                     <label for="inmanage_pay" class="col-sm-6 control-label">非经营性单位支出（费用/元）</label>
+                                     <div class="col-sm-6">
+                                         <input type=" text" class="form-control" name="inmanage_pay_${i}" id="inmanage_pay"
+                                                placeholder="请输入">
+                                     </div>
+                                 </div>
+                                 <button class="pull-right btn button btn-warning deleteBtn">删除</button>
+                             </div>
+                     </div>
+                     `
+                    )
+                }
+            }
+            $(".compNumber").on('input propertychange', function (e) {   //实时获取所属产业单位数
+                console.log(this.value)
+                if (this.value < staticA) {
+                    toastr.error("不能小于预选值");
+                    return false
+                } else if (this.value < $(".card-list").length) {
+                    var newLength = $(".card-list").length - this.value
+                    for (let i = 0; i < newLength; i++) {
+                        $('.card-list:eq(-1)').remove()
+                    }
+                } else {
+                    for (let i = (staticA + 1); i <= this.value; i++) {
+                        e.preventDefault()
+                        $("#comp-card").append(
+                            `<div  class="card-list">
+                         <div class="col-md-6">
+                         <div>机构 ${i}</div>
+                                 <div class="form-group">
+                                     <label for="unit_category" class="col-sm-6 control-label">单位类别</label>
+                                     <div class="col-sm-6">
+                                         <input type=" text" class="form-control" name="unit_category_${i}" id="unit_category"
+                                                placeholder="请输入">
+                                     </div>
+                                 </div>
+                                 <div class="form-group">
+                                     <label for="social_num" class="col-sm-6 control-label">统一社会信用代码</label>
+                                     <div class="col-sm-6">
+                                         <input type=" text" class="form-control" name="social_num_${i}"  id="social_num"
+                                                placeholder="请输入">
+                                     </div>
+                                 </div>
+                                 <div class="form-group">
+                                     <label for="org_num" class="col-sm-6 control-label">尚未领取统一社会信用代码的组织机构代码</label>
+                                     <div class="col-sm-6">
+                                         <input type=" text" class="form-control" name="org_num_${i}" id="org_num"
+                                                placeholder="请输入">
+                                     </div>
+                                 </div>
+                                 <div class="form-group">
+                                     <label for="name" class="col-sm-6 control-label">单位详细名称</label>
+                                     <div class="col-sm-6">
+                                         <input type=" text" class="form-control" name="name_${i}" id="name"
+                                                placeholder="请输入">
+                                     </div>
+                                 </div>
+                                 <div class="form-group">
+                                     <label for="address" class="col-sm-6 control-label">详细地址</label>
+                                     <div class="col-sm-6">
+                                         <input type=" text" class="form-control" name="address_${i}" id="address"
+                                                placeholder="请输入">
+                                     </div>
+                                 </div>
+                                 <div class="form-group disable-card">
+                                     <label for="zone_num" class="col-sm-6 control-label">区划代码（六位）</label>
+                                     <div class="col-sm-6">
+                                         <input type=" text" class="form-control" name="zone_num_${i}" id="zone_num"
+                                                readonly>
+                                     </div>
+                                 </div>
+                                 <div class="form-group">
+                                     <label for="mobile" class="col-sm-6 control-label">联系电话</label>
+                                     <div class="col-sm-6">
+                                         <input type=" text" class="form-control" name="mobile_${i}" id="mobile"
+                                                placeholder="请输入">
+                                     </div>
+                                 </div>
+                                 <div class="form-group">
+                                     <label for="main_activity" class="col-sm-6 control-label">主要业务活动</label>
+                                     <div class="col-sm-6">
+                                         <input type=" text" class="form-control" name="main_activity_${i}" id="main_activity"
+                                                placeholder="请输入">
+                                     </div>
+                                 </div>
+                                 <div class="form-group disable-card">
+                                     <label for="catrgory_code" class="col-sm-6  control-label">行业代码（小类 GB/T4754-2017）</label>
+                                     <div class="col-sm-6">
+                                         <input type=" text" class="form-control" name="catrgory_code_${i}"  id="catrgory_code"
+                                                readonly>
+                                     </div>
+                                 </div>
+                                 <div class="form-group">
+                                     <label for="incumbency_num" class="col-sm-6 control-label">从业人员期末人数（人数）</label>
+                                     <div class="col-sm-6">
+                                         <input type=" text" class="form-control" name="incumbency_num_${i}" id="incumbency_num"
+                                                placeholder="请输入">
+                                     </div>
+                                 </div>
+                                 <div class="form-group">
+                                     <label for="manage_income" class="col-sm-6 control-label">经营性单位收入（元）</label>
+                                     <div class="col-sm-6">
+                                         <input type=" text" class="form-control" name="manage_income_${i}"  id="manage_income"
+                                                placeholder="请输入">
+                                     </div>
+                                 </div>
+                                 <div class="form-group">
+                                     <label for="inmanage_pay" class="col-sm-6 control-label">非经营性单位支出（费用/元）</label>
+                                     <div class="col-sm-6">
+                                         <input type=" text" class="form-control" name="inmanage_pay_${i}" id="inmanage_pay"
+                                                placeholder="请输入">
+                                     </div>
+                                 </div>
+                             </div>
+                     </div>
+                     `
+                        )
+                    }
+                }
+
+
+            });
+
+
+            $("#onClickButton").click(function () {
+
+                var data = $("#base_form_611_1").serializeArray();
+                var postData = {};
+                for (var x in data) {
+                    postData[data[x].name] = data[x].value;
+                    {#if (data[x].name != "form-__prefix__-unit_category" || data[x].name != "form-__prefix__-social_num" || data[x].name != "form-__prefix__-org_num"#}
+                    {#    || data[x].name != "form-__prefix__-address" || data[x].name != "form-__prefix__-catrgory_code" || data[x].name != "form-__prefix__-id"#}
+                    {#    || data[x].name != "form-__prefix__-mobile" || data[x].name != "form-__prefix__-name" || data[x].name != "form-__prefix__-mobile"#}
+                    {#    || data[x].name != "form-__prefix__-zone_num") {#}
+                    {#    postData[data[x].name] = data[x].value;}#}
+
+                }
+                console.log(postData)
+
+
+                if (data[x].value == '') {
+                    toastr.error("不能有空选项");
+                    return false
+                    {#for (var i = 1; i <= postData.count; i++) {#}
+                    {#    if (data[x].name != "form-" + i + "-zone_num" || data[x].name != "form-" + i + "-catrgory_code" || data[x].name != "first_social_num" || data[x].name != "main_social_num") {#}
+                    {#        toastr.error("不能有空选项");#}
+                    {#        return false#}
+                    {#    }}#}
+                }
+
+
+                //验证
+                if (postData.main_social_num == '') {
+                    toastr.error("本法人单位所属产业活动单位不能为空");
+                    return false
+                }
+
+
+                var next_url = '/edit_611_2/{{ cid }}/';
+                $.post('/edit_611_1/{{ cid }}/?next=' + next_url, postData, function (res) {
+                    console.log(res);
+                    if (res.code == 0) {
+                        toastr.success("保存成功");
+                        window.setTimeout(function () {
+                            {#window.location.reload()#}
+                        }, 1000);
+                    } else {
+                        for (var msg1 in res.msg) {
+                            toastr.error(msg1 + "," + res.msg[msg1]);
+                        }
+                    }
+                }).fail(function (jqXHR, textStatus, errorThrown) {
+                    toastr.error('提交失败请稍后重试');
+                });
+                return false;
+            })
+
+        });
+
+    </script>
+
+{% endblock %}
